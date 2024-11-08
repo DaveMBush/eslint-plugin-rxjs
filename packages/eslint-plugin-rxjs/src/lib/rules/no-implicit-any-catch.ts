@@ -7,7 +7,7 @@ import {
   AST_NODE_TYPES,
   TSESLint as eslint,
   TSESTree as es,
-} from '@typescript-eslint/experimental-utils';
+} from '@typescript-eslint/utils';
 import {
   getTypeServices,
   hasTypeAnnotation,
@@ -17,8 +17,9 @@ import {
   isMemberExpression,
   isObjectExpression,
   isProperty,
-} from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+} from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 function isParenthesised(
   sourceCode: Readonly<eslint.SourceCode>,
@@ -74,7 +75,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     const [config = {}] = context.options;
     const { allowExplicitAny = false } = config;
     const { couldBeObservable } = getTypeServices(context);
-    const sourceCode = context.getSourceCode();
+    const sourceCode = context.sourceCode;
 
     function checkCallback(callback: es.Node) {
       if (
@@ -181,4 +182,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noImplicitAnyCatch };
+

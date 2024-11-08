@@ -3,11 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import {
-  TSESTree as es,
-  TSESLint as eslint,
-} from '@typescript-eslint/experimental-utils';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { TSESTree as es, TSESLint as eslint } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -85,4 +82,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noInternal };
+

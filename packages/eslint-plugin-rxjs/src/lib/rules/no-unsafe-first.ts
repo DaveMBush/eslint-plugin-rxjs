@@ -5,9 +5,10 @@
 
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
-import { getTypeServices, isCallExpression, isIdentifier } from 'eslint-etc';
+import { getTypeServices, isCallExpression, isIdentifier } from '../eslint-etc';
+
 import { defaultObservable } from '../constants';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   observable?: string;
@@ -91,4 +92,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noUnsafeFirst };
+

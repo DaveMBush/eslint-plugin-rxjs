@@ -5,14 +5,19 @@
 
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
-import { getTypeServices, isCallExpression, isIdentifier } from 'eslint-etc';
+import { getTypeServices, isCallExpression, isIdentifier } from '../eslint-etc';
 import ts from 'typescript';
 import { defaultObservable } from '../constants';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 function isTypeReference(type: ts.Type): type is ts.TypeReference {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
   return Boolean((type as any).target);
 }
+
+const defaultOptions: readonly {
+  observable?: string;
+}[] = [];
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -39,8 +44,8 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     type: 'problem',
   },
   name: 'no-cyclic-action',
-  defaultOptions: [],
-  create: (context, unused: typeof defaultOptions) => {
+  defaultOptions,
+  create: (context) => {
     const [config = {}] = context.options;
     const { observable = defaultObservable } = config;
     const observableRegExp = new RegExp(observable);
@@ -126,4 +131,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noCyclicAction };
+

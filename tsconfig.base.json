@@ -2,6 +2,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

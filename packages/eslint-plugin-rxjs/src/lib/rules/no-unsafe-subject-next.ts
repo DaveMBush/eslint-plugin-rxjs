@@ -8,11 +8,12 @@ import {
   getParserServices,
   getTypeServices,
   isMemberExpression,
-} from 'eslint-etc';
+} from '../eslint-etc';
+
 import * as tsutils from 'tsutils';
 import { couldBeType, isReferenceType, isUnionType } from 'tsutils-etc';
 import * as ts from 'typescript';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -70,4 +71,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noUnsafeSubjectNext };
+

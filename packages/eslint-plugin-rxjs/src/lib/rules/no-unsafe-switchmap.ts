@@ -12,10 +12,11 @@ import {
   isIdentifier,
   isLiteral,
   isMemberExpression,
-} from 'eslint-etc';
+} from '../eslint-etc';
+
 import { defaultObservable } from '../constants';
 import { createRegExpForWords } from '../utils';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   allow?: string | string[];
@@ -167,4 +168,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noUnsafeSwitchMap };
+

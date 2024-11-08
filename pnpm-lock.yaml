@@ -7,6 +7,25 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@typescript-eslint/utils':
+        specifier: ^8.13.0
+        version: 8.13.0(eslint@9.14.0)(typescript@5.5.4)
+      common-tags:
+        specifier: ^1.8.2
+        version: 1.8.2
+      decamelize:
+        specifier: ^5.0.1
+        version: 5.0.1
+      tslib:
+        specifier: ^2.8.1
+        version: 2.8.1
+      tsutils:
+        specifier: ^3.21.0
+        version: 3.21.0(typescript@5.5.4)
+      tsutils-etc:
+        specifier: ^1.4.2
+        version: 1.4.2(tsutils@3.21.0(typescript@5.5.4))(typescript@5.5.4)
     devDependencies:
       '@nx/cypress':
         specifier: 20.0.8
@@ -65,12 +84,6 @@ importers:
       '@typescript-eslint/rule-tester':
         specifier: ^8.13.0
         version: 8.13.0(eslint@9.14.0)(typescript@5.5.4)
-      '@typescript-eslint/utils':
-        specifier: ^8.13.0
-        version: 8.13.0(eslint@9.14.0)(typescript@5.5.4)
-      common-tags:
-        specifier: ^1.8.2
-        version: 1.8.2
       esbuild:
         specifier: ^0.24.0
         version: 0.24.0
@@ -101,9 +114,6 @@ importers:
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@swc/core@1.8.0(@swc/helpers@0.5.13))(@types/node@18.16.9)(typescript@5.5.4)
-      tslib:
-        specifier: ^2.8.1
-        version: 2.8.1
       typescript:
         specifier: ~5.5.4
         version: 5.5.4
@@ -2553,6 +2563,10 @@ packages:
     peerDependenciesMeta:
       supports-color:
         optional: true
+
+  decamelize@5.0.1:
+    resolution: {integrity: sha512-VfxadyCECXgQlkoEAjeghAr5gY3Hf+IKjKb+X8tGVDtveCjN+USwprd2q3QXBR9T1+x2DG0XZF5/w+7HAtSaXA==}
+    engines: {node: '>=10'}
 
   dedent@1.5.3:
     resolution: {integrity: sha512-NHQtfOOW68WD8lgypbLA5oT+Bt0xXJhiYvoR6SmmNXZfpzOGXwdKWmcwG8N7PwVVWV3eF/68nmD9BaJSsTBhyQ==}
@@ -5196,12 +5210,28 @@ packages:
     resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
     engines: {node: '>=6'}
 
+  tslib@1.14.1:
+    resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
+
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
   tsscmp@1.0.6:
     resolution: {integrity: sha512-LxhtAkPDTkVCMQjt2h6eBVY28KCjikZqZfMcC15YBeNjkgUpdCfBu5HoiOTDu86v6smE8yOjyEktJ8hlbANHQA==}
     engines: {node: '>=0.6.x'}
+
+  tsutils-etc@1.4.2:
+    resolution: {integrity: sha512-2Dn5SxTDOu6YWDNKcx1xu2YUy6PUeKrWZB/x2cQ8vY2+iz3JRembKn/iZ0JLT1ZudGNwQQvtFX9AwvRHbXuPUg==}
+    hasBin: true
+    peerDependencies:
+      tsutils: ^3.0.0
+      typescript: '>=4.0.0'
+
+  tsutils@3.21.0:
+    resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
+    engines: {node: '>= 6'}
+    peerDependencies:
+      typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
 
   tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
@@ -8663,6 +8693,8 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
+  decamelize@5.0.1: {}
+
   dedent@1.5.3: {}
 
   deep-equal@1.0.1: {}
@@ -11656,9 +11688,23 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
+  tslib@1.14.1: {}
+
   tslib@2.8.1: {}
 
   tsscmp@1.0.6: {}
+
+  tsutils-etc@1.4.2(tsutils@3.21.0(typescript@5.5.4))(typescript@5.5.4):
+    dependencies:
+      '@types/yargs': 17.0.33
+      tsutils: 3.21.0(typescript@5.5.4)
+      typescript: 5.5.4
+      yargs: 17.7.2
+
+  tsutils@3.21.0(typescript@5.5.4):
+    dependencies:
+      tslib: 1.14.1
+      typescript: 5.5.4
 
   tunnel-agent@0.6.0:
     dependencies:

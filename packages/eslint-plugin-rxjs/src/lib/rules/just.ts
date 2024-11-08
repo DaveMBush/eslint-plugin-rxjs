@@ -4,7 +4,7 @@
  */
 
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -39,7 +39,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
             fix: (fixer) => fixer.replaceTextRange(node.range, 'of as just'),
           });
 
-          const [ofImport] = context.getDeclaredVariables(node);
+          const [ofImport] = context.sourceCode.getDeclaredVariables(node);
           ofImport.references.forEach((ref) => {
             context.report({
               messageId: 'forbidden',
@@ -53,4 +53,4 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as just };

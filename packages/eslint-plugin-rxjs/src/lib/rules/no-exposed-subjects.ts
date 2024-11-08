@@ -4,8 +4,9 @@
  */
 
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { getTypeServices, isIdentifier } from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { getTypeServices, isIdentifier } from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultAllowedTypesRegExp = /^EventEmitter$/;
 
@@ -37,7 +38,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
   name: 'no-exposed-subjects',
   defaultOptions,
-  create: (context, unused: typeof defaultOptions) => {
+  create: (context) => {
     const [config = {}] = context.options;
     const { allowProtected = false } = config;
     const { couldBeSubject, couldBeType } = getTypeServices(context);
@@ -104,6 +105,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         },
       [`MethodDefinition[accessibility!=${accessibilityRexExp}][kind='method']`]:
         (node: es.MethodDefinition) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
           const functionExpression = node.value as any;
           const returnType = functionExpression.returnType;
           if (!returnType) {
@@ -130,4 +132,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noExposedSubjects };
+

@@ -11,8 +11,9 @@ import {
   isCallExpression,
   isIdentifier,
   isMemberExpression,
-} from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+} from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   alias?: string[];
@@ -140,4 +141,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noUnsafeTakeUntil };
+

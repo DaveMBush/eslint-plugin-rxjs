@@ -10,9 +10,10 @@ import {
   getParent,
   getParserServices,
   getTypeServices,
-} from 'eslint-etc';
+} from '../eslint-etc';
+
 import { escapeRegExp } from '../utils';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   parameters?: boolean;
@@ -130,6 +131,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         }
       },
       'PropertyDefinition[computed=false]': (node: es.PropertyDefinition) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
         const anyNode = node as any;
         if (validate.properties) {
           checkNode(anyNode.key);
@@ -233,4 +235,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as suffixSubjects };
+

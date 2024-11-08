@@ -9,8 +9,9 @@ import {
   isIdentifier,
   isImport,
   isObjectPattern,
-} from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+} from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -31,7 +32,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     function checkNode(
       expression: es.ArrowFunctionExpression | es.FunctionExpression,
     ) {
-      const scope = context.getScope();
+      const scope = context.sourceCode.getScope(expression);
       if (!isImport(scope, 'takeWhile', /^rxjs\/?/)) {
         return;
       }
@@ -70,4 +71,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noIgnoredTakeWhileValue };
+

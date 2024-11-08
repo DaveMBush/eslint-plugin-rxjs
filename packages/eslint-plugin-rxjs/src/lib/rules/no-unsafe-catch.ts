@@ -11,9 +11,10 @@ import {
   isCallExpression,
   isFunctionDeclaration,
   isIdentifier,
-} from 'eslint-etc';
+} from '../eslint-etc';
+
 import { defaultObservable } from '../constants';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   observable?: string;
@@ -96,4 +97,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noUnsafeCatch };
+

@@ -4,8 +4,9 @@
  */
 
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { getTypeServices } from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { getTypeServices } from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -55,4 +56,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noSubjectUnsubscribe };
+

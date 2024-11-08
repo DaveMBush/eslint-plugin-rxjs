@@ -4,10 +4,11 @@
  */
 
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { getParserServices, getTypeServices } from 'eslint-etc';
+import { getParserServices, getTypeServices } from '../eslint-etc';
+
 import { couldBeFunction, couldBeType, isAny, isUnknown } from 'tsutils-etc';
 import * as ts from 'typescript';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -63,4 +64,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as throwError };
+

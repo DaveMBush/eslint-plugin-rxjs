@@ -4,7 +4,7 @@
  */
 
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   allowConfig?: boolean;
@@ -58,4 +58,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noShareReplay };
+

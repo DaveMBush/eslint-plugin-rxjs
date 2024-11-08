@@ -3,17 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import {
-  TSESTree as es,
-  TSESLint as eslint,
-} from '@typescript-eslint/experimental-utils';
+import { TSESTree as es, TSESLint as eslint } from '@typescript-eslint/utils';
 import {
   getTypeServices,
   isArrowFunctionExpression,
   isFunctionExpression,
   isMemberExpression,
-} from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+} from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly {
   allowNext?: boolean;
@@ -54,7 +52,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       }
 
       function* fix(fixer: eslint.RuleFixer) {
-        const sourceCode = context.getSourceCode();
+        const sourceCode = context.sourceCode;
         const [nextArg, errorArg, completeArg] = args;
         const nextArgText = nextArg ? sourceCode.getText(nextArg) : '';
         const errorArgText = errorArg ? sourceCode.getText(errorArg) : '';
@@ -143,8 +141,9 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
-
 function isValidArgText(argText: string) {
   return argText && argText !== 'undefined' && argText !== 'null';
 }
+
+export { rule as preferObserver };
+

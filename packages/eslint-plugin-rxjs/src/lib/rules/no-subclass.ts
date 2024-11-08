@@ -4,18 +4,19 @@
  */
 
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { getTypeServices } from 'eslint-etc';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { getTypeServices } from '../eslint-etc';
+
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
-      description: 'Forbids subclassing RxJS classes.',
+      description: 'Forbids sub-classing RxJS classes.',
     },
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Subclassing RxJS classes is forbidden.',
+      forbidden: 'Sub-classing RxJS classes is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -41,7 +42,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       )})$/] > Identifier.superClass`]: (node: es.Identifier) => {
         if (
           queryNames.some((name) =>
-            couldBeType(node, name, { name: /[\/\\]rxjs[\/\\]/ }),
+            couldBeType(node, name, { name: /[/\\]rxjs[/\\]/ }),
           )
         ) {
           context.report({
@@ -54,4 +55,5 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   },
 });
 
-export = rule;
+export { rule as noSubclass };
+

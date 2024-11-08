@@ -3,12 +3,11 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { TSESTree as es } from '@typescript-eslint/utils';
+import { AST_NODE_TYPES, TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
-import { ESLintUtils, TSESTree } from '@typescript-eslint/utils';
+import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly Record<string, boolean | string>[] = [];
-
 
 const rule = ESLintUtils.RuleCreator(() => __filename)({
   meta: {
@@ -33,7 +32,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
   name: 'ban-operators',
   defaultOptions,
   create: (context) => {
-    let bans: { explanation: string; regExp: RegExp }[] = [];
+    const bans: { explanation: string; regExp: RegExp }[] = [];
 
     const [config] = context.options;
     if (!config) {
@@ -67,16 +66,18 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       [String.raw`ImportDeclaration[source.value=/^rxjs\u002foperators$/] > ImportSpecifier`]:
         (node: es.ImportSpecifier) => {
           const identifier = node.imported;
-          const failure = getFailure(identifier.name);
-          if (failure) {
-            context.report({
-              ...failure,
-              node: identifier,
-            });
+          if (identifier.type === AST_NODE_TYPES.Identifier) {
+            const failure = getFailure(identifier.name);
+            if (failure) {
+              context.report({
+                ...failure,
+                node: identifier,
+              });
+            }
           }
         },
     };
   },
 });
 
-export = rule;
+export { rule as banOperators };
