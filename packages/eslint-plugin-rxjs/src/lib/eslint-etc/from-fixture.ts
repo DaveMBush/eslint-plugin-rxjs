@@ -79,24 +79,24 @@ function parseFixture<TMessageIds extends string>(
   fixture.split('\n').forEach((line) => {
     const match = line.match(errorRegExp);
     if (match?.groups) {
-      const column = match.groups.indent.length + 1;
-      const endColumn = column + match.groups.error.length;
+      const column = match.groups['indent'].length + 1;
+      const endColumn = column + match.groups['error'].length;
       const { length } = lines;
       errors.push({
         column,
-        data: JSON.parse(match.groups.data || '{}'),
+        data: JSON.parse(match.groups['data'] || '{}'),
         endColumn,
         endLine: length,
         line: length,
-        messageId: match.groups.id as TMessageIds,
+        messageId: match.groups['id'] as TMessageIds,
         // TODO: Remove type assertion once https://github.com/typescript-eslint/typescript-eslint/pull/3844 is available.
         ...(getSuggestions(
           suggestions,
-          Boolean(match.groups.suggest),
-          match.groups.indices?.trim(),
+          Boolean(match.groups['suggest']),
+          match.groups['indices']?.trim(),
         ) as TestCaseError<TMessageIds>['suggestions']),
       });
-      if (match.groups.suggest) {
+      if (match.groups['suggest']) {
         suggestFound = true;
       }
     } else {

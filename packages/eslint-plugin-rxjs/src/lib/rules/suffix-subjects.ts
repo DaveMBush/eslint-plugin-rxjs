@@ -82,7 +82,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     );
 
     function checkNode(nameNode: es.Node, typeNode?: es.Node) {
-      let tsNode = esTreeNodeToTSNodeMap.get(nameNode);
+      const tsNode = esTreeNodeToTSNodeMap.get(nameNode);
       const text = tsNode.getText();
       if (
         !suffixRegex.test(text) &&

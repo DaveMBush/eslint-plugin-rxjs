@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-etc
- */
-
 import { stripIndent } from 'common-tags';
 import { fromFixture } from './from-fixture';
 
@@ -14,9 +9,9 @@ describe('fromFixture', () => {
                      ~~~~~~~ [whoops]
       `,
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 14,
         data: {},
@@ -41,9 +36,9 @@ describe('fromFixture', () => {
         `,
       },
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 14,
         data: {},
@@ -53,8 +48,8 @@ describe('fromFixture', () => {
         messageId: 'whoops',
       },
     ]);
-    expect(test).to.have.property('filename', 'test.ts');
-    expect(test).to.have.property('output', "const name = 'alice';");
+    expect(test).toHaveProperty('filename', 'test.ts');
+    expect(test).toHaveProperty('output', "const name = 'alice';");
   });
 
   it('should create an invalid test with multiple errors', () => {
@@ -67,15 +62,15 @@ describe('fromFixture', () => {
         ~~~~~ [third]
       `,
     );
-    expect(test).to.have.property(
+    expect(test).toHaveProperty(
       'code',
       stripIndent`
       const name = "alice";
       const role = 'engineer';
     `,
     );
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 14,
         data: {},
@@ -110,9 +105,9 @@ describe('fromFixture', () => {
               ~~~~ [whoops { "identifier": "name" }]
       `,
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 7,
         data: {
@@ -134,9 +129,9 @@ describe('fromFixture', () => {
               ~~~~ [whoops { "value": "${punctuation}" }]
       `,
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 7,
         data: {
@@ -167,9 +162,9 @@ describe('fromFixture', () => {
         ],
       },
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 14,
         data: {},
@@ -187,7 +182,7 @@ describe('fromFixture', () => {
         ],
       },
     ]);
-    expect(test).to.not.have.property('suggestions');
+    expect(test).not.toHaveProperty('suggestions');
   });
 
   it('should create an invalid test with multiple suggestions', () => {
@@ -213,9 +208,9 @@ describe('fromFixture', () => {
         ],
       },
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 14,
         data: {},
@@ -239,7 +234,7 @@ describe('fromFixture', () => {
         ],
       },
     ]);
-    expect(test).to.not.have.property('suggestions');
+    expect(test).not.toHaveProperty('suggestions');
   });
 
   it('should create an invalid test with multiple errors with suggestions', () => {
@@ -273,9 +268,9 @@ describe('fromFixture', () => {
         ],
       } as const,
     );
-    expect(test).to.have.property('code', `const name = "alice";`);
-    expect(test).to.have.property('errors');
-    expect(test.errors).to.deep.equal([
+    expect(test).toHaveProperty('code', `const name = "alice";`);
+    expect(test).toHaveProperty('errors');
+    expect(test.errors).toEqual([
       {
         column: 14,
         data: {},
@@ -323,7 +318,7 @@ describe('fromFixture', () => {
         messageId: 'whoops',
       },
     ]);
-    expect(test).to.not.have.property('suggestions');
+    expect(test).not.toHaveProperty('suggestions');
   });
 
   it('should throw if suggestions are not annotated', () => {
@@ -344,6 +339,6 @@ describe('fromFixture', () => {
           ],
         },
       ),
-    ).to.throw(/no 'suggest' annotation found/);
+    ).toThrow(/no 'suggest' annotation found/);
   });
 });
