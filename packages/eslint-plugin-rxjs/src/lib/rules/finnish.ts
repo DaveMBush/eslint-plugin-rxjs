@@ -24,8 +24,9 @@ const defaultOptions: readonly {
   variables?: boolean;
 }[] = [];
 
-
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const shouldBeFinnishMessageId = 'shouldBeFinnish';
+export const shouldNotBeFinnishMessageId = 'shouldNotBeFinnish';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Enforces the use of Finnish notation.',
@@ -33,8 +34,8 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      shouldBeFinnish: 'Finnish notation should be used here.',
-      shouldNotBeFinnish: 'Finnish notation should not be used here.',
+      [shouldBeFinnishMessageId]: 'Finnish notation should be used here.',
+      [shouldNotBeFinnishMessageId]: 'Finnish notation should not be used here.',
     },
     schema: [
       {
@@ -300,5 +301,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as finnish };

@@ -6,7 +6,9 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Enforces the use of a `just` alias for `of`.',
@@ -14,7 +16,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: 'code',
     hasSuggestions: false,
     messages: {
-      forbidden: 'Use just alias.',
+      [messageId]: 'Use just alias.',
     },
     schema: [],
     type: 'problem',
@@ -34,7 +36,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           }
 
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node,
             fix: (fixer) => fixer.replaceTextRange(node.range, 'of as just'),
           });
@@ -42,7 +44,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           const [ofImport] = context.sourceCode.getDeclaredVariables(node);
           ofImport.references.forEach((ref) => {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: ref.identifier,
               fix: (fixer) =>
                 fixer.replaceTextRange(ref.identifier.range, 'just'),
@@ -52,5 +54,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as just };

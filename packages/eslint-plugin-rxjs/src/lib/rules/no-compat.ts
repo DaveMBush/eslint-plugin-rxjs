@@ -6,7 +6,9 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -15,7 +17,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: "'rxjs-compat'-dependent import locations are forbidden.",
+      [messageId]: "'rxjs-compat'-dependent import locations are forbidden.",
     },
     schema: [],
     type: 'problem',
@@ -27,12 +29,10 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       [String.raw`ImportDeclaration Literal[value=/^rxjs\u002f/]:not(Literal[value=/^rxjs\u002f(ajax|fetch|operators|testing|webSocket)/])`]:
         (node: es.Literal) => {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node,
           });
         },
     };
   },
 });
-
-export { rule as noCompat };

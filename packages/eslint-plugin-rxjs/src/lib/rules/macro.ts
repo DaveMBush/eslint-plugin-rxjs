@@ -9,7 +9,8 @@ import {
 } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'macro';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Enforces the use of the RxJS Tools Babel macro.',
@@ -17,7 +18,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: 'code',
     hasSuggestions: false,
     messages: {
-      macro: 'Use the RxJS Tools Babel macro.',
+      [messageId]: 'Use the RxJS Tools Babel macro.',
     },
     schema: [],
     type: 'problem',
@@ -47,7 +48,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         hasFailure = true;
         context.report({
           fix,
-          messageId: 'macro',
+          messageId,
           node: node.callee,
         });
       },
@@ -75,5 +76,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as macro };

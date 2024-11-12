@@ -7,7 +7,9 @@ import { TSESTree as es } from '@typescript-eslint/utils';
 import { getParent, getTypeServices } from '../eslint-etc';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids passing `async` functions to `subscribe`.',
@@ -15,7 +17,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Passing async functions to subscribe is forbidden.',
+      [messageId]: 'Passing async functions to subscribe is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -43,7 +45,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         };
 
         context.report({
-          messageId: 'forbidden',
+          messageId,
           loc: asyncLoc,
         });
       }
@@ -56,5 +58,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noAsyncSubscribe };

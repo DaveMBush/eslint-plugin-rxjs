@@ -9,7 +9,9 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly Record<string, boolean | string>[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the use of banned observables.',
@@ -17,7 +19,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'RxJS observable is banned: {{name}}{{explanation}}.',
+      [messageId]: 'RxJS observable is banned: {{name}}{{explanation}}.',
     },
     schema: [
       {
@@ -80,5 +82,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as banObservables };

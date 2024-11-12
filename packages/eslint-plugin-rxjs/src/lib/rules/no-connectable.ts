@@ -7,7 +7,8 @@ import { TSESTree as es } from '@typescript-eslint/utils';
 import { getTypeServices } from '../eslint-etc';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids operators that return connectable observables.',
@@ -15,7 +16,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Connectable observables are forbidden.',
+      [messageId]: 'Connectable observables are forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -28,7 +29,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       "CallExpression[callee.name='multicast']": (node: es.CallExpression) => {
         if (node.arguments.length === 1) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node: node.callee,
           });
         }
@@ -37,7 +38,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         (node: es.CallExpression) => {
           if (!node.arguments.some((arg) => couldBeFunction(arg))) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: node.callee,
             });
           }
@@ -45,5 +46,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noConnectable };
