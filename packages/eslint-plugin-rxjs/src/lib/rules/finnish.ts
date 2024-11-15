@@ -26,6 +26,7 @@ const defaultOptions: readonly {
 
 export const shouldBeFinnishMessageId = 'shouldBeFinnish';
 export const shouldNotBeFinnishMessageId = 'shouldNotBeFinnish';
+
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
@@ -106,26 +107,29 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     }
 
     function checkNode(nameNode: es.Node, typeNode?: es.Node) {
-      let tsNode = esTreeNodeToTSNodeMap.get(nameNode);
+      const tsNode = esTreeNodeToTSNodeMap.get(nameNode);
       const text = tsNode.getText();
       const hasFinnish = /\$$/.test(text);
       if (hasFinnish && !strict) {
         return;
       }
       const shouldBeFinnish = hasFinnish
-        ? () => {}
-        : () =>
+        ? () => { /* noop */ }
+        : () => {
             context.report({
               loc: getLoc(tsNode),
               messageId: 'shouldBeFinnish',
             });
+          };
       const shouldNotBeFinnish = hasFinnish
-        ? () =>
+        ? () => {
             context.report({
               loc: getLoc(tsNode),
               messageId: 'shouldNotBeFinnish',
-            })
-        : () => {};
+            });
+          }
+        : () => { /* noop */ };
+
       if (
         couldBeObservable(typeNode || nameNode) ||
         couldReturnObservable(typeNode || nameNode)

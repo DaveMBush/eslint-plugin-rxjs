@@ -1,17 +1,16 @@
 import { RuleTesterConfig } from '@typescript-eslint/rule-tester';
 
 import path from 'path';
-
 export const testCheckConfig = {
   languageOptions: {
     parserOptions: {
+      parser: '@typescript-eslint/parser',
       projectService: {
         allowDefaultProject: [
-          'file.ts',
-          'react.tsx',
+          '*.ts','*.tsx'
         ],
       },
-      project: './tsconfig.lib.json',
+      project: path.join(__dirname, '../../../../tsconfig.lib.json'),
       tsconfigRootDir: path.join(__dirname, '../../../../'),
     },
   },

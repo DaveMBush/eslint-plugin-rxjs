@@ -7,7 +7,7 @@ import { RuleTester } from '@typescript-eslint/rule-tester';
 import { ParserOptions } from '@typescript-eslint/utils/ts-eslint';
 import { resolve } from 'path';
 
-RuleTester.afterAll = mocha.after;
+//RuleTester.afterAll = mocha.after;
 
 export function createRuleTester({
   filename = './tests/file.tsx',

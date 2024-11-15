@@ -7,7 +7,9 @@ import { TSESTree as es } from '@typescript-eslint/utils';
 import { getParent, getTypeServices } from '../eslint-etc';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the calling of `Observable.create`.',
@@ -15,7 +17,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Observable.create is forbidden; use new Observable.',
+      [messageId]: 'Observable.create is forbidden; use new Observable.',
     },
     schema: [],
     type: 'problem',
@@ -31,7 +33,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           const memberExpression = getParent(node) as es.MemberExpression;
           if (couldBeObservable(memberExpression.object)) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node,
             });
           }
@@ -39,6 +41,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noCreate };
-

@@ -768,5 +768,58 @@ ruleTester.run('finnish', rule, {
       `,
       options: [{ strict: true }],
     }),
+    convertAnnotatedSourceToFailureCase({
+      messageId: shouldBeFinnishMessageId,
+      description: 'complex type combination without $',
+      annotatedSource: `
+        // complex type combination without $
+        import { Observable } from "rxjs";
+
+        type ComplexType = Observable<any> & { additional: string };
+        const complexVariable: ComplexType = { additional: 'test' };
+              ~~~~~~~~~~~~~~~
+      `,
+    }),
+
+    convertAnnotatedSourceToFailureCase({
+      messageId: shouldBeFinnishMessageId,
+      description: 'nested object properties without $',
+      annotatedSource: `
+        // nested object properties without $
+        import { Observable, of } from "rxjs";
+
+        const nestedObject = {
+          level1: {
+            level2: {
+              someProperty: of(0)
+              ~~~~~~~~~~~~
+            }
+          }
+        };
+      `,
+    }),
+
+    convertAnnotatedSourceToFailureCase({
+      messageId: shouldBeFinnishMessageId,
+      description: 'variable name close to Finnish notation but incorrect',
+      annotatedSource: `
+        // variable name close to Finnish notation but incorrect
+        import { Observable, of } from "rxjs";
+
+        const someObservableDollar = of(0);
+              ~~~~~~~~~~~~~~~~~~~~
+      `,
+    }),
+
+    convertAnnotatedSourceToFailureCase({
+      messageId: shouldNotBeFinnishMessageId,
+      description: 'strict mode with non-Observable variable ending with $',
+      annotatedSource: `
+        // strict mode with non-Observable variable ending with $
+        const nonObservable$ = 42;
+              ~~~~~~~~~~~~~~
+      `,
+      options: [{ strict: true }],
+    }),
   ],
 });

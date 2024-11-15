@@ -1,16 +1,16 @@
 import { Linter } from '@typescript-eslint/utils/ts-eslint';
 
-import { banObservables } from './lib/rules/ban-observables';
-import { banOperators } from './lib/rules/ban-operators';
-import { finnish } from './lib/rules/finnish';
-import { just } from './lib/rules/just';
-import { macro } from './lib/rules/macro';
-import { noAsyncSubscribe } from './lib/rules/no-async-subscribe';
-import { noCompat } from './lib/rules/no-compat';
-import { noConnectable } from './lib/rules/no-connectable';
-import { noCreate } from './lib/rules/no-create';
-import { noCyclicAction } from './lib/rules/no-cyclic-action';
-import { noExplicitGenerics } from './lib/rules/no-explicit-generics';
+import banObservables from './lib/rules/ban-observables';
+import banOperators from './lib/rules/ban-operators';
+import finnish from './lib/rules/finnish';
+import just from './lib/rules/just';
+import macro from './lib/rules/macro';
+import noAsyncSubscribe from './lib/rules/no-async-subscribe';
+import noCompat from './lib/rules/no-compat';
+import noConnectable from './lib/rules/no-connectable';
+import noCreate from './lib/rules/no-create';
+import noCyclicAction from './lib/rules/no-cyclic-action';
+import noExplicitGenerics from './lib/rules/no-explicit-generics';
 import { noExposedSubjects } from './lib/rules/no-exposed-subjects';
 import { noFinnish } from './lib/rules/no-finnish';
 import { noIgnoredError } from './lib/rules/no-ignored-error';

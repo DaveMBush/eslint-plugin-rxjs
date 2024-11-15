@@ -9,7 +9,7 @@ import {
   TSESTree as es,
 } from '@typescript-eslint/utils';
 import * as tsutils from 'tsutils-etc';
-import * as ts from 'typescript';
+import ts from 'typescript';
 import { isArrowFunctionExpression, isFunctionDeclaration } from './is';
 
 export function getTypeServices<
@@ -20,17 +20,35 @@ export function getTypeServices<
   const { esTreeNodeToTSNodeMap, program } = services;
   const typeChecker = program.getTypeChecker();
 
+  const getType = (node: es.Node) => {
+    const tsNode = esTreeNodeToTSNodeMap.get(node);
+    if (!tsNode) {
+      return undefined;
+    }
+
+    const type = typeChecker.getTypeAtLocation(tsNode);
+    if (!type) {
+      return undefined;
+    }
+    return type;
+  };
+
   const couldBeType = (
     node: es.Node,
     name: string | RegExp,
     qualified?: { name: RegExp },
   ) => {
     const type = getType(node);
-    return tsutils.couldBeType(
+    if (!type) {
+      return false;
+    }
+
+    const result = tsutils.couldBeType(
       type,
       name,
       qualified ? { ...qualified, typeChecker } : undefined,
     );
+    return result;
   };
 
   const couldReturnType = (
@@ -53,7 +71,7 @@ export function getTypeServices<
     ) {
       tsTypeNode = tsNode.type;
     }
-    return Boolean(
+    const result = Boolean(
       tsTypeNode &&
         tsutils.couldBeType(
           typeChecker.getTypeAtLocation(tsTypeNode),
@@ -61,11 +79,7 @@ export function getTypeServices<
           qualified ? { ...qualified, typeChecker } : undefined,
         ),
     );
-  };
-
-  const getType = (node: es.Node) => {
-    const tsNode = esTreeNodeToTSNodeMap.get(node);
-    return tsNode && typeChecker.getTypeAtLocation(tsNode);
+    return result;
   };
 
   return {
@@ -76,7 +90,11 @@ export function getTypeServices<
       if (isArrowFunctionExpression(node) || isFunctionDeclaration(node)) {
         return true;
       }
-      return tsutils.couldBeFunction(getType(node));
+      const type = getType(node);
+      if (!type) {
+        return false;
+      }
+      return tsutils.couldBeFunction(type);
     },
     couldBeMonoTypeOperatorFunction: (node: es.Node) =>
       couldBeType(node, 'MonoTypeOperatorFunction'),
@@ -88,9 +106,27 @@ export function getTypeServices<
       couldReturnType(node, 'Observable'),
     couldReturnType,
     getType,
-    isAny: (node: es.Node) => tsutils.isAny(getType(node)),
-    isReferenceType: (node: es.Node) => tsutils.isReferenceType(getType(node)),
-    isUnknown: (node: es.Node) => tsutils.isUnknown(getType(node)),
+    isAny: (node: es.Node) => {
+      const type = getType(node);
+      if (!type) {
+        return false;
+      }
+      return tsutils.isAny(type);
+    },
+    isReferenceType: (node: es.Node) => {
+      const type = getType(node);
+      if (!type) {
+        return false;
+      }
+      return tsutils.isReferenceType(type);
+    },
+    isUnknown: (node: es.Node) => {
+      const type = getType(node);
+      if (!type) {
+        return false;
+      }
+      return tsutils.isUnknown(type);
+    },
     typeChecker,
   };
 }

@@ -15,11 +15,13 @@ function isTypeReference(type: ts.Type): type is ts.TypeReference {
   return Boolean((type as any).target);
 }
 
+export const messageId = 'forbidden';
+
 const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids effects and epics that re-emit filtered actions.',
@@ -27,8 +29,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden:
-        'Effects and epics that re-emit filtered actions are forbidden.',
+      [messageId]: 'Effects and epics that re-emit filtered actions are forbidden.',
     },
     schema: [
       {
@@ -63,6 +64,9 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         return;
       }
       const operatorType = getType(operatorCallExpression);
+      if (!operatorType) {
+        return;
+      }
       const [signature] = typeChecker.getSignaturesOfType(
         operatorType,
         ts.SignatureKind.Call,
@@ -80,9 +84,8 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       if (!operatorElementType) {
         return;
       }
-
       const pipeType = getType(pipeCallExpression);
-      if (!isTypeReference(pipeType)) {
+      if (!pipeType || !isTypeReference(pipeType)) {
         return;
       }
       const [pipeElementType] = typeChecker.getTypeArguments(pipeType);
@@ -95,7 +98,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       for (const actionType of operatorActionTypes) {
         if (pipeActionTypes.includes(actionType)) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node: pipeCallExpression.callee,
           });
           return;
@@ -130,6 +133,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noCyclicAction };
-
