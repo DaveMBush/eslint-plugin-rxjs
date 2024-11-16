@@ -14,7 +14,10 @@ const defaultOptions: readonly {
   allowProtected?: boolean;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const forbiddenId = 'forbidden';
+export const forbiddenAllowProtectedId = 'forbiddenAllowProtected';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids exposed (i.e. non-private) subjects.',
@@ -22,8 +25,8 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: "Subject '{{subject}}' must be private.",
-      forbiddenAllowProtected:
+      [forbiddenId]: "Subject '{{subject}}' must be private.",
+      [forbiddenAllowProtectedId]:
         "Subject '{{subject}}' must be private or protected.",
     },
     schema: [
@@ -43,7 +46,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     const { allowProtected = false } = config;
     const { couldBeSubject, couldBeType } = getTypeServices(context);
 
-    const messageId = allowProtected ? 'forbiddenAllowProtected' : 'forbidden';
+    const messageId = allowProtected ? forbiddenAllowProtectedId : forbiddenId;
     const accessibilityRexExp = allowProtected
       ? /^(private|protected)$/
       : /^private$/;
@@ -131,6 +134,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noExposedSubjects };
-

@@ -8,7 +8,8 @@ import { getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the ignoring of observables returned by functions.',
@@ -16,7 +17,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Ignoring a returned Observable is forbidden.',
+      [messageId]: 'Ignoring a returned Observable is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -30,7 +31,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       'ExpressionStatement > CallExpression': (node: es.CallExpression) => {
         if (couldBeObservable(node)) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node,
           });
         }
@@ -38,6 +39,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noIgnoredObservable };
-

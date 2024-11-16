@@ -3,14 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-observable");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-ignored-observable';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-ignored-observable", rule, {
+ruleTester.run("no-ignored-observable", rule, {
   valid: [
-    stripIndent`
+    `
       // not ignored
       import { Observable, of } from "rxjs";
 
@@ -24,7 +25,7 @@ ruleTester({ types: true }).run("no-ignored-observable", rule, {
       const a = functionSource();
       sink(functionSource());
     `,
-    stripIndent`
+    `
       // not ignored arrow
       import { Observable, of } from "rxjs";
 
@@ -38,8 +39,10 @@ ruleTester({ types: true }).run("no-ignored-observable", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'ignored',
+      messageId,
+      annotatedSource: `
         // ignored
         import { Observable, of } from "rxjs";
 
@@ -48,19 +51,21 @@ ruleTester({ types: true }).run("no-ignored-observable", rule, {
         }
 
         functionSource();
-        ~~~~~~~~~~~~~~~~ [forbidden]
+        ~~~~~~~~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'ignored arrow',
+      messageId,
+      annotatedSource: `
         // ignored arrow
         import { Observable, of } from "rxjs";
 
         const arrowSource = () => of(42);
 
         arrowSource();
-        ~~~~~~~~~~~~~ [forbidden]
+        ~~~~~~~~~~~~~
       `
-    ),
+    }),
   ],
 });

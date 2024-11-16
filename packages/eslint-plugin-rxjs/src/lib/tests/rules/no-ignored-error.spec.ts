@@ -3,27 +3,28 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-error");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-ignored-error';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-ignored-error", rule, {
+ruleTester.run('no-ignored-error', rule, {
   valid: [
-    stripIndent`
+    `
       // noop
       import { of } from "rxjs";
       const observable = of([1, 2]);
       observable.subscribe(() => {}, () => {});
     `,
-    stripIndent`
+    `
       // subject
       import { Subject } from "rxjs";
       const subject = new Subject<any>();
       const observable = of([1, 2]);
       observable.subscribe(subject);
     `,
-    stripIndent`
+    `
       // https://github.com/cartant/eslint-plugin-rxjs/issues/61
       const whatever = {
         subscribe(
@@ -35,46 +36,56 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'arrow next ignored error',
+      messageId,
+      annotatedSource: `
         // arrow next ignored error
         import { of } from "rxjs";
         const observable = of([1, 2]);
         observable.subscribe(() => {});
-                   ~~~~~~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+                   ~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'variable next ignored error',
+      messageId,
+      annotatedSource: `
         // variable next ignored error
         import { of } from "rxjs";
         const observable = of([1, 2]);
         const next = () => {};
         observable.subscribe(next);
-                   ~~~~~~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+                   ~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'subject arrow next ignored error',
+      messageId,
+      annotatedSource: `
         // subject arrow next ignored error
         import { Subject } from "rxjs";
         const subject = new Subject<any>();
         subject.subscribe(() => {});
-                ~~~~~~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+                ~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'subject variable next ignored error',
+      messageId,
+      annotatedSource: `
         // subject variable next ignored error
         import { Subject } from "rxjs";
         const next = () => {};
         const subject = new Subject<any>();
         subject.subscribe(next);
-                ~~~~~~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+                ~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'https://github.com/cartant/eslint-plugin-rxjs/issues/60 a',
+      messageId,
+      annotatedSource: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/60
         import { Observable } from "rxjs"
         interface ISomeExtension {
@@ -82,13 +93,24 @@ ruleTester({ types: true }).run("no-ignored-error", rule, {
         }
         function subscribeObservable<T>(obs: Observable<T>) {
           return obs.subscribe((v: T) => {})
-                     ~~~~~~~~~ [forbidden]
+                     ~~~~~~~~~
+        }
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'https://github.com/cartant/eslint-plugin-rxjs/issues/60 b',
+      messageId,
+      annotatedSource: `
+        // https://github.com/cartant/eslint-plugin-rxjs/issues/60
+        import { Observable } from "rxjs"
+        interface ISomeExtension {
+          sayHi(): void
         }
         function subscribeObservableWithExtension<T>(obs: Observable<T> & ISomeExtension) {
           return obs.subscribe((v: T) => {})
-                     ~~~~~~~~~ [forbidden]
+                     ~~~~~~~~~
         }
-      `
-    ),
+      `,
+    }),
   ],
 });

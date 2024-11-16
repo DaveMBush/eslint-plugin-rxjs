@@ -12,7 +12,8 @@ import {
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -21,7 +22,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Ignoring the notifier is forbidden.',
+      [messageId]: 'Ignoring the notifier is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -59,7 +60,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
               });
             } else {
               context.report({
-                messageId: 'forbidden',
+                messageId,
                 node: node.callee,
               });
             }
@@ -76,7 +77,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         if (entry.node === node) {
           if (entry.sightings < 2) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: node.callee,
             });
           }
@@ -95,6 +96,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noIgnoredNotifier };
-

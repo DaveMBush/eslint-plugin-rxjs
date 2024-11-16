@@ -3,14 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-notifier");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-ignored-notifier';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-ignored-notifier", rule, {
+ruleTester.run('no-ignored-notifier', rule, {
   valid: [
-    stripIndent`
+    `
       // repeatWhen not ignored
       import { of } from "rxjs";
       import { repeatWhen } from "rxjs/operators";
@@ -29,7 +30,7 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
         )
       );
     `,
-    stripIndent`
+    `
       // retryWhen not ignored
       import { of } from "rxjs";
       import { retryWhen } from "rxjs/operators";
@@ -50,9 +51,10 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
-        // repeatWhen ignored parameter
+    convertAnnotatedSourceToFailureCase({
+      description: 'repeatWhen ignored parameter',
+      messageId,
+      annotatedSource: `
         import { of, range } from "rxjs";
         import { repeatWhen } from "rxjs/operators";
 
@@ -60,13 +62,14 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const c = source.pipe(
           repeatWhen(notifications => range(0, 3))
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
         );
-      `
-    ),
-    fromFixture(
-      stripIndent`
-        // repeatWhen no parameter
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'repeatWhen no parameter',
+      messageId,
+      annotatedSource: `
         import { of, range } from "rxjs";
         import { repeatWhen } from "rxjs/operators";
 
@@ -74,13 +77,14 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const c = source.pipe(
           repeatWhen(() => range(0, 3))
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
-        // repeatWhen non-arrow ignored parameter
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'repeatWhen non-arrow ignored parameter',
+      messageId,
+      annotatedSource: `
         import { of, range } from "rxjs";
         import { repeatWhen } from "rxjs/operators";
 
@@ -88,17 +92,18 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const c = source.pipe(
           repeatWhen(
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
             function (notifications) {
               return range(0, 3);
             }
           )
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
-        // repeatWhen non-arrow no parameter
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'repeatWhen non-arrow no parameter',
+      messageId,
+      annotatedSource: `
         import { of, range } from "rxjs";
         import { repeatWhen } from "rxjs/operators";
 
@@ -106,16 +111,18 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const c = source.pipe(
           repeatWhen(
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
             function () {
               return range(0, 3);
             }
           )
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'retryWhen ignored parameter',
+      messageId,
+      annotatedSource: `
         // retryWhen ignored parameter
         import { of } from "rxjs";
         import { retryWhen } from "rxjs/operators";
@@ -124,12 +131,14 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const h = source.pipe(
           retryWhen(errors => range(0, 3))
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'retryWhen no parameter',
+      messageId,
+      annotatedSource: `
         // retryWhen no parameter
         import { of } from "rxjs";
         import { retryWhen } from "rxjs/operators";
@@ -138,12 +147,14 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const h = source.pipe(
           retryWhen(() => range(0, 3))
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'retryWhen non-arrow ignored parameter',
+      messageId,
+      annotatedSource: `
         // retryWhen non-arrow ignored parameter
         import { of } from "rxjs";
         import { retryWhen } from "rxjs/operators";
@@ -152,16 +163,18 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const h = source.pipe(
           retryWhen(
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
             function (errors) {
               return range(0, 3);
             }
           )
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'retryWhen non-arrow no parameter',
+      messageId,
+      annotatedSource: `
         // retryWhen non-arrow no parameter
         import { of } from "rxjs";
         import { retryWhen } from "rxjs/operators";
@@ -170,13 +183,13 @@ ruleTester({ types: true }).run("no-ignored-notifier", rule, {
 
         const h = source.pipe(
           retryWhen(
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
             function () {
               return range(0, 3);
             }
           )
         );
       `
-    ),
+    }),
   ],
 });

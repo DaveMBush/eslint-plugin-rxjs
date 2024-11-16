@@ -12,8 +12,8 @@ import {
 } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
-
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the use of Finnish notation.',
@@ -21,7 +21,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Finnish notation is forbidden.',
+      [messageId]: 'Finnish notation is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -42,7 +42,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         if (/[$]+$/.test(tsNode.getText())) {
           context.report({
             loc: getLoc(tsNode),
-            messageId: 'forbidden',
+            messageId,
           });
         }
       }
@@ -112,6 +112,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noFinnish };
-
