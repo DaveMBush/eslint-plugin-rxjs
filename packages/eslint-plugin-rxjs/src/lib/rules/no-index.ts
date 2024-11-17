@@ -6,7 +6,8 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the importation from index modules.',
@@ -14,7 +15,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'RxJS imports from index modules are forbidden.',
+      [messageId]: 'RxJS imports from index modules are forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -26,13 +27,10 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       [String.raw`ImportDeclaration Literal[value=/^rxjs(?:\u002f\w+)?\u002findex/]`]:
         (node: es.Literal) => {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node,
           });
         },
     };
   },
 });
-
-export { rule as noIndex };
-

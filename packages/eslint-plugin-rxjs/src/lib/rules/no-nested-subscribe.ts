@@ -8,7 +8,8 @@ import { getParent, getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -17,7 +18,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Nested subscribe calls are forbidden.',
+      [messageId]: 'Nested subscribe calls are forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -42,7 +43,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         while (parent) {
           if (argumentsMap.has(parent)) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: node.property,
             });
             return;
@@ -56,6 +57,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noNestedSubscribe };
-

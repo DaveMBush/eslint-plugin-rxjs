@@ -6,7 +6,10 @@
 import { TSESTree as es, TSESLint as eslint } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const forbiddenId = 'forbidden';
+export const suggestId = 'suggest';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the importation of internals.',
@@ -14,8 +17,8 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: 'code',
     hasSuggestions: true,
     messages: {
-      forbidden: 'RxJS imports from internal are forbidden.',
-      suggest: 'Import from a non-internal location.',
+      [forbiddenId]: 'RxJS imports from internal are forbidden.',
+      [suggestId]: 'Import from a non-internal location.',
     },
     schema: [],
     type: 'problem',
@@ -67,13 +70,13 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           }
           context.report({
             fix,
-            messageId: 'forbidden',
+            messageId: forbiddenId,
             node,
-            suggest: [{ fix, messageId: 'suggest' }],
+            suggest: [{ fix, messageId: suggestId }],
           });
         } else {
           context.report({
-            messageId: 'forbidden',
+            messageId: forbiddenId,
             node,
           });
         }
@@ -81,6 +84,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noInternal };
-
