@@ -41,7 +41,11 @@ const defaultOptions: readonly {
   allowExplicitAny?: boolean;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const explicitAnyId = 'explicitAny';
+export const implicitAnyId = 'implicitAny';
+export const narrowedId = 'narrowed';
+export const suggestExplicitUnknownId = 'suggestExplicitUnknown';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -50,10 +54,10 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: 'code',
     hasSuggestions: true,
     messages: {
-      explicitAny: 'Explicit `any` in `catchError`.',
-      implicitAny: 'Implicit `any` in `catchError`.',
-      narrowed: 'Error type must be `unknown` or `any`.',
-      suggestExplicitUnknown:
+      [explicitAnyId]: 'Explicit `any` in `catchError`.',
+      [implicitAnyId]: 'Implicit `any` in `catchError`.',
+      [narrowedId]: 'Error type must be `unknown` or `any`.',
+      [suggestExplicitUnknownId]:
         'Use `unknown` instead, this will force you to explicitly and safely assert the type is correct.',
     },
     schema: [
@@ -100,11 +104,11 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
             }
             context.report({
               fix,
-              messageId: 'explicitAny',
+              messageId: explicitAnyId,
               node: param,
               suggest: [
                 {
-                  messageId: 'suggestExplicitUnknown',
+                  messageId: suggestExplicitUnknownId,
                   fix,
                 },
               ],
@@ -114,11 +118,11 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
               return fixer.replaceText(typeAnnotation, ': unknown');
             }
             context.report({
-              messageId: 'narrowed',
+              messageId: narrowedId,
               node: param,
               suggest: [
                 {
-                  messageId: 'suggestExplicitUnknown',
+                  messageId: suggestExplicitUnknownId,
                   fix,
                 },
               ],
@@ -136,11 +140,11 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           }
           context.report({
             fix,
-            messageId: 'implicitAny',
+            messageId: implicitAnyId,
             node: param,
             suggest: [
               {
-                messageId: 'suggestExplicitUnknown',
+                messageId: suggestExplicitUnknownId,
                 fix,
               },
             ],
@@ -181,6 +185,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noImplicitAnyCatch };
-

@@ -13,7 +13,8 @@ import {
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids ignoring the value within `takeWhile`.',
@@ -21,7 +22,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Ignoring the value within takeWhile is forbidden.',
+      [messageId]: 'Ignoring the value within takeWhile is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -54,7 +55,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       }
       if (ignored) {
         context.report({
-          messageId: 'forbidden',
+          messageId,
           node: expression,
         });
       }
@@ -70,6 +71,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noIgnoredTakeWhileValue };
-

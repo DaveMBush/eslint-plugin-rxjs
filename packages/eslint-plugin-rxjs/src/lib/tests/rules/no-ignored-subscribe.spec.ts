@@ -3,15 +3,16 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-subscribe");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-ignored-subscribe';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-ignored-subscribe", rule, {
+ruleTester.run("no-ignored-subscribe", rule, {
   valid: [
     {
-      code: stripIndent`
+      code: `
         // not ignored
         import { of } from "rxjs";
 
@@ -20,7 +21,7 @@ ruleTester({ types: true }).run("no-ignored-subscribe", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // subject not ignored
         import { Subject } from "rxjs";
 
@@ -29,7 +30,7 @@ ruleTester({ types: true }).run("no-ignored-subscribe", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // not ignored non-arrow
         import { of } from "rxjs";
 
@@ -42,7 +43,7 @@ ruleTester({ types: true }).run("no-ignored-subscribe", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/61
         const whatever = {
           subscribe(callback?: (value: unknown) => void) {}
@@ -51,7 +52,7 @@ ruleTester({ types: true }).run("no-ignored-subscribe", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/69
         import { Subscribable } from "rxjs";
         declare const subscribable: Subscribable<unknown>;
@@ -60,34 +61,40 @@ ruleTester({ types: true }).run("no-ignored-subscribe", rule, {
     },
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'ignored',
+      messageId,
+      annotatedSource: `
         // ignored
         import { of } from "rxjs";
 
         const observable = of([1, 2]);
         observable.subscribe();
-                   ~~~~~~~~~ [forbidden]
+                   ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'subject ignored',
+      messageId,
+      annotatedSource: `
         // subject ignored
         import { Subject } from "rxjs";
 
         const subject = new Subject<any>();
         subject.subscribe();
-                ~~~~~~~~~ [forbidden]
+                ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'subscribable ignored',
+      messageId,
+      annotatedSource: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/69
         import { Subscribable } from "rxjs";
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe();
-                     ~~~~~~~~~ [forbidden]
+                     ~~~~~~~~~
       `
-    ),
+    }),
   ],
 });

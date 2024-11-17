@@ -3,14 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-takewhile-value");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-ignored-takewhile-value';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
+ruleTester.run("no-ignored-takewhile-value", rule, {
   valid: [
-    stripIndent`
+    `
       // function
       import { Observable } from "rxjs";
       import { takeWhile } from "rxjs/operators";
@@ -23,7 +24,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
         }
       };
     `,
-    stripIndent`
+    `
       // arrow function
       import { Observable } from "rxjs";
       import { takeWhile } from "rxjs/operators";
@@ -36,7 +37,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
         }
       };
     `,
-    stripIndent`
+    `
       // arrow function with block
       import { Observable } from "rxjs";
       import { takeWhile } from "rxjs/operators";
@@ -49,7 +50,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
         }
       };
     `,
-    stripIndent`
+    `
       // https://github.com/cartant/eslint-plugin-rxjs/issues/75
       import {
         equals,
@@ -62,7 +63,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
         ([_, width]) => w.innerWidth >= width,
       )
     `,
-    stripIndent`
+    `
       // https://github.com/cartant/eslint-plugin-rxjs/issues/93
       import { Observable } from "rxjs";
       import { takeWhile } from "rxjs/operators";
@@ -75,7 +76,7 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
         }
       };
     `,
-    stripIndent`
+    `
       // Array destructuring
       import { Observable } from "rxjs";
       import { takeWhile } from "rxjs/operators";
@@ -90,8 +91,10 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'function without value',
+      messageId,
+      annotatedSource: `
         // function without value
         import { Observable } from "rxjs";
         import { takeWhile } from "rxjs/operators";
@@ -100,14 +103,16 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
           constructor(private _source: Observable<string>) {
             _source.pipe(
               takeWhile(function (value) { return false; })
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             ).subscribe();
           }
         };
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'function without parameter',
+      messageId,
+      annotatedSource: `
         // function without parameter
         import { Observable } from "rxjs";
         import { takeWhile } from "rxjs/operators";
@@ -116,14 +121,16 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
           constructor(private _source: Observable<string>) {
             _source.pipe(
               takeWhile(function () { return false; })
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             ).subscribe();
           }
         };
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'arrow function without value',
+      messageId,
+      annotatedSource: `
         // arrow function without value
         import { Observable } from "rxjs";
         import { takeWhile } from "rxjs/operators";
@@ -132,14 +139,16 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
           constructor(private _source: Observable<string>) {
             _source.pipe(
               takeWhile(value => false)
-                        ~~~~~~~~~~~~~~ [forbidden]
+                        ~~~~~~~~~~~~~~
             ).subscribe();
           }
         };
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'arrow function without parameter',
+      messageId,
+      annotatedSource: `
         // arrow function without parameter
         import { Observable } from "rxjs";
         import { takeWhile } from "rxjs/operators";
@@ -148,14 +157,16 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
           constructor(private _source: Observable<string>) {
             _source.pipe(
               takeWhile(() => false)
-                        ~~~~~~~~~~~ [forbidden]
+                        ~~~~~~~~~~~
             ).subscribe();
           }
         };
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'arrow function with block without value',
+      messageId,
+      annotatedSource: `
         // arrow function with block without value
         import { Observable } from "rxjs";
         import { takeWhile } from "rxjs/operators";
@@ -164,14 +175,16 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
           constructor(private _source: Observable<string>) {
             _source.pipe(
               takeWhile(value => { return false; })
-                        ~~~~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
             ).subscribe();
           }
         };
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'arrow function with block without parameter',
+      messageId,
+      annotatedSource: `
         // arrow function with block without parameter
         import { Observable } from "rxjs";
         import { takeWhile } from "rxjs/operators";
@@ -180,11 +193,11 @@ ruleTester({ types: true }).run("no-ignored-takewhile-value", rule, {
           constructor(private _source: Observable<string>) {
             _source.pipe(
               takeWhile(() => { return false; })
-                        ~~~~~~~~~~~~~~~~~~~~~~~ [forbidden]
+                        ~~~~~~~~~~~~~~~~~~~~~~~
             ).subscribe();
           }
         };
       `
-    ),
+    }),
   ],
 });

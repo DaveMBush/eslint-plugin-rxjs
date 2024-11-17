@@ -3,42 +3,43 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-ignored-subscription");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-ignored-subscription';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-ignored-subscription", rule, {
+ruleTester.run("no-ignored-subscription", rule, {
   valid: [
-    stripIndent`
+    `
       // const and add
       import { of } from "rxjs";
       const a = of(42).subscribe();
       a.add(of(42).subscribe());
     `,
-    stripIndent`
+    `
       // let
       import { Subscription } from "rxjs";
       let b: Subscription;
       b = of(42).subscribe();
     `,
-    stripIndent`
+    `
       // array element
       import { of } from "rxjs";
       const c = [of(42).subscribe()];
     `,
-    stripIndent`
+    `
       // object property
       import { of } from "rxjs";
       const d = { subscription: of(42).subscribe() };
     `,
-    stripIndent`
+    `
       // subscriber
       import { of, Subscriber } from "rxjs";
       const subscriber = new Subscriber<number>();
       of(42).subscribe(subscriber);
     `,
-    stripIndent`
+    `
       // https://github.com/cartant/eslint-plugin-rxjs/issues/61
       const whatever = {
         subscribe(callback?: (value: unknown) => void) {}
@@ -47,22 +48,25 @@ ruleTester({ types: true }).run("no-ignored-subscription", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'ignored',
+      messageId,
+      annotatedSource: `
         // ignored
         import { of } from "rxjs";
         of(42).subscribe();
-               ~~~~~~~~~ [forbidden]
+               ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
-        // ignored subject
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'ignored subject',
+      messageId,
+      annotatedSource: `
         import { Subject } from "rxjs";
         const s = new Subject<any>()
         s.subscribe();
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
       `
-    ),
+    }),
   ],
 });
