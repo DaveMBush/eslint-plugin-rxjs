@@ -8,7 +8,8 @@ import { getParent, getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -17,8 +18,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden:
-        'Accessing the value property of a BehaviorSubject is forbidden.',
+      [messageId]: 'Accessing the value property of a BehaviorSubject is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -38,7 +38,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
 
         if (couldBeBehaviorSubject(parent.object)) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node,
           });
         }
@@ -46,6 +46,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noSubjectValue };
-

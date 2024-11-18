@@ -7,8 +7,9 @@ import { TSESTree as es } from '@typescript-eslint/utils';
 import { getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
+export const messageId = 'forbidden';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids sub-classing RxJS classes.',
@@ -54,6 +55,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noSubclass };
-

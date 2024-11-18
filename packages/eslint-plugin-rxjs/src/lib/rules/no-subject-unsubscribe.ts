@@ -7,8 +7,8 @@ import { TSESTree as es } from '@typescript-eslint/utils';
 import { getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
-
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -17,7 +17,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Calling unsubscribe on a subject is forbidden.',
+      [messageId]: 'Calling unsubscribe on a subject is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -33,7 +33,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       ) => {
         if (couldBeSubject(node.object)) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node: node.property,
           });
         }
@@ -46,7 +46,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           const [arg] = node.arguments;
           if (couldBeSubject(arg)) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: arg,
             });
           }
@@ -55,6 +55,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noSubjectUnsubscribe };
-

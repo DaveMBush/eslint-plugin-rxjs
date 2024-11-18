@@ -16,7 +16,8 @@ import {
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -25,7 +26,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Redundant notifications are forbidden.',
+      [messageId]: 'Redundant notifications are forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -67,7 +68,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
               const { property } = callee;
               if (isIdentifier(property)) {
                 context.report({
-                  messageId: 'forbidden',
+                  messageId,
                   node: property,
                 });
               }
@@ -111,6 +112,3 @@ function isExpressionObserver(
   const { object } = callExpression.callee;
   return couldBeType(object, /^(Subject|Subscriber)$/);
 }
-
-export { rule as noRedundantNotify };
-

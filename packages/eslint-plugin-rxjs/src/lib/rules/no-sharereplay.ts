@@ -10,7 +10,10 @@ const defaultOptions: readonly {
   allowConfig?: boolean;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const forbiddenId = 'forbidden';
+export const forbiddenWithoutConfigId = 'forbiddenWithoutConfig';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids using the `shareReplay` operator.',
@@ -57,6 +60,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noShareReplay };
-

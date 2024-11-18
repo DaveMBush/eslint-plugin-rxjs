@@ -3,37 +3,42 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-subject-value");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-subject-value';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-subject-value", rule, {
+ruleTester.run("no-subject-value", rule, {
   valid: [
-    stripIndent`
+    `
       // no value
       import { BehaviorSubject } from "rxjs";
       const subject = new BehaviorSubject<number>(1);
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'value property',
+      messageId,
+      annotatedSource: `
         // value property
         import { BehaviorSubject } from "rxjs";
         const subject = new BehaviorSubject<number>(1);
         console.log(subject.value);
-                            ~~~~~ [forbidden]
+                            ~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'getValue method',
+      messageId,
+      annotatedSource: `
         // getValue method
         import { BehaviorSubject } from "rxjs";
         const subject = new BehaviorSubject<number>(1);
         console.log(subject.getValue());
-                            ~~~~~~~~ [forbidden]
+                            ~~~~~~~~
       `
-    ),
+    }),
   ],
 });

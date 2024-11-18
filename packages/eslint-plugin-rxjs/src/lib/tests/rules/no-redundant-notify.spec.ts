@@ -3,14 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-redundant-notify");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-redundant-notify';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-redundant-notify", rule, {
+ruleTester.run("no-redundant-notify", rule, {
   valid: [
-    stripIndent`
+    `
       // observable next + complete
       import { Observable } from "rxjs";
       const observable = new Observable<number>(observer => {
@@ -18,7 +19,7 @@ ruleTester({ types: true }).run("no-redundant-notify", rule, {
         observer.complete();
       })
     `,
-    stripIndent`
+    `
       // observable next + error
       import { Observable } from "rxjs";
       const observable = new Observable<number>(observer => {
@@ -26,21 +27,21 @@ ruleTester({ types: true }).run("no-redundant-notify", rule, {
         observer.error(new Error("Kaboom!"));
       })
     `,
-    stripIndent`
+    `
       // subject next + complete
       import { Subject } from "rxjs";
       const subject = new Subject<number>();
       subject.next(42);
       subject.complete();
     `,
-    stripIndent`
+    `
       // subject next + error
       import { Subject } from "rxjs";
       const subject = new Subject<number>();
       subject.next(42);
       subject.error(new Error("Kaboom!"));
     `,
-    stripIndent`
+    `
       // different names with error
       import { Subject } from "rxjs";
       const a = new Subject<number>();
@@ -48,7 +49,7 @@ ruleTester({ types: true }).run("no-redundant-notify", rule, {
       a.error(new Error("Kaboom!"));
       b.error(new Error("Kaboom!"));
     `,
-    stripIndent`
+    `
       // different names with complete
       import { Subject } from "rxjs";
       const a = new Subject<number>();
@@ -56,14 +57,14 @@ ruleTester({ types: true }).run("no-redundant-notify", rule, {
       a.complete();
       b.complete();
     `,
-    stripIndent`
+    `
       // non-observer
       import { Subject } from "rxjs";
       const subject = new Subject<number>();
       subject.error(new Error("Kaboom!"));
       console.error(new Error("Kaboom!"));
     `,
-    stripIndent`
+    `
       // multiple subjects
       import { Subject } from "rxjs";
       class SomeClass {
@@ -78,131 +79,155 @@ ruleTester({ types: true }).run("no-redundant-notify", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: "observable complete + next",
+      messageId: messageId,
+      annotatedSource: `
         // observable complete + next
         import { Observable } from "rxjs";
         const observable = new Observable<number>(observer => {
           observer.complete();
           observer.next(42);
-                   ~~~~ [forbidden]
+                   ~~~~
         })
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "observable complete + complete",
+      messageId: messageId,
+      annotatedSource: `
         // observable complete + complete
         import { Observable } from "rxjs";
         const observable = new Observable<number>(observer => {
           observer.complete();
           observer.complete();
-                   ~~~~~~~~ [forbidden]
+                   ~~~~~~~~
         })
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "observable complete + error",
+      messageId: messageId,
+      annotatedSource: `
         // observable complete + error
         import { Observable } from "rxjs";
         const observable = new Observable<number>(observer => {
           observer.complete();
           observer.error(new Error("Kaboom!"));
-                   ~~~~~ [forbidden]
+                   ~~~~~
         })
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "observable error + next",
+      messageId: messageId,
+      annotatedSource: `
         // observable error + next
         import { Observable } from "rxjs";
         const observable = new Observable<number>(observer => {
           observer.error(new Error("Kaboom!"));
           observer.next(42);
-                   ~~~~ [forbidden]
+                   ~~~~
         })
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "observable error + complete",
+      messageId: messageId,
+      annotatedSource: `
         // observable error + complete
         import { Observable } from "rxjs";
         const observable = new Observable<number>(observer => {
           observer.error(new Error("Kaboom!"));
           observer.complete();
-                   ~~~~~~~~ [forbidden]
+                   ~~~~~~~~
         })
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "observable error + error",
+      messageId: messageId,
+      annotatedSource: `
         // observable error + error
         import { Observable } from "rxjs";
         const observable = new Observable<number>(observer => {
           observer.error(new Error("Kaboom!"));
           observer.error(new Error("Kaboom!"));
-                   ~~~~~ [forbidden]
+                   ~~~~~
         });
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "subject complete + next",
+      messageId: messageId,
+      annotatedSource: `
         // subject complete + next
         import { Subject } from "rxjs";
         const subject = new Subject<number>();
         subject.complete();
         subject.next(42);
-                ~~~~ [forbidden]
+                ~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "subject complete + complete",
+      messageId: messageId,
+      annotatedSource: `
         // subject complete + complete
         import { Subject } from "rxjs";
         const subject = new Subject<number>();
         subject.complete();
         subject.complete();
-                ~~~~~~~~ [forbidden]
+                ~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "subject complete + error",
+      messageId: messageId,
+      annotatedSource: `
         // subject complete + error
         import { Subject } from "rxjs";
         const subject = new Subject<number>();
         subject.complete();
         subject.error(new Error("Kaboom!"));
-                ~~~~~ [forbidden]
+                ~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "subject error + next",
+      messageId: messageId,
+      annotatedSource: `
         // subject error + next
         import { Subject } from "rxjs";
         const subject = new Subject<number>();
         subject.error(new Error("Kaboom!"));
         subject.next(42);
-                ~~~~ [forbidden]
+                ~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "subject error + complete",
+      messageId: messageId,
+      annotatedSource: `
         // subject error + complete
         import { Subject } from "rxjs";
         const subject = new Subject<number>();
         subject.error(new Error("Kaboom!"));
         subject.complete();
-                ~~~~~~~~ [forbidden]
+                ~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: "subject error + error",
+      messageId: messageId,
+      annotatedSource: `
         // subject error + error
         import { Subject } from "rxjs";
         const subject = new Subject<number>();
         subject.error(new Error("Kaboom!"));
         subject.error(new Error("Kaboom!"));
-                ~~~~~ [forbidden]
+                ~~~~~
       `
-    ),
+    }),
   ],
 });
