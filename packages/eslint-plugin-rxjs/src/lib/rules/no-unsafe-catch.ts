@@ -19,8 +19,8 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 const defaultOptions: readonly {
   observable?: string;
 }[] = [];
-
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids unsafe `catchError` usage in effects and epics.',
@@ -28,7 +28,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Unsafe catchError usage in effects and epics are forbidden.',
+      [messageId]: 'Unsafe catchError usage in effects and epics are forbidden.',
     },
     schema: [
       {
@@ -80,7 +80,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
             isUnsafe(arg.arguments)
           ) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: arg.callee,
             });
           }
@@ -96,6 +96,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noUnsafeCatch };
-

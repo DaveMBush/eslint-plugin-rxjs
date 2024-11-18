@@ -13,7 +13,8 @@ import {
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the passing of unbound methods.',
@@ -21,7 +22,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Unbound methods are forbidden.',
+      [messageId]: 'Unbound methods are forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -36,7 +37,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     function mapArguments(node: es.CallExpression | es.NewExpression) {
       node.arguments.filter(isMemberExpression).forEach((arg) => {
         const argType = getType(arg);
-        if (argType.getCallSignatures().length > 0) {
+        if (argType && argType.getCallSignatures().length > 0) {
           nodeMap.set(arg);
         }
       });
@@ -77,7 +78,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         while (parent) {
           if (nodeMap.has(parent)) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: parent,
             });
             return;
@@ -88,6 +89,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noUnboundMethods };
-

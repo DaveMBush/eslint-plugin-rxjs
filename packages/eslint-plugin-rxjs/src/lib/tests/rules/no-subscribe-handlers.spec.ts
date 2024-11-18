@@ -3,15 +3,16 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-subscribe-handlers");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-subscribe-handlers';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
+ruleTester.run("no-subscribe-handlers", rule, {
   valid: [
     {
-      code: stripIndent`
+      code: `
         // ignored
         import { of } from "rxjs";
 
@@ -20,7 +21,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // subject ignored
         import { Subject } from "rxjs";
 
@@ -29,14 +30,14 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         import { Subscribable } from "rxjs";
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe();
       `,
     },
     {
-      code: stripIndent`
+      code: `
         const whatever = {
           subscribe(callback?: (value: unknown) => void) {}
         };
@@ -44,7 +45,7 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         const whatever = {
           subscribe(callback?: (value: unknown) => void) {}
         };
@@ -53,28 +54,34 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
     },
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'of',
+      messageId,
+      annotatedSource: `
         // not ignored
         import { of } from "rxjs";
 
         const observable = of([1, 2]);
         observable.subscribe(value => console.log(value));
-                   ~~~~~~~~~ [forbidden]
+                   ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'subject',
+      messageId,
+      annotatedSource: `
         // subject not ignored
         import { Subject } from "rxjs";
 
         const subject = new Subject<any>();
         subject.subscribe(value => console.log(value));
-                ~~~~~~~~~ [forbidden]
+                ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'non-arrow',
+      messageId,
+      annotatedSource: `
         // not ignored non-arrow
         import { of } from "rxjs";
 
@@ -84,26 +91,30 @@ ruleTester({ types: true }).run("no-subscribe-handlers", rule, {
 
         const observable = of([1, 2]);
         observable.subscribe(log);
-                   ~~~~~~~~~ [forbidden]
+                   ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'Subscribable',
+      messageId,
+      annotatedSource: `
         import { Subscribable } from "rxjs";
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe((value) => console.log(value));
-                     ~~~~~~~~~ [forbidden]
+                     ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'object',
+      messageId,
+      annotatedSource: `
         import { Subscribable } from "rxjs";
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe({
-                     ~~~~~~~~~ [forbidden]
+                     ~~~~~~~~~
           next: (value) => console.log(value)
         });
       `
-    ),
+    }),
   ],
 });

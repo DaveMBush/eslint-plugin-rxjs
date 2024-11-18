@@ -3,12 +3,13 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-catch");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-unsafe-catch';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-const setup = stripIndent`
+const setup = `
   import { EMPTY, Observable, of } from "rxjs";
   import { first, switchMap, take, tap } from "rxjs/operators";
 
@@ -21,10 +22,10 @@ const setup = stripIndent`
   const that = { actions };
 `.replace(/\n/g, "");
 
-ruleTester({ types: true }).run("no-unsafe-catch", rule, {
+ruleTester.run("no-unsafe-catch", rule, {
   valid: [
     {
-      code: stripIndent`
+      code: `
         // actions with caught
         ${setup}
         const safePipedOfTypeEffect = actions.pipe(
@@ -36,7 +37,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // actions property with caught
         ${setup}
         const safePipedOfTypeEffect = that.actions.pipe(
@@ -48,7 +49,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // epic with caught
         ${setup}
         const safePipedOfTypeEpic = (action$: Actions) => action$.pipe(
@@ -60,7 +61,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // actions nested
         ${setup}
         const safePipedOfTypeEffect = actions.pipe(
@@ -71,7 +72,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // actions property nested
         ${setup}
         const safePipedOfTypeEffect = that.actions.pipe(
@@ -82,7 +83,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // epic nested
         ${setup}
         const safePipedOfTypeEpic = (action$: Actions) => action$.pipe(
@@ -93,7 +94,7 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // non-matching options
         ${setup}
         const effect = actions.pipe(
@@ -106,8 +107,10 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
     },
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'unsafe actions',
+      messageId,
+      annotatedSource: `
         // unsafe actions
         ${setup}
         const unsafePipedOfTypeEffect = actions.pipe(
@@ -115,12 +118,14 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           catchError(() => EMPTY)
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'unsafe actions property',
+      messageId,
+      annotatedSource: `
         // unsafe actions property
         ${setup}
         const unsafePipedOfTypeEffect = that.actions.pipe(
@@ -128,12 +133,14 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           catchError(() => EMPTY)
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'unsafe epic',
+      messageId,
+      annotatedSource: `
         // unsafe epic
         ${setup}
         const unsafePipedOfTypeEpic = (action$: Actions) => action$.pipe(
@@ -141,12 +148,14 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           catchError(() => EMPTY)
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'matching options',
+      messageId,
+      annotatedSource: `
         // matching options
         ${setup}
         const unsafePipedOfTypeTakeEpic = (foo: Actions) => foo.pipe(
@@ -154,19 +163,19 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           catchError(() => EMPTY)
-          ~~~~~~~~~~ [forbidden]
+          ~~~~~~~~~~
         );
       `,
-      {
-        options: [
-          {
-            observable: "foo",
-          },
-        ],
-      }
-    ),
-    fromFixture(
-      stripIndent`
+      options: [
+        {
+          observable: "foo",
+        },
+      ],
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'https://github.com/cartant/rxjs-tslint-rules/issues/96',
+      messageId,
+      annotatedSource: `
         // https://github.com/cartant/rxjs-tslint-rules/issues/96
         import { Observable } from "rxjs";
         import { catchError, map } from "rxjs/operators";
@@ -176,19 +185,19 @@ ruleTester({ types: true }).run("no-unsafe-catch", rule, {
           actions$: Observable<Action>;
 
           @Effect()
-          initialiseAppointments$ = this.actions$.pipe(
-            ofType(AppointmentsActions.Type.Initialise),
+          initializeAppointments$ = this.actions$.pipe(
+            ofType(AppointmentsActions.Type.initialize),
             this.getAppointmentSessionParametersFromURL(),
             this.updateAppointmentSessionIfDeprecated(),
             map(
               (appointmentSession: AppointmentSession) =>
-                new AppointmentsActions.InitialiseSuccess(appointmentSession)
+                new AppointmentsActions.initializeSuccess(appointmentSession)
             ),
-            catchError(() => of(new AppointmentsActions.InitialiseError())),
-            ~~~~~~~~~~ [forbidden]
+            catchError(() => of(new AppointmentsActions.initializeError())),
+            ~~~~~~~~~~
           );
         }
       `
-    ),
+    }),
   ],
 });

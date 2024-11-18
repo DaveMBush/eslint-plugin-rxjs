@@ -3,20 +3,21 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-topromise");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-topromise';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester({ types: true }).run("no-topromise", rule, {
+ruleTester.run("no-topromise", rule, {
   valid: [
-    stripIndent`
+    `
       // no toPromise
       import { of, Subject } from "rxjs";
       const a = of("a");
       a.subscribe(value => console.log(value));
     `,
-    stripIndent`
+    `
       // non-observable toPromise
       const a = {
         toPromise() {
@@ -27,23 +28,27 @@ ruleTester({ types: true }).run("no-topromise", rule, {
     `,
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'observable toPromise',
+      messageId,
+      annotatedSource: `
         // observable toPromise
         import { of } from "rxjs";
         const a = of("a");
         a.toPromise().then(value => console.log(value));
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'subject toPromise',
+      messageId,
+      annotatedSource: `
         // subject toPromise
         import { Subject } from "rxjs";
         const a = new Subject<string>();
         a.toPromise().then(value => console.log(value));
-          ~~~~~~~~~ [forbidden]
+          ~~~~~~~~~
       `
-    ),
+    }),
   ],
 });

@@ -6,7 +6,8 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     deprecated: true,
     docs: {
@@ -15,7 +16,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'The tap operator is forbidden.',
+      [messageId]: 'The tap operator is forbidden.',
     },
     replacedBy: ['ban-operators'],
     schema: [],
@@ -29,7 +30,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         (node: es.ImportSpecifier) => {
           const { loc } = node;
           context.report({
-            messageId: 'forbidden',
+            messageId,
             loc: {
               ...loc,
               end: {
@@ -42,6 +43,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noTap };
-

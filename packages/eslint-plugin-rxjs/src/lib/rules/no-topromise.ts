@@ -8,7 +8,8 @@ import { getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the use of the `toPromise` method.',
@@ -16,7 +17,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'The toPromise method is forbidden.',
+      [messageId]: 'The toPromise method is forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -31,7 +32,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
       ) => {
         if (couldBeObservable(node.object)) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node: node.property,
           });
         }
@@ -39,6 +40,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noToPromise };
-

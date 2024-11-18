@@ -3,12 +3,13 @@
  * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
  */
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-first");
-import { ruleTester } from "../utils";
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-unsafe-first';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-const setup = stripIndent`
+const setup = `
   import { EMPTY, Observable, of } from "rxjs";
   import { first, switchMap, take, tap } from "rxjs/operators";
 
@@ -22,10 +23,10 @@ const setup = stripIndent`
   const that = { actions };
 `.replace(/\n/g, "");
 
-ruleTester({ types: true }).run("no-unsafe-first", rule, {
+ruleTester.run("no-unsafe-first", rule, {
   valid: [
     {
-      code: stripIndent`
+      code: `
         // actions nested first
         ${setup}
         const safePipedOfTypeFirstEffect = actions.pipe(
@@ -36,7 +37,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // actions nested take
         ${setup}
         const safePipedOfTypeTakeEffect = actions.pipe(
@@ -47,7 +48,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // actions property nested first
         ${setup}
         const safePipedOfTypeFirstEffect = that.actions.pipe(
@@ -58,7 +59,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // actions property nested take
         ${setup}
         const safePipedOfTypeTakeEffect = that.actions.pipe(
@@ -69,7 +70,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // epic nested first
         ${setup}
         const safePipedOfTypeFirstEpic = (action$: Actions) => action$.pipe(
@@ -80,7 +81,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // epic nested take
         ${setup}
         const safePipedOfTypeTakeEpic = (action$: Actions) => action$.pipe(
@@ -91,7 +92,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // non-matching options
         ${setup}
         const safePipedOfTypeFirstEffect = actions.pipe(
@@ -103,7 +104,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       options: [{ observable: "foo" }],
     },
     {
-      code: stripIndent`
+      code: `
         // mid-identifier action
         ${setup}
         const safe = transactionSource.pipe(
@@ -115,7 +116,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       options: [{ observable: "foo" }],
     },
     {
-      code: stripIndent`
+      code: `
         // mid-identifier action
         import { of } from "rxjs";
         import { first, tap } from "rxjs/operators";
@@ -127,7 +128,7 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/89
         ${setup}
         const safeEffect$ = actions$.pipe(
@@ -145,34 +146,38 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
     },
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
-        // actions first
+    convertAnnotatedSourceToFailureCase({
+      description: 'actions first',
+      messageId,
+      annotatedSource: `
         ${setup}
         const unsafePipedOfTypeFirstEffect = actions$.pipe(
           ofType("DO_SOMETHING"),
           tap(() => {}),
           switchMap(() => EMPTY),
           first()
-          ~~~~~ [forbidden]
+          ~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
-        // actions take
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'actions take',
+      messageId,
+      annotatedSource: `
         ${setup}
         const unsafePipedOfTypeTakeEffect = actions.pipe(
           ofType("DO_SOMETHING"),
           tap(() => {}),
           switchMap(() => EMPTY),
           take(1)
-          ~~~~ [forbidden]
+          ~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'actions property first',
+      messageId,
+      annotatedSource: `
         // actions property first
         ${setup}
         const unsafePipedOfTypeFirstEffect = that.actions.pipe(
@@ -180,12 +185,14 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           first()
-          ~~~~~ [forbidden]
+          ~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'actions property take',
+      messageId,
+      annotatedSource: `
         // actions property take
         ${setup}
         const unsafePipedOfTypeTakeEffect = that.actions.pipe(
@@ -193,12 +200,14 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           take(1)
-          ~~~~ [forbidden]
+          ~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'epic first',
+      messageId,
+      annotatedSource: `
         // epic first
         ${setup}
         const unsafePipedOfTypeFirstEpic = (action$: Actions) => action$.pipe(
@@ -206,12 +215,14 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           first()
-          ~~~~~ [forbidden]
+          ~~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'epic take',
+      messageId,
+      annotatedSource: `
         //epic take
         ${setup}
         const unsafePipedOfTypeTakeEpic = (action$: Actions) => action$.pipe(
@@ -219,12 +230,14 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           take(1)
-          ~~~~ [forbidden]
+          ~~~~
         );
       `
-    ),
-    fromFixture(
-      stripIndent`
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'matching options',
+      messageId,
+      annotatedSource: `
         // matching options
         ${setup}
         const unsafePipedOfTypeTakeEpic = (foo: Actions) => foo.pipe(
@@ -232,16 +245,14 @@ ruleTester({ types: true }).run("no-unsafe-first", rule, {
           tap(() => {}),
           switchMap(() => EMPTY),
           take(1)
-          ~~~~ [forbidden]
+          ~~~~
         );
       `,
-      {
-        options: [
-          {
-            observable: "foo",
-          },
-        ],
-      }
-    ),
+      options: [
+        {
+          observable: "foo",
+        },
+      ],
+    }),
   ],
 });

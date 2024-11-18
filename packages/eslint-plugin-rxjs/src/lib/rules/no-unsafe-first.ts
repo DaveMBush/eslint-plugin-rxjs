@@ -14,7 +14,8 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids unsafe `first`/`take` usage in effects and epics.',
@@ -22,8 +23,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden:
-        'Unsafe first and take usage in effects and epics are forbidden.',
+      [messageId]: 'Unsafe first and take usage in effects and epics are forbidden.',
     },
     schema: [
       {
@@ -59,7 +59,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         if (isCallExpression(arg) && isIdentifier(arg.callee)) {
           if (invalidOperatorsRegExp.test(arg.callee.name)) {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: arg.callee,
             });
           }
@@ -91,6 +91,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noUnsafeFirst };
-

@@ -8,7 +8,8 @@ import { getTypeServices } from '../eslint-etc';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+  export const messageId = 'forbidden';
+  export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the passing of handlers to `subscribe`.',
@@ -43,6 +44,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noSubscribeHandlers };
-
