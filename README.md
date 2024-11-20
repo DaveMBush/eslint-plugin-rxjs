@@ -1,5 +1,7 @@
 # eslint-plugin-rxjs
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 An upgrade of [eslint-plugin-rxjs](https://github.com/cartant/eslint-plugin-rxjs) to support modern TypeScript and ESLint. ie, Flat Config as well as legacy config.
 
 Since some rules have better implementations in other more generic ESLint packages, they have been removed and noted here as to the appropriate replacements.
