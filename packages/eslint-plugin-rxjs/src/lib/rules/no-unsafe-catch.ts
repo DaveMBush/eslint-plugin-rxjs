@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
 import {
@@ -28,7 +23,8 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      [messageId]: 'Unsafe catchError usage in effects and epics are forbidden.',
+      [messageId]:
+        'Unsafe catchError usage in effects and epics are forbidden.',
     },
     schema: [
       {

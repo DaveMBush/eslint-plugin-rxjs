@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-ignored-notifier';
 import { testCheckConfig } from './type-check';
@@ -79,7 +74,7 @@ ruleTester.run('no-ignored-notifier', rule, {
           repeatWhen(() => range(0, 3))
           ~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'repeatWhen non-arrow ignored parameter',
@@ -98,7 +93,7 @@ ruleTester.run('no-ignored-notifier', rule, {
             }
           )
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'repeatWhen non-arrow no parameter',
@@ -117,7 +112,7 @@ ruleTester.run('no-ignored-notifier', rule, {
             }
           )
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'retryWhen ignored parameter',
@@ -133,7 +128,7 @@ ruleTester.run('no-ignored-notifier', rule, {
           retryWhen(errors => range(0, 3))
           ~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'retryWhen no parameter',
@@ -149,7 +144,7 @@ ruleTester.run('no-ignored-notifier', rule, {
           retryWhen(() => range(0, 3))
           ~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'retryWhen non-arrow ignored parameter',
@@ -169,7 +164,7 @@ ruleTester.run('no-ignored-notifier', rule, {
             }
           )
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'retryWhen non-arrow no parameter',
@@ -189,7 +184,7 @@ ruleTester.run('no-ignored-notifier', rule, {
             }
           )
         );
-      `
+      `,
     }),
   ],
 });

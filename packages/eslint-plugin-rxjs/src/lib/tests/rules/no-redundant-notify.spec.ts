@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-redundant-notify';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-redundant-notify", rule, {
+ruleTester.run('no-redundant-notify', rule, {
   valid: [
     `
       // observable next + complete
@@ -80,7 +75,7 @@ ruleTester.run("no-redundant-notify", rule, {
   ],
   invalid: [
     convertAnnotatedSourceToFailureCase({
-      description: "observable complete + next",
+      description: 'observable complete + next',
       messageId: messageId,
       annotatedSource: `
         // observable complete + next
@@ -90,10 +85,10 @@ ruleTester.run("no-redundant-notify", rule, {
           observer.next(42);
                    ~~~~
         })
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "observable complete + complete",
+      description: 'observable complete + complete',
       messageId: messageId,
       annotatedSource: `
         // observable complete + complete
@@ -103,10 +98,10 @@ ruleTester.run("no-redundant-notify", rule, {
           observer.complete();
                    ~~~~~~~~
         })
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "observable complete + error",
+      description: 'observable complete + error',
       messageId: messageId,
       annotatedSource: `
         // observable complete + error
@@ -116,10 +111,10 @@ ruleTester.run("no-redundant-notify", rule, {
           observer.error(new Error("Kaboom!"));
                    ~~~~~
         })
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "observable error + next",
+      description: 'observable error + next',
       messageId: messageId,
       annotatedSource: `
         // observable error + next
@@ -129,10 +124,10 @@ ruleTester.run("no-redundant-notify", rule, {
           observer.next(42);
                    ~~~~
         })
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "observable error + complete",
+      description: 'observable error + complete',
       messageId: messageId,
       annotatedSource: `
         // observable error + complete
@@ -142,10 +137,10 @@ ruleTester.run("no-redundant-notify", rule, {
           observer.complete();
                    ~~~~~~~~
         })
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "observable error + error",
+      description: 'observable error + error',
       messageId: messageId,
       annotatedSource: `
         // observable error + error
@@ -155,10 +150,10 @@ ruleTester.run("no-redundant-notify", rule, {
           observer.error(new Error("Kaboom!"));
                    ~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "subject complete + next",
+      description: 'subject complete + next',
       messageId: messageId,
       annotatedSource: `
         // subject complete + next
@@ -167,10 +162,10 @@ ruleTester.run("no-redundant-notify", rule, {
         subject.complete();
         subject.next(42);
                 ~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "subject complete + complete",
+      description: 'subject complete + complete',
       messageId: messageId,
       annotatedSource: `
         // subject complete + complete
@@ -179,10 +174,10 @@ ruleTester.run("no-redundant-notify", rule, {
         subject.complete();
         subject.complete();
                 ~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "subject complete + error",
+      description: 'subject complete + error',
       messageId: messageId,
       annotatedSource: `
         // subject complete + error
@@ -191,10 +186,10 @@ ruleTester.run("no-redundant-notify", rule, {
         subject.complete();
         subject.error(new Error("Kaboom!"));
                 ~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "subject error + next",
+      description: 'subject error + next',
       messageId: messageId,
       annotatedSource: `
         // subject error + next
@@ -203,10 +198,10 @@ ruleTester.run("no-redundant-notify", rule, {
         subject.error(new Error("Kaboom!"));
         subject.next(42);
                 ~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "subject error + complete",
+      description: 'subject error + complete',
       messageId: messageId,
       annotatedSource: `
         // subject error + complete
@@ -215,10 +210,10 @@ ruleTester.run("no-redundant-notify", rule, {
         subject.error(new Error("Kaboom!"));
         subject.complete();
                 ~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "subject error + error",
+      description: 'subject error + error',
       messageId: messageId,
       annotatedSource: `
         // subject error + error
@@ -227,7 +222,7 @@ ruleTester.run("no-redundant-notify", rule, {
         subject.error(new Error("Kaboom!"));
         subject.error(new Error("Kaboom!"));
                 ~~~~~
-      `
+      `,
     }),
   ],
 });

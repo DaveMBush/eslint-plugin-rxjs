@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
 import decamelize from 'decamelize';
@@ -24,7 +19,8 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids unsafe `switchMap` usage in effects and epics.',
@@ -32,7 +28,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Unsafe switchMap usage in effects and epics is forbidden.',
+      [messageId]: 'Unsafe switchMap usage in effects and epics is forbidden.',
     },
     schema: [
       {
@@ -152,7 +148,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           arg.callee.name === 'switchMap'
         ) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node: arg.callee,
           });
         }
@@ -167,6 +163,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noUnsafeSwitchMap };
-

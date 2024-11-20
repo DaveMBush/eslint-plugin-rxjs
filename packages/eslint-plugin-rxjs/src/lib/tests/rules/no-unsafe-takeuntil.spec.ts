@@ -1,17 +1,13 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-unsafe-takeuntil';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-takeuntil");
-import { ruleTester } from "../utils";
-
-ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
+ruleTester.run('no-unsafe-takeuntil', rule, {
   valid: [
     {
-      code: stripIndent`
+      code: `
         // after switchMap
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -24,7 +20,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // after combineLatest
         import { combineLatest, of } from "rxjs";
         import { takeUntil } from "rxjs/operators";
@@ -38,7 +34,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // after switchMap but hidden in pipe
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -51,7 +47,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // before allowed
         import { of, Subscription } from "rxjs";
         import {
@@ -106,7 +102,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // before allowed in options
         import { combineLatest, of } from "rxjs";
         import { takeUntil, tap } from "rxjs/operators";
@@ -120,12 +116,12 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
       options: [
         {
-          allow: ["tap"],
+          allow: ['tap'],
         },
       ],
     },
     {
-      code: stripIndent`
+      code: `
         // after switchMap as alias
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -140,12 +136,12 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
       options: [
         {
-          alias: ["untilDestroyed"],
+          alias: ['untilDestroyed'],
         },
       ],
     },
     {
-      code: stripIndent`
+      code: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/66
         import { of, Subscription } from "rxjs";
         import { takeUntil } from "rxjs/operators";
@@ -164,12 +160,12 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
       `,
       options: [
         {
-          alias: ["untilDestroyed"],
+          alias: ['untilDestroyed'],
         },
       ],
     },
     {
-      code: stripIndent`
+      code: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/79
         import { of } from "rxjs";
         import { repeatWhen, takeUntil } from "rxjs/operators";
@@ -187,8 +183,10 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
     },
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'before switchMap',
+      messageId,
+      annotatedSource: `
         // before switchMap
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -198,11 +196,13 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
         const c = of("c");
 
         const d = a.pipe(takeUntil(c), switchMap(_ => b)).subscribe();
-                         ~~~~~~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+                         ~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'before combineLatest',
+      messageId,
+      annotatedSource: `
         // before combineLatest
         import { combineLatest, of } from "rxjs";
         import { takeUntil } from "rxjs/operators";
@@ -213,11 +213,13 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
         const d = of("d");
 
         const e = a.pipe(takeUntil(d), s => combineLatest(s, b, c)).subscribe();
-                         ~~~~~~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+                         ~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'after allowed before switchMap',
+      messageId,
+      annotatedSource: `
         // after allowed before switchMap
         import { combineLatest, of } from "rxjs";
         import { takeUntil, tap, switchMap } from "rxjs/operators";
@@ -227,18 +229,18 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
         const c = of("c");
 
         const d = a.pipe(takeUntil(c), tap(value => console.log(value)), switchMap(_ => b)).subscribe();
-                         ~~~~~~~~~ [forbidden]
+                         ~~~~~~~~~
       `,
-      {
-        options: [
-          {
-            allow: ["tap"],
-          },
-        ],
-      }
-    ),
-    fromFixture(
-      stripIndent`
+      options: [
+        {
+          allow: ['tap'],
+        },
+      ],
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'https://github.com/rxjs-tslint-rules/issues/49',
+      messageId,
+      annotatedSource: `
         // https://github.com/rxjs-tslint-rules/issues/49
         import { fromEventPattern, NEVER } from "rxjs";
         import { map, startWith, takeUntil } from "rxjs/operators";
@@ -255,7 +257,7 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
               (listener: Function) => {}
             ).pipe(
               takeUntil(this._destroy),
-              ~~~~~~~~~ [forbidden]
+              ~~~~~~~~~
               startWith(mql),
               map((nextMql: MediaQueryList) => ({}))
             );
@@ -263,10 +265,12 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
             return output;
           }
         }
-      `
-    ),
-    fromFixture(
-      stripIndent`
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'before switchMap as an alias',
+      messageId,
+      annotatedSource: `
         // before switchMap as an alias
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -278,18 +282,18 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
         const c = of("c");
 
         const d = a.pipe(untilDestroyed(), switchMap(_ => b)).subscribe();
-                         ~~~~~~~~~~~~~~ [forbidden]
+                         ~~~~~~~~~~~~~~
       `,
-      {
-        options: [
-          {
-            alias: ["untilDestroyed"],
-          },
-        ],
-      }
-    ),
-    fromFixture(
-      stripIndent`
+      options: [
+        {
+          alias: ['untilDestroyed'],
+        },
+      ],
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'before switchMap as an alias and a class member',
+      messageId,
+      annotatedSource: `
         // before switchMap as an alias and a class member
         import { of } from "rxjs";
         import { switchMap, takeUntil } from "rxjs/operators";
@@ -301,15 +305,13 @@ ruleTester({ types: true }).run("no-unsafe-takeuntil", rule, {
         const c = of("c");
 
         const d = a.pipe(obj.untilDestroyed(), switchMap(_ => b)).subscribe();
-                         ~~~~~~~~~~~~~~~~~~ [forbidden]
+                         ~~~~~~~~~~~~~~~~~~
       `,
-      {
-        options: [
-          {
-            alias: ["untilDestroyed"],
-          },
-        ],
-      }
-    ),
+      options: [
+        {
+          alias: ['untilDestroyed'],
+        },
+      ],
+    }),
   ],
 });

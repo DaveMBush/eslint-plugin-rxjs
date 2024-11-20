@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
 import { getTypeServices, isCallExpression, isIdentifier } from '../eslint-etc';
@@ -29,7 +24,8 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      [messageId]: 'Effects and epics that re-emit filtered actions are forbidden.',
+      [messageId]:
+        'Effects and epics that re-emit filtered actions are forbidden.',
     },
     schema: [
       {

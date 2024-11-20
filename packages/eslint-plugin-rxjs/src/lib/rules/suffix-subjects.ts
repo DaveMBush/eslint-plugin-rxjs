@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import {
   findParent,
@@ -23,7 +18,8 @@ const defaultOptions: readonly {
   variables?: boolean;
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Enforces the use of a suffix in subject identifiers.',
@@ -31,7 +27,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: `Subject identifiers must end with "{{suffix}}".`,
+      [messageId]: `Subject identifiers must end with "{{suffix}}".`,
     },
     schema: [
       {
@@ -97,7 +93,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         context.report({
           data: { suffix },
           loc: getLoc(tsNode),
-          messageId: 'forbidden',
+          messageId,
         });
       }
     }
@@ -234,6 +230,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as suffixSubjects };
-

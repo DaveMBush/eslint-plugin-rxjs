@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import {
   getParserServices,
@@ -15,7 +10,8 @@ import { couldBeType, isReferenceType, isUnionType } from 'tsutils-etc';
 import * as ts from 'typescript';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids unsafe optional `next` calls.',
@@ -70,6 +66,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noUnsafeSubjectNext };
-

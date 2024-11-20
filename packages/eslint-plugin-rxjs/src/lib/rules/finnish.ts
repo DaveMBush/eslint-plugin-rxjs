@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import {
   findParent,
@@ -36,7 +31,8 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     hasSuggestions: false,
     messages: {
       [shouldBeFinnishMessageId]: 'Finnish notation should be used here.',
-      [shouldNotBeFinnishMessageId]: 'Finnish notation should not be used here.',
+      [shouldNotBeFinnishMessageId]:
+        'Finnish notation should not be used here.',
     },
     schema: [
       {
@@ -114,7 +110,9 @@ export default ESLintUtils.RuleCreator(() => __filename)({
         return;
       }
       const shouldBeFinnish = hasFinnish
-        ? () => { /* noop */ }
+        ? () => {
+            /* noop */
+          }
         : () => {
             context.report({
               loc: getLoc(tsNode),
@@ -128,7 +126,9 @@ export default ESLintUtils.RuleCreator(() => __filename)({
               messageId: 'shouldNotBeFinnish',
             });
           }
-        : () => { /* noop */ };
+        : () => {
+            /* noop */
+          };
 
       if (
         couldBeObservable(typeNode || nameNode) ||

@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-ignored-observable';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-ignored-observable", rule, {
+ruleTester.run('no-ignored-observable', rule, {
   valid: [
     `
       // not ignored
@@ -52,7 +47,7 @@ ruleTester.run("no-ignored-observable", rule, {
 
         functionSource();
         ~~~~~~~~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'ignored arrow',
@@ -65,7 +60,7 @@ ruleTester.run("no-ignored-observable", rule, {
 
         arrowSource();
         ~~~~~~~~~~~~~
-      `
+      `,
     }),
   ],
 });

@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { getParserServices, getTypeServices } from '../eslint-etc';
 
@@ -10,7 +5,8 @@ import { couldBeFunction, couldBeType, isAny, isUnknown } from 'tsutils-etc';
 import * as ts from 'typescript';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -19,7 +15,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Passing non-Error values are forbidden.',
+      [messageId]: 'Passing non-Error values are forbidden.',
     },
     schema: [],
     type: 'problem',
@@ -32,19 +28,20 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
 
     function checkNode(node: es.Node) {
       let type = getType(node);
-      if (couldBeFunction(type)) {
+      if (type && couldBeFunction(type)) {
         const tsNode = esTreeNodeToTSNodeMap.get(node);
         const annotation = (tsNode as ts.ArrowFunction).type;
         const body = (tsNode as ts.ArrowFunction).body;
         type = program.getTypeChecker().getTypeAtLocation(annotation ?? body);
       }
       if (
+        type &&
         !isAny(type) &&
         !isUnknown(type) &&
         !couldBeType(type, /^(Error|DOMException)$/)
       ) {
         context.report({
-          messageId: 'forbidden',
+          messageId,
           node,
         });
       }
@@ -63,6 +60,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as throwError };
-

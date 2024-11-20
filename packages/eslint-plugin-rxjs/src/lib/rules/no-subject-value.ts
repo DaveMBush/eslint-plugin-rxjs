@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { getParent, getTypeServices } from '../eslint-etc';
 
@@ -18,7 +13,8 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      [messageId]: 'Accessing the value property of a BehaviorSubject is forbidden.',
+      [messageId]:
+        'Accessing the value property of a BehaviorSubject is forbidden.',
     },
     schema: [],
     type: 'problem',

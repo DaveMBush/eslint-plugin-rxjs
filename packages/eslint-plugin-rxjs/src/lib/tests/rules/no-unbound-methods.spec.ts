@@ -1,12 +1,11 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-unbound-methods';
 import { testCheckConfig } from './type-check';
-import { RuleTester, ValidTestCase, InvalidTestCase } from '@typescript-eslint/rule-tester';
+import {
+  RuleTester,
+  ValidTestCase,
+  InvalidTestCase,
+} from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
 interface Tests {
@@ -528,7 +527,7 @@ const unboundTests: Tests = {
   ],
 };
 
-ruleTester.run("no-unbound-methods", rule, {
+ruleTester.run('no-unbound-methods', rule, {
   valid: [
     ...arrowTests.valid,
     ...boundTests.valid,

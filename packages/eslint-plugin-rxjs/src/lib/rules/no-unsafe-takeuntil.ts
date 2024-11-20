@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
 import {
@@ -20,7 +15,8 @@ const defaultOptions: readonly {
   allow?: string[];
 }[] = [];
 
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+export const messageId = 'forbidden';
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description: 'Forbids the application of operators after `takeUntil`.',
@@ -28,7 +24,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: undefined,
     hasSuggestions: false,
     messages: {
-      forbidden: 'Applying operators after takeUntil is forbidden.',
+      [messageId]: 'Applying operators after takeUntil is forbidden.',
     },
     schema: [
       {
@@ -118,7 +114,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
         if (checkedOperatorsRegExp.test(operatorName)) {
           if (state === 'disallowed') {
             context.report({
-              messageId: 'forbidden',
+              messageId,
               node: arg.callee,
             });
           }
@@ -140,6 +136,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     };
   },
 });
-
-export { rule as noUnsafeTakeUntil };
-

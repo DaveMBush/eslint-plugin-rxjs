@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-connectable';
 import { testCheckConfig } from './type-check';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-connectable", rule, {
+ruleTester.run('no-connectable', rule, {
   valid: [
     {
       code: `
@@ -70,7 +65,7 @@ ruleTester.run("no-connectable", rule, {
           publish()
           ~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       messageId,
@@ -83,7 +78,7 @@ ruleTester.run("no-connectable", rule, {
           publishBehavior(1)
           ~~~~~~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       messageId,
@@ -96,7 +91,7 @@ ruleTester.run("no-connectable", rule, {
           publishLast()
           ~~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       messageId,
@@ -109,7 +104,7 @@ ruleTester.run("no-connectable", rule, {
           publishReplay(1)
           ~~~~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       messageId,
@@ -122,7 +117,7 @@ ruleTester.run("no-connectable", rule, {
           multicast(new Subject<number>())
           ~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       messageId,
@@ -135,7 +130,7 @@ ruleTester.run("no-connectable", rule, {
           multicast(() => new Subject<number>())
           ~~~~~~~~~
         );
-      `
+      `,
     }),
   ],
 });

@@ -1,17 +1,13 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
+import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
+import rule, { messageId } from '../../rules/no-unsafe-subject-next';
+import { testCheckConfig } from './type-check';
+import { RuleTester } from '@typescript-eslint/rule-tester';
+const ruleTester = new RuleTester(testCheckConfig);
 
-import { stripIndent } from "common-tags";
-import { fromFixture } from "eslint-etc";
-import rule = require("../../source/rules/no-unsafe-subject-next");
-import { ruleTester } from "../utils";
-
-ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
+ruleTester.run('no-unsafe-subject-next', rule, {
   valid: [
     {
-      code: stripIndent`
+      code: `
         // number next
         import { Subject } from "rxjs";
         const s = new Subject<number>();
@@ -19,7 +15,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // replay number next
         import { ReplaySubject } from "rxjs";
         const s = new ReplaySubject<number>();
@@ -27,7 +23,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // any next
         import { Subject } from "rxjs";
         const s = new Subject<any>();
@@ -36,7 +32,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // unknown next
         import { Subject } from "rxjs";
         const s = new Subject<unknown>();
@@ -45,7 +41,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // void next
         import { Subject } from "rxjs";
         const s = new Subject<void>();
@@ -53,7 +49,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // void union next
         import { Subject } from "rxjs";
         const s = new Subject<number | void>();
@@ -62,7 +58,7 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
       `,
     },
     {
-      code: stripIndent`
+      code: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/76
         import { Subject } from "rxjs";
         const s = new Subject();
@@ -71,23 +67,27 @@ ruleTester({ types: true }).run("no-unsafe-subject-next", rule, {
     },
   ],
   invalid: [
-    fromFixture(
-      stripIndent`
+    convertAnnotatedSourceToFailureCase({
+      description: 'optional number next',
+      messageId,
+      annotatedSource: `
         // optional number next
         import { Subject } from "rxjs";
         const s = new Subject<number>();
         s.next();
-          ~~~~ [forbidden]
-      `
-    ),
-    fromFixture(
-      stripIndent`
+          ~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'optional replay number next',
+      messageId,
+      annotatedSource: `
         // optional replay number next
         import { ReplaySubject } from "rxjs";
         const s = new ReplaySubject<number>();
         s.next();
-          ~~~~ [forbidden]
-      `
-    ),
+          ~~~~
+      `,
+    }),
   ],
 });

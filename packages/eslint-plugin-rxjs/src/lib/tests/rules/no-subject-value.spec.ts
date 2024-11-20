@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-subject-value';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-subject-value", rule, {
+ruleTester.run('no-subject-value', rule, {
   valid: [
     `
       // no value
@@ -27,7 +22,7 @@ ruleTester.run("no-subject-value", rule, {
         const subject = new BehaviorSubject<number>(1);
         console.log(subject.value);
                             ~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'getValue method',
@@ -38,7 +33,7 @@ ruleTester.run("no-subject-value", rule, {
         const subject = new BehaviorSubject<number>(1);
         console.log(subject.getValue());
                             ~~~~~~~~
-      `
+      `,
     }),
   ],
 });

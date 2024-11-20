@@ -1,10 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
-import rule, { explicitAnyId, implicitAnyId, narrowedId, suggestExplicitUnknownId } from '../../rules/no-implicit-any-catch';
+import rule, {
+  explicitAnyId,
+  implicitAnyId,
+  narrowedId,
+  suggestExplicitUnknownId,
+} from '../../rules/no-implicit-any-catch';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);

@@ -1,14 +1,9 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-tap';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester();
 
-ruleTester.run("no-tap", rule, {
+ruleTester.run('no-tap', rule, {
   valid: [
     `
       // no tap
@@ -39,7 +34,7 @@ ruleTester.run("no-tap", rule, {
           map(x => x * 2),
           tap(value => console.log(value))
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'tap with shallow import',
@@ -52,7 +47,7 @@ ruleTester.run("no-tap", rule, {
           map(x => x * 2),
           tap(value => console.log(value))
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'tap alias',
@@ -66,7 +61,7 @@ ruleTester.run("no-tap", rule, {
           map(x => x * 2),
           tapAlias(value => console.log(value))
         );
-      `
+      `,
     }),
   ],
 });

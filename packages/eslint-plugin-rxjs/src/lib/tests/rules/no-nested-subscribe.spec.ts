@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-nested-subscribe';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-nested-subscribe", rule, {
+ruleTester.run('no-nested-subscribe', rule, {
   valid: [
     `
       // not nested in next argument
@@ -80,7 +75,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           value => of("bar").subscribe()
                              ~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in next property',
@@ -92,7 +87,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           next: value => of("bar").subscribe()
                                    ~~~~~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in next method',
@@ -104,7 +99,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           next(value) { of("bar").subscribe(); }
                                   ~~~~~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in error argument',
@@ -117,7 +112,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           error => of("bar").subscribe()
                              ~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in error property',
@@ -129,7 +124,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           error: error => of("bar").subscribe()
                                     ~~~~~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in error method',
@@ -141,7 +136,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           error(error) { of("bar").subscribe(); }
                                    ~~~~~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in complete argument',
@@ -155,7 +150,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           () => of("bar").subscribe()
                           ~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in complete property',
@@ -167,7 +162,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           complete: () => of("bar").subscribe()
                                     ~~~~~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in complete method',
@@ -179,7 +174,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           complete() { of("bar").subscribe(); }
                                  ~~~~~~~~~
         });
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'nested in Subscribable',
@@ -192,7 +187,7 @@ ruleTester.run("no-nested-subscribe", rule, {
           () => subscribable.subscribe()
                              ~~~~~~~~~
         );
-      `
+      `,
     }),
   ],
 });

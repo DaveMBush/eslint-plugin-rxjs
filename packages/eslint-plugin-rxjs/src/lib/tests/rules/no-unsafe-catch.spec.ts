@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-unsafe-catch';
 import { testCheckConfig } from './type-check';
@@ -20,9 +15,9 @@ const setup = `
   type Actions = Observable<any>;
   const actions = of({});
   const that = { actions };
-`.replace(/\n/g, "");
+`.replace(/\n/g, '');
 
-ruleTester.run("no-unsafe-catch", rule, {
+ruleTester.run('no-unsafe-catch', rule, {
   valid: [
     {
       code: `
@@ -103,7 +98,7 @@ ruleTester.run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
         );
       `,
-      options: [{ observable: "foo" }],
+      options: [{ observable: 'foo' }],
     },
   ],
   invalid: [
@@ -120,7 +115,7 @@ ruleTester.run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
           ~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'unsafe actions property',
@@ -135,7 +130,7 @@ ruleTester.run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
           ~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'unsafe epic',
@@ -150,7 +145,7 @@ ruleTester.run("no-unsafe-catch", rule, {
           catchError(() => EMPTY)
           ~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'matching options',
@@ -168,7 +163,7 @@ ruleTester.run("no-unsafe-catch", rule, {
       `,
       options: [
         {
-          observable: "foo",
+          observable: 'foo',
         },
       ],
     }),
@@ -197,7 +192,7 @@ ruleTester.run("no-unsafe-catch", rule, {
             ~~~~~~~~~~
           );
         }
-      `
+      `,
     }),
   ],
 });

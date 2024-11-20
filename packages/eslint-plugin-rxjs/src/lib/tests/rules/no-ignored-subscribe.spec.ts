@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-ignored-subscribe';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-ignored-subscribe", rule, {
+ruleTester.run('no-ignored-subscribe', rule, {
   valid: [
     {
       code: `
@@ -71,7 +66,7 @@ ruleTester.run("no-ignored-subscribe", rule, {
         const observable = of([1, 2]);
         observable.subscribe();
                    ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'subject ignored',
@@ -83,7 +78,7 @@ ruleTester.run("no-ignored-subscribe", rule, {
         const subject = new Subject<any>();
         subject.subscribe();
                 ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'subscribable ignored',
@@ -94,7 +89,7 @@ ruleTester.run("no-ignored-subscribe", rule, {
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe();
                      ~~~~~~~~~
-      `
+      `,
     }),
   ],
 });

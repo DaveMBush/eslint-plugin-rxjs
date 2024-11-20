@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-subscribe-handlers';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-subscribe-handlers", rule, {
+ruleTester.run('no-subscribe-handlers', rule, {
   valid: [
     {
       code: `
@@ -64,7 +59,7 @@ ruleTester.run("no-subscribe-handlers", rule, {
         const observable = of([1, 2]);
         observable.subscribe(value => console.log(value));
                    ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'subject',
@@ -76,7 +71,7 @@ ruleTester.run("no-subscribe-handlers", rule, {
         const subject = new Subject<any>();
         subject.subscribe(value => console.log(value));
                 ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'non-arrow',
@@ -92,7 +87,7 @@ ruleTester.run("no-subscribe-handlers", rule, {
         const observable = of([1, 2]);
         observable.subscribe(log);
                    ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'Subscribable',
@@ -102,7 +97,7 @@ ruleTester.run("no-subscribe-handlers", rule, {
         declare const subscribable: Subscribable<unknown>;
         subscribable.subscribe((value) => console.log(value));
                      ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'object',
@@ -114,7 +109,7 @@ ruleTester.run("no-subscribe-handlers", rule, {
                      ~~~~~~~~~
           next: (value) => console.log(value)
         });
-      `
+      `,
     }),
   ],
 });

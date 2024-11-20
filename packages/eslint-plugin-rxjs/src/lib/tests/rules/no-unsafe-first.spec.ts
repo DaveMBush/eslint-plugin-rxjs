@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-unsafe-first';
 import { testCheckConfig } from './type-check';
@@ -21,9 +16,9 @@ const setup = `
   const actions = of({});
   const actions$ = of({});
   const that = { actions };
-`.replace(/\n/g, "");
+`.replace(/\n/g, '');
 
-ruleTester.run("no-unsafe-first", rule, {
+ruleTester.run('no-unsafe-first', rule, {
   valid: [
     {
       code: `
@@ -101,7 +96,7 @@ ruleTester.run("no-unsafe-first", rule, {
           first()
         );
       `,
-      options: [{ observable: "foo" }],
+      options: [{ observable: 'foo' }],
     },
     {
       code: `
@@ -113,7 +108,7 @@ ruleTester.run("no-unsafe-first", rule, {
           first()
         );
       `,
-      options: [{ observable: "foo" }],
+      options: [{ observable: 'foo' }],
     },
     {
       code: `
@@ -158,7 +153,7 @@ ruleTester.run("no-unsafe-first", rule, {
           first()
           ~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'actions take',
@@ -172,7 +167,7 @@ ruleTester.run("no-unsafe-first", rule, {
           take(1)
           ~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'actions property first',
@@ -187,7 +182,7 @@ ruleTester.run("no-unsafe-first", rule, {
           first()
           ~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'actions property take',
@@ -202,7 +197,7 @@ ruleTester.run("no-unsafe-first", rule, {
           take(1)
           ~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'epic first',
@@ -217,7 +212,7 @@ ruleTester.run("no-unsafe-first", rule, {
           first()
           ~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'epic take',
@@ -232,7 +227,7 @@ ruleTester.run("no-unsafe-first", rule, {
           take(1)
           ~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'matching options',
@@ -250,7 +245,7 @@ ruleTester.run("no-unsafe-first", rule, {
       `,
       options: [
         {
-          observable: "foo",
+          observable: 'foo',
         },
       ],
     }),

@@ -1,8 +1,3 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { TSESTree as es, TSESLint as eslint } from '@typescript-eslint/utils';
 import {
   getTypeServices,
@@ -16,7 +11,10 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 const defaultOptions: readonly {
   allowNext?: boolean;
 }[] = [];
-const rule = ESLintUtils.RuleCreator(() => __filename)({
+
+export const messageId = 'forbidden';
+
+export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
       description:
@@ -25,7 +23,7 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
     fixable: 'code',
     hasSuggestions: true,
     messages: {
-      forbidden:
+      [messageId]:
         'Passing separate handlers is forbidden; pass an observer instead.',
     },
     schema: [
@@ -99,12 +97,12 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
 
       if (args.length > 1) {
         context.report({
-          messageId: 'forbidden',
+          messageId,
           node: reportNode,
           fix,
           suggest: [
             {
-              messageId: 'forbidden',
+              messageId,
               fix,
             },
           ],
@@ -117,12 +115,12 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
           couldBeFunction(arg)
         ) {
           context.report({
-            messageId: 'forbidden',
+            messageId,
             node: reportNode,
             fix,
             suggest: [
               {
-                messageId: 'forbidden',
+                messageId,
                 fix,
               },
             ],
@@ -144,6 +142,3 @@ const rule = ESLintUtils.RuleCreator(() => __filename)({
 function isValidArgText(argText: string) {
   return argText && argText !== 'undefined' && argText !== 'null';
 }
-
-export { rule as preferObserver };
-

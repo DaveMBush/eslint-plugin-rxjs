@@ -1,15 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/no-topromise';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-topromise", rule, {
+ruleTester.run('no-topromise', rule, {
   valid: [
     `
       // no toPromise
@@ -37,7 +32,7 @@ ruleTester.run("no-topromise", rule, {
         const a = of("a");
         a.toPromise().then(value => console.log(value));
           ~~~~~~~~~
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'subject toPromise',
@@ -48,7 +43,7 @@ ruleTester.run("no-topromise", rule, {
         const a = new Subject<string>();
         a.toPromise().then(value => console.log(value));
           ~~~~~~~~~
-      `
+      `,
     }),
   ],
 });

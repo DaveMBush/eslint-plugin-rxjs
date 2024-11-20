@@ -1,15 +1,13 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
-import rule, { forbiddenId, forbiddenWithoutConfigId } from '../../rules/no-sharereplay';
+import rule, {
+  forbiddenId,
+  forbiddenWithoutConfigId,
+} from '../../rules/no-sharereplay';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
-ruleTester.run("no-sharereplay", rule, {
+ruleTester.run('no-sharereplay', rule, {
   valid: [
     {
       code: `
@@ -28,7 +26,7 @@ ruleTester.run("no-sharereplay", rule, {
   ],
   invalid: [
     convertAnnotatedSourceToFailureCase({
-      description: "no arguments",
+      description: 'no arguments',
       messageId: forbiddenId,
       annotatedSource: `
         // no arguments
@@ -37,10 +35,10 @@ ruleTester.run("no-sharereplay", rule, {
           ~~~~~~~~~~~
         );
       `,
-      options: [{ allowConfig: false }]
+      options: [{ allowConfig: false }],
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "config allowed no arguments",
+      description: 'config allowed no arguments',
       messageId: forbiddenWithoutConfigId,
       annotatedSource: `
         // config allowed no arguments
@@ -49,10 +47,10 @@ ruleTester.run("no-sharereplay", rule, {
           ~~~~~~~~~~~
         );
       `,
-      options: [{ allowConfig: true }]
+      options: [{ allowConfig: true }],
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "one argument",
+      description: 'one argument',
       messageId: forbiddenWithoutConfigId,
       annotatedSource: `
         // one argument
@@ -60,10 +58,10 @@ ruleTester.run("no-sharereplay", rule, {
           shareReplay(1)
           ~~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "two arguments",
+      description: 'two arguments',
       messageId: forbiddenWithoutConfigId,
       annotatedSource: `
         // two arguments
@@ -71,10 +69,10 @@ ruleTester.run("no-sharereplay", rule, {
           shareReplay(1, 100)
           ~~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "three arguments",
+      description: 'three arguments',
       messageId: forbiddenWithoutConfigId,
       annotatedSource: `
         // three arguments
@@ -82,10 +80,10 @@ ruleTester.run("no-sharereplay", rule, {
           shareReplay(1, 100, asapScheduler)
           ~~~~~~~~~~~
         );
-      `
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "config argument refCount",
+      description: 'config argument refCount',
       messageId: forbiddenId,
       annotatedSource: `
         // config argument refCount
@@ -94,10 +92,10 @@ ruleTester.run("no-sharereplay", rule, {
           ~~~~~~~~~~~
         );
       `,
-      options: [{ allowConfig: false }]
+      options: [{ allowConfig: false }],
     }),
     convertAnnotatedSourceToFailureCase({
-      description: "config argument no refCount",
+      description: 'config argument no refCount',
       messageId: forbiddenId,
       annotatedSource: `
         // config argument no refCount
@@ -106,7 +104,7 @@ ruleTester.run("no-sharereplay", rule, {
           ~~~~~~~~~~~
         );
       `,
-      options: [{ allowConfig: false }]
+      options: [{ allowConfig: false }],
     }),
   ],
 });

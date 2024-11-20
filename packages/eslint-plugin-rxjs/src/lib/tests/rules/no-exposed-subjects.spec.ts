@@ -1,12 +1,10 @@
-/**
- * @license Use of this source code is governed by an MIT-style license that
- * can be found in the LICENSE file at https://github.com/cartant/eslint-plugin-rxjs
- */
-
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
-import rule, { forbiddenId, forbiddenAllowProtectedId } from '../../rules/no-exposed-subjects';
+import rule, {
+  forbiddenId,
+  forbiddenAllowProtectedId,
+} from '../../rules/no-exposed-subjects';
 import { testCheckConfig } from './type-check';
-import { RuleTester } from "@typescript-eslint/rule-tester";
+import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
 
 ruleTester.run('no-exposed-subjects', rule, {
@@ -436,7 +434,8 @@ ruleTester.run('no-exposed-subjects', rule, {
     }),
 
     convertAnnotatedSourceToFailureCase({
-      description: 'https://github.com/cartant/eslint-plugin-rxjs/issues/91 getfoo',
+      description:
+        'https://github.com/cartant/eslint-plugin-rxjs/issues/91 getfoo',
       messageId: forbiddenId,
       annotatedSource: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/91
@@ -455,7 +454,8 @@ ruleTester.run('no-exposed-subjects', rule, {
       },
     }),
     convertAnnotatedSourceToFailureCase({
-      description: 'https://github.com/cartant/eslint-plugin-rxjs/issues/91 foo$',
+      description:
+        'https://github.com/cartant/eslint-plugin-rxjs/issues/91 foo$',
       messageId: forbiddenId,
       annotatedSource: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/91
@@ -471,7 +471,8 @@ ruleTester.run('no-exposed-subjects', rule, {
       },
     }),
     convertAnnotatedSourceToFailureCase({
-      description: 'https://github.com/cartant/eslint-plugin-rxjs/issues/91 bar$',
+      description:
+        'https://github.com/cartant/eslint-plugin-rxjs/issues/91 bar$',
       messageId: forbiddenId,
       annotatedSource: `
         // https://github.com/cartant/eslint-plugin-rxjs/issues/91
