@@ -44,8 +44,8 @@ jobs:
           # Use the version from the workflow input if it is set,
           # otherwise use from the github release
           VERSION=${{ github.event.inputs.version || github.ref_name }}
-          npx nx release version --specifier $VERSION --verbose --skip-nx-cache
-          npx nx release publish --verbose --skip-nx-cache
+          npx nx release version --specifier $VERSION --verbose --first-release --skip-nx-cache
+          npx nx release publish --verbose --first-release --skip-nx-cache
         env:
           NX_NO_CLOUD: true
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
