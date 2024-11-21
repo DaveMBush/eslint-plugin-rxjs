@@ -10,6 +10,18 @@
     "tsutils": "^3.21.0",
     "tsutils-etc": "^1.4.2"
   },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin",
+    "rxjs"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "commonjs",
   "main": "./index.cjs"
 }
