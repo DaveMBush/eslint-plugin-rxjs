@@ -1,0 +1,52 @@
+name: publish to npm
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish'
+        required: true
+        default: 'patch'
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.3.0
+          run_install: false
+
+      - name: Use Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm i
+
+      - name: Publish to npm
+        run: |
+          # Use the version from the workflow input if it is set,
+          # otherwise use from the github release
+          VERSION=${{ github.event.inputs.version || github.ref_name }}
+          npx nx release version --specifier $VERSION --verbose --skip-nx-cache
+          npx nx release publish --verbose --skip-nx-cache
+        env:
+          NX_NO_CLOUD: true
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

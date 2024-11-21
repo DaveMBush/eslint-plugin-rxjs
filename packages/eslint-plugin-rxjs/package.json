@@ -1,6 +1,6 @@
 {
   "name": "@smarttools/eslint-plugin-rxjs",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "dependencies": {
     "@typescript-eslint/utils": "^8.13.0",
     "@typescript-eslint/rule-tester": "^8.13.0",
