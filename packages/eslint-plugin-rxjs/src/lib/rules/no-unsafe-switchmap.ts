@@ -19,6 +19,7 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
+export type RuleOptions = typeof defaultOptions;
 export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {

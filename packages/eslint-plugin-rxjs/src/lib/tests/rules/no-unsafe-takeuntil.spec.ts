@@ -1,5 +1,5 @@
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
-import rule, { messageId } from '../../rules/no-unsafe-takeuntil';
+import rule, { messageId, RuleOptions } from '../../rules/no-unsafe-takeuntil';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
@@ -114,7 +114,7 @@ ruleTester.run('no-unsafe-takeuntil', rule, {
 
         const e = a.pipe(takeUntil(d), tap(value => console.log(value))).subscribe();
       `,
-      options: [
+      options: <RuleOptions>[
         {
           allow: ['tap'],
         },
@@ -134,7 +134,7 @@ ruleTester.run('no-unsafe-takeuntil', rule, {
 
         const d = a.pipe(switchMap(_ => b), untilDestroyed()).subscribe();
       `,
-      options: [
+      options: <RuleOptions>[
         {
           alias: ['untilDestroyed'],
         },
@@ -158,7 +158,7 @@ ruleTester.run('no-unsafe-takeuntil', rule, {
         r = a.pipe(takeUntil(b), untilDestroyed()).subscribe();
         r = a.pipe(untilDestroyed(), takeUntil(c)).subscribe();
       `,
-      options: [
+      options: <RuleOptions>[
         {
           alias: ['untilDestroyed'],
         },
@@ -231,7 +231,7 @@ ruleTester.run('no-unsafe-takeuntil', rule, {
         const d = a.pipe(takeUntil(c), tap(value => console.log(value)), switchMap(_ => b)).subscribe();
                          ~~~~~~~~~
       `,
-      options: [
+      options: <RuleOptions>[
         {
           allow: ['tap'],
         },
@@ -284,7 +284,7 @@ ruleTester.run('no-unsafe-takeuntil', rule, {
         const d = a.pipe(untilDestroyed(), switchMap(_ => b)).subscribe();
                          ~~~~~~~~~~~~~~
       `,
-      options: [
+      options: <RuleOptions>[
         {
           alias: ['untilDestroyed'],
         },
@@ -307,7 +307,7 @@ ruleTester.run('no-unsafe-takeuntil', rule, {
         const d = a.pipe(obj.untilDestroyed(), switchMap(_ => b)).subscribe();
                          ~~~~~~~~~~~~~~~~~~
       `,
-      options: [
+      options: <RuleOptions>[
         {
           alias: ['untilDestroyed'],
         },

@@ -115,7 +115,6 @@ ruleTester.run('prefer-observer', rule, {
           complete: () => console.log("complete")
         })).subscribe();
       `,
-      options: [{}],
     },
     {
       code: `
@@ -155,7 +154,6 @@ ruleTester.run('prefer-observer', rule, {
         source.subscribe(nextObserver);
         source.pipe(tap(nextObserver));
       `,
-      options: [{}],
     },
     {
       code: `
@@ -173,7 +171,6 @@ ruleTester.run('prefer-observer', rule, {
           function (value) { console.log(value); }
         )).subscribe();
       `,
-      options: [{}],
     },
     {
       code: `

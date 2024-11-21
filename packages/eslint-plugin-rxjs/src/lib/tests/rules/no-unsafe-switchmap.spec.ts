@@ -1,5 +1,5 @@
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
-import rule, { messageId } from '../../rules/no-unsafe-switchmap';
+import rule, { messageId, RuleOptions } from '../../rules/no-unsafe-switchmap';
 import { testCheckConfig } from './type-check';
 import { RuleTester } from '@typescript-eslint/rule-tester';
 const ruleTester = new RuleTester(testCheckConfig);
@@ -53,7 +53,7 @@ ruleTester.run('no-unsafe-switchmap', rule, {
         ${setup}
         const fooEffect = actions.pipe(ofType("FOO"), tap(() => {}), switchMap(() => EMPTY));
       `,
-      options: [
+      options: <RuleOptions>[
         {
           allow: ['FOO'],
         },
@@ -66,7 +66,7 @@ ruleTester.run('no-unsafe-switchmap', rule, {
         const barEffect = actions.pipe(ofType("BAR"), tap(() => {}), switchMap(() => EMPTY));
         const bazEffect = actions.pipe(ofType("BAZ"), tap(() => {}), switchMap(() => EMPTY));
       `,
-      options: [
+      options: <RuleOptions>[
         {
           disallow: ['FOO'],
         },
@@ -146,7 +146,7 @@ ruleTester.run('no-unsafe-switchmap', rule, {
         const barEffect = actions.pipe(ofType("BAR"), tap(() => {}), switchMap(() => EMPTY));
                                                                      ~~~~~~~~~
       `,
-      options: [
+      options: <RuleOptions>[
         {
           allow: ['FOO'],
         },
@@ -161,7 +161,7 @@ ruleTester.run('no-unsafe-switchmap', rule, {
         const bazEffect = actions.pipe(ofType("BAZ"), tap(() => {}), switchMap(() => EMPTY));
                                                                      ~~~~~~~~~
       `,
-      options: [
+      options: <RuleOptions>[
         {
           allow: ['FOO'],
         },
@@ -177,7 +177,7 @@ ruleTester.run('no-unsafe-switchmap', rule, {
         const fooEffect = actions.pipe(ofType("FOO"), tap(() => {}), switchMap(() => EMPTY));
                                                                      ~~~~~~~~~
       `,
-      options: [
+      options: <RuleOptions>[
         {
           disallow: ['FOO'],
         },
