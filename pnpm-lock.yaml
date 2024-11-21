@@ -144,6 +144,9 @@ importers:
       decamelize:
         specifier: ^5.0.1
         version: 5.0.1
+      eslint:
+        specifier: ^9.0.0
+        version: 9.14.0(jiti@1.21.6)
       tsutils:
         specifier: ^3.21.0
         version: 3.21.0(typescript@5.5.4)
