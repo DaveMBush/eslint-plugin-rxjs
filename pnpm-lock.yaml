@@ -130,7 +130,29 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1(typanion@3.14.0)
 
-  packages/eslint-plugin-rxjs: {}
+  packages/eslint-plugin-rxjs:
+    dependencies:
+      '@typescript-eslint/rule-tester':
+        specifier: ^8.13.0
+        version: 8.13.0(eslint@9.14.0(jiti@1.21.6))(typescript@5.5.4)
+      '@typescript-eslint/utils':
+        specifier: ^8.13.0
+        version: 8.13.0(eslint@9.14.0(jiti@1.21.6))(typescript@5.5.4)
+      common-tags:
+        specifier: ^1.8.2
+        version: 1.8.2
+      decamelize:
+        specifier: ^5.0.1
+        version: 5.0.1
+      tsutils:
+        specifier: ^3.21.0
+        version: 3.21.0(typescript@5.5.4)
+      tsutils-etc:
+        specifier: ^1.4.2
+        version: 1.4.2(tsutils@3.21.0(typescript@5.5.4))(typescript@5.5.4)
+      typescript:
+        specifier: ~5.5.4
+        version: 5.5.4
 
 packages:
 
