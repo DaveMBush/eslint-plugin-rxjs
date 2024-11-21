@@ -8,57 +8,89 @@ Since some rules have better implementations in other more generic ESLint packag
 
 The tests have been upgraded to use standard TypeScript and ESLint test helpers.
 
+All existing unit tests pass.
+
 ## Install
 
 Install the ESLint TypeScript parser using npm:
 
-```
+``` bash
 npm install @typescript-eslint/parser --save-dev
 ```
 
 Install the package using npm:
 
-```
+``` bash
 npm install @smarttools/eslint-plugin-rxjs --save-dev
 ```
 
 Configure the `parser` and the `parserOptions` for ESLint. Here, I use a `.eslintrc.js` file for the configuration:
 
-```js
+### Flat Config
+
+``` js
+const rxjs = require('@smarttools/eslint-plugin-rxjs');
+
+module.exports = [{
+  files: ['**/*'],
+  plugins: {
+    rxjs,
+  },
+},{
+  files: ['**/*.ts'],
+  // languageOptions here
+  rules: {
+    'rxjs/no-async-subscribe': 'error',
+    ...etc.
+  },
+}];
+```
+
+### Legacy Config
+
+``` js
 const { join } = require("path");
 module.exports = {
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: 2019,
-    project: join(__dirname, "./tsconfig.json"),
-    sourceType: "module"
-  },
+  // parserOptions here
   plugins: ["rxjs"],
   extends: [],
   rules: {
     "rxjs/no-async-subscribe": "error",
-    "rxjs/no-ignored-observable": "error",
-    "rxjs/no-ignored-subscription": "error",
-    "rxjs/no-nested-subscribe": "error",
-    "rxjs/no-unbound-methods": "error",
-    "rxjs/throw-error": "error"
+    ...etc.
   }
 };
 ```
 
 Or, using the `recommended` configuration:
 
-```js
+### Flat Config
+
+``` js
+const rxjs = require('@smarttools/eslint-plugin-rxjs');
+
+module.exports = [
+  rxjs.configs.recommended,
+  {
+    files: ['**/*.ts'],
+    plugins: {
+      rxjs,
+    },
+  },
+  // additional rules
+];
+```
+
+### Legacy Config
+
+``` js
 const { join } = require("path");
 module.exports = {
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaVersion: 2019,
-    project: join(__dirname, "./tsconfig.json"),
-    sourceType: "module"
-  },
+  // parserOptions here
   extends: ["plugin:rxjs/recommended"],
 };
+
 ```
 
 ## Rules
