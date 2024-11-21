@@ -1,4 +1,5 @@
 import { Linter } from '@typescript-eslint/utils/ts-eslint';
+import recommended from './lib/configs/recommended';
 
 import banObservables from './lib/rules/ban-observables';
 import banOperators from './lib/rules/ban-operators';
@@ -91,4 +92,17 @@ const rules = {
   'throw-error': throwError,
 } satisfies Linter.PluginRules;
 
-export default { meta, rules } satisfies Linter.Plugin;
+const plugin: Linter.Plugin = {
+  meta, rules, configs: {}
+};
+
+plugin.configs = {
+  recommended: {
+    plugins: ['rxjs'],
+    rules: {
+      ...recommended.rules,
+    },
+  },
+};
+
+export default plugin;

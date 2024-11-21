@@ -1,7 +1,15 @@
 {
   "name": "@smarttools/eslint-plugin-rxjs",
   "version": "0.0.1",
-  "dependencies": {},
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.13.0",
+    "@typescript-eslint/rule-tester": "^8.13.0",
+    "common-tags": "^1.8.2",
+    "decamelize": "^5.0.1",
+    "typescript": "~5.5.4",
+    "tsutils": "^3.21.0",
+    "tsutils-etc": "^1.4.2"
+  },
   "type": "commonjs",
   "main": "./index.cjs"
 }

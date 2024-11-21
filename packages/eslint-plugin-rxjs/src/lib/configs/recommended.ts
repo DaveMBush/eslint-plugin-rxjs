@@ -1,3 +1,5 @@
+import { Linter } from '@typescript-eslint/utils/ts-eslint';
+
 export = {
   plugins: ['rxjs'],
   rules: {
@@ -16,5 +18,5 @@ export = {
     'rxjs/no-unbound-methods': 'error',
     'rxjs/no-unsafe-subject-next': 'error',
     'rxjs/no-unsafe-takeuntil': 'error',
-  },
+  } as Linter.RulesRecord,
 };
