@@ -206,7 +206,6 @@ ruleTester.run('no-implicit-any-catch', rule, {
         };
         whatever.subscribe(() => {}, (error) => {});
       `,
-      options: [{}],
     },
   ],
   invalid: [
