@@ -103,16 +103,18 @@ const plugin: Linter.Plugin = {
 
 if (plugin.configs) {
   Object.assign(plugin.configs, {
-    recommended: [
-      {
-        plugins: {
-          rxjs: plugin,
+    recommended: {
+      plugins: [{
+        '@smarttools/rxjs': {
+          meta,
+          rules,
         },
-        rules: {
-          ...recommended.rules,
-        },
+      }],
+      rules: {
+        ...recommended.rules,
       },
-    ],
+    },
+    'recommended-legacy': recommended,
   });
 }
 

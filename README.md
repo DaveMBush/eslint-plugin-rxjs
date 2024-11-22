@@ -10,6 +10,8 @@ The tests have been upgraded to use standard TypeScript and ESLint test helpers.
 
 All existing unit tests pass.
 
+This plugin now works with both Flat Config and Legacy Config. Pay attention to the example below.
+
 ## Install
 
 Install the ESLint TypeScript parser using npm:
@@ -88,7 +90,7 @@ const { join } = require("path");
 module.exports = {
   parser: "@typescript-eslint/parser",
   // parserOptions here
-  extends: ["plugin:@smarttools/rxjs/recommended"],
+  extends: ["plugin:@smarttools/rxjs/recommended-legacy"],
 };
 
 ```
