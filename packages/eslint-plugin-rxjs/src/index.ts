@@ -42,7 +42,10 @@ import preferObserver from './lib/rules/prefer-observer';
 import suffixSubjects from './lib/rules/suffix-subjects';
 import throwError from './lib/rules/throw-error';
 
-const { name, version } = require('../package.json') as { name: string; version: string; }
+const { name, version } = require('../package.json') as {
+  name: string;
+  version: string;
+};
 
 export const meta = {
   name,
@@ -52,9 +55,9 @@ export const meta = {
 const rules = {
   'ban-observables': banObservables,
   'ban-operators': banOperators,
-  'finnish': finnish,
-  'just': just,
-  'macro': macro,
+  finnish: finnish,
+  just: just,
+  macro: macro,
   'no-async-subscribe': noAsyncSubscribe,
   'no-compat': noCompat,
   'no-connectable': noConnectable,
@@ -80,7 +83,7 @@ const rules = {
   'no-subject-value': noSubjectValue,
   'no-subscribe-handlers': noSubscribeHandlers,
   'no-tap': noTap,
-  'no-to-promise': noToPromise,
+  'no-topromise': noToPromise,
   'no-unbound-methods': noUnboundMethods,
   'no-unsafe-catch': noUnsafeCatch,
   'no-unsafe-first': noUnsafeFirst,
@@ -93,16 +96,24 @@ const rules = {
 } satisfies Linter.PluginRules;
 
 const plugin: Linter.Plugin = {
-  meta, rules, configs: {}
+  meta,
+  rules,
+  configs: {},
 };
 
-plugin.configs = {
-  recommended: {
-    plugins: ['rxjs'],
-    rules: {
-      ...recommended.rules,
-    },
-  },
-};
+if (plugin.configs) {
+  Object.assign(plugin.configs, {
+    recommended: [
+      {
+        plugins: {
+          rxjs: plugin,
+        },
+        rules: {
+          ...recommended.rules,
+        },
+      },
+    ],
+  });
+}
 
-export default plugin;
+module.exports = plugin;
