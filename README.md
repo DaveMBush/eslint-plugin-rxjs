@@ -53,10 +53,10 @@ const { join } = require("path");
 module.exports = {
   parser: "@typescript-eslint/parser",
   // parserOptions here
-  plugins: ["rxjs"],
+  plugins: ["@smarttools/rxjs"],
   extends: [],
   rules: {
-    "rxjs/no-async-subscribe": "error",
+    "@smarttools/rxjs/no-async-subscribe": "error",
     ...etc.
   }
 };
@@ -88,7 +88,7 @@ const { join } = require("path");
 module.exports = {
   parser: "@typescript-eslint/parser",
   // parserOptions here
-  extends: ["plugin:rxjs/recommended"],
+  extends: ["plugin:@smarttools/rxjs/recommended"],
 };
 
 ```
