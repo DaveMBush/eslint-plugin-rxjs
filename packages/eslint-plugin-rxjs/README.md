@@ -1,6 +1,8 @@
 # eslint-plugin-rxjs
 
+![NPM Version](https://img.shields.io/npm/v/%40smarttools%2Feslint-plugin-rxjs)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![CI](https://github.com/DaveMBush/eslint-plugin-rxjs/actions/workflows/ci.yml/badge.svg)
 
 An upgrade of [eslint-plugin-rxjs](https://github.com/cartant/eslint-plugin-rxjs) to support modern TypeScript and ESLint. ie, Flat Config as well as legacy config.
 
