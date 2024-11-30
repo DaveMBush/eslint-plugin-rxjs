@@ -74,7 +74,7 @@ Or, using the `recommended` configuration:
 const rxjs = require('@smarttools/eslint-plugin-rxjs');
 
 module.exports = [
-  rxjs.configs.recommended,
+  ...rxjs.configs.recommended.rules,
   {
     files: ['**/*.ts'],
     plugins: {
