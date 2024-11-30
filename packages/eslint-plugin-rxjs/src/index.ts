@@ -104,12 +104,9 @@ const plugin: Linter.Plugin = {
 if (plugin.configs) {
   Object.assign(plugin.configs, {
     recommended: {
-      plugins: [{
-        '@smarttools/rxjs': {
-          meta,
-          rules,
-        },
-      }],
+      plugins: {
+        '@smarttools/rxjs': plugin,
+      },
       rules: {
         ...recommended.rules,
       },
