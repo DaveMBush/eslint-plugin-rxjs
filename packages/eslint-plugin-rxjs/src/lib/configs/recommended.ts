@@ -2,6 +2,7 @@ import { Linter } from '@typescript-eslint/utils/ts-eslint';
 
 export = {
   plugins: ['@smarttools/rxjs'],
+  name: '@smarttools/rxjs/legacy-recommended',
   rules: {
     '@smarttools/rxjs/no-async-subscribe': 'error',
     '@smarttools/rxjs/no-create': 'error',
