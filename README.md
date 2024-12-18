@@ -68,6 +68,8 @@ module.exports = {
 
 Or, using the `recommended` configuration:
 
+Note: The recommended configuration uses rules that require type checking. You will need to supply the parsing options as specified in the [TypeScript ESLint documentation](https://typescript-eslint.io/docs/linting/type-linting/).
+
 ### Flat Config
 
 ``` js
