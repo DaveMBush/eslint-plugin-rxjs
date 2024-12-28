@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "build": "nx affected:build",
-    "test": "nx affected:test"
+    "test": "nx affected:test",
+    "lint": "nx affected:lint",
+    "lint:fix": "nx affected:lint --fix"
   },
   "private": true,
   "dependencies": {

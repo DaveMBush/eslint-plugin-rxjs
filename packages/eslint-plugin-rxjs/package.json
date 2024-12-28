@@ -8,7 +8,8 @@
     "decamelize": "^5.0.1",
     "typescript": "~5.5.4",
     "tsutils": "^3.21.0",
-    "tsutils-etc": "^1.4.2"
+    "tsutils-etc": "^1.4.2",
+    "@angular-eslint/test-utils": "19.0.2"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,12 @@
   },
   "license": "MIT",
   "type": "commonjs",
-  "main": "./index.cjs"
+  "main": "./index.cjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    }
+  }
 }
