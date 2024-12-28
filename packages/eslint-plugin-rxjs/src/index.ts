@@ -116,4 +116,4 @@ if (plugin.configs) {
   });
 }
 
-module.exports = plugin;
+export default plugin;
