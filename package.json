@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "nx affected:build --skip-nx-cache",
+    "build": "nx affected:build",
     "test": "nx affected:test"
   },
   "private": true,
