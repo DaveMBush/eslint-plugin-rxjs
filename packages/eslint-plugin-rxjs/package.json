@@ -2,7 +2,7 @@
   "name": "@smarttools/eslint-plugin-rxjs",
   "version": "1.0.0",
   "dependencies": {
-    "@typescript-eslint/utils": "^8.13.0",
+    "@typescript-eslint/utils": "^8.18.2",
     "@typescript-eslint/rule-tester": "^8.13.0",
     "common-tags": "^1.8.2",
     "decamelize": "^5.0.1",
