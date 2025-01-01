@@ -47,7 +47,7 @@ const { name, version } = require('../package.json') as {
   version: string;
 };
 
-export const meta = {
+const meta = {
   name,
   version,
 } satisfies Linter.PluginMeta;

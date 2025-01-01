@@ -1,6 +1,6 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
 import { stripIndent } from 'common-tags';
-import decamelize from 'decamelize';
+
 import {
   getTypeServices,
   isCallExpression,
@@ -95,6 +95,13 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     }
 
     const { couldBeObservable } = getTypeServices(context);
+
+    function decamelize(str: string): string {
+      return str
+        .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+        .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1_$2')
+        .toLowerCase();
+    }
 
     function shouldDisallow(args: es.Node[]): boolean {
       const names = args

@@ -16,7 +16,6 @@
         "assets": [
           "packages/eslint-plugin-rxjs/*.md"
         ],
-        "generatePackageJson": true,
         "format": [
           "cjs"
         ],
