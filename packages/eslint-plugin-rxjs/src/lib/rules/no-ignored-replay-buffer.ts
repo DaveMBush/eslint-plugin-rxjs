@@ -2,6 +2,9 @@ import { AST_NODE_TYPES, TSESTree as es } from '@typescript-eslint/utils';
 
 import { ESLintUtils } from '@typescript-eslint/utils';
 
+// Thanks to JaxonWinzierl for helping with the fix for the config
+// https://github.com/JasonWeinzierl/eslint-plugin-rxjs-x/pull/12/files#diff-8a9cff9aa21d1a4600766e85f1493aa81fa30c4902d6110c21173d00536393ed
+
 export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
