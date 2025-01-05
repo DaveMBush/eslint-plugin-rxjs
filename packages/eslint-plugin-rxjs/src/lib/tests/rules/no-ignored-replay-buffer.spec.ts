@@ -27,6 +27,11 @@ ruleTester.run('no-ignored-replay-buffer', rule, {
       const a = of(42).pipe(shareReplay(1));
     `,
     `
+      // shareReplay with config not ignored
+      import { interval, shareReplay } from "rxjs";
+      interval(1000).pipe(shareReplay({ bufferSize: 1, refCount: true }));
+    `,
+    `
       // namespace ReplaySubject not ignored
       import * as Rx from "rxjs";
 
@@ -48,6 +53,12 @@ ruleTester.run('no-ignored-replay-buffer', rule, {
       const a = Rx.of(42).pipe(shareReplay(1));
     `,
     `
+      // namespace shareReplay with config not ignored
+      import * as Rx from "rxjs";
+      import { shareReplay } from "rxjs/operators";
+      const a = Rx.of(42).pipe(shareReplay({ bufferSize: 1, refCount: true }));
+    `,
+    `
       // namespace class not ignored
       import * as Rx from "rxjs";
 
@@ -57,6 +68,11 @@ ruleTester.run('no-ignored-replay-buffer', rule, {
           this.valid = new Rx.ReplaySubject<number>(1);
         }
       }
+    `,
+    `
+        // shareReplay with config not ignored
+        import { interval, shareReplay } from "rxjs";
+        interval(1000).pipe(shareReplay({ bufferSize: 1, refCount: true }));
     `,
   ],
   invalid: [
@@ -103,7 +119,26 @@ ruleTester.run('no-ignored-replay-buffer', rule, {
                               ~~~~~~~~~~~
       `,
     }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'shareReplay with config ignored',
+      messageId,
+      annotatedSource: `
+        // shareReplay with config ignored
+        import { of, shareReplay } from "rxjs";
+        const a = of(42).pipe(shareReplay({ refCount: true }));
+                              ~~~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'shareReplay with config ignored',
+      messageId,
+      annotatedSource: `
+        import { interval, shareReplay } from "rxjs";
 
+        interval(1000).pipe(shareReplay({ refCount: true }));
+                            ~~~~~~~~~~~
+      `,
+    }),
     convertAnnotatedSourceToFailureCase({
       description: 'namespace ReplaySubject ignored a',
       messageId,
@@ -145,6 +180,16 @@ ruleTester.run('no-ignored-replay-buffer', rule, {
 
         const a = Rx.of(42).pipe(shareReplay());
                                  ~~~~~~~~~~~
+      `,
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'namespace shareReplay with config ignored',
+      messageId,
+      annotatedSource: `
+        import * as Rx from "rxjs";
+
+        const a = Rx.of(42).pipe(Rx.shareReplay({ refCount: true }));
+                                    ~~~~~~~~~~~
       `,
     }),
     convertAnnotatedSourceToFailureCase({
