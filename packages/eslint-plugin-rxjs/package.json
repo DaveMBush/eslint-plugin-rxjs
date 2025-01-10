@@ -31,7 +31,8 @@
   "exports": {
     ".": {
       "require": "./index.cjs",
-      "types": "./index.d.ts"
+      "types": "./index.d.ts",
+      "import": "./index.cjs"
     }
   }
 }
