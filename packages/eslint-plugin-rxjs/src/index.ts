@@ -95,11 +95,17 @@ const rules = {
   'throw-error': throwError,
 } satisfies Linter.PluginRules;
 
-const plugin: Linter.Plugin = {
+type ESLintPlugin = {
+  meta: typeof meta;
+  rules: typeof rules;
+  configs: Record<string, unknown>;
+};
+
+const plugin = {
   meta,
   rules,
   configs: {},
-};
+} as ESLintPlugin;
 
 if (plugin.configs) {
   Object.assign(plugin.configs, {
@@ -116,4 +122,4 @@ if (plugin.configs) {
   });
 }
 
-module.exports = plugin;
+export = plugin;
