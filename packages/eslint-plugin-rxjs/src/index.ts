@@ -101,25 +101,27 @@ type ESLintPlugin = {
   configs: Record<string, unknown>;
 };
 
-const plugin = {
+const basePlugin = {
   meta,
   rules,
-  configs: {},
-} as ESLintPlugin;
+};
 
-if (plugin.configs) {
-  Object.assign(plugin.configs, {
-    recommended: {
-      name: '@smarttools/rxjs/recommended',
-      plugins: {
-        '@smarttools/rxjs': plugin,
-      },
-      rules: {
-        ...recommended.rules,
-      },
-    },
+const recommendedConfig = {
+  name: '@smarttools/rxjs/recommended',
+  plugins: {
+    '@smarttools/rxjs': basePlugin,
+  },
+  rules: {
+    ...recommended.rules,
+  },
+};
+
+const plugin: ESLintPlugin = {
+  ...basePlugin,
+  configs: {
+    recommended: recommendedConfig,
     'recommended-legacy': recommended,
-  });
-}
+  },
+};
 
 export = plugin;

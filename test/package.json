@@ -1,8 +1,0 @@
-{
-  "name": "eslint-rxjs-test",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@smarttools/eslint-plugin-rxjs": "link:../dist/packages/eslint-plugin-rxjs"
-  }
-}
