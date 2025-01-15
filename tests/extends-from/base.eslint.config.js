@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['plugin:@smarttools/rxjs/recommended'],
+  extends: ['plugin:@smarttools/rxjs/recommended-legacy'],
   rules: {
     '@smarttools/rxjs/finnish': [
       'warn',

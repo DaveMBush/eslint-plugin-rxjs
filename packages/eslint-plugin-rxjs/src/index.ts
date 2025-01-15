@@ -107,6 +107,7 @@ const basePlugin = {
 };
 
 const recommendedConfig = {
+  name: '@smarttools/rxjs/recommended',
   plugins: {
     '@smarttools/rxjs': basePlugin,
   },
