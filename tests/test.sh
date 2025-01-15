@@ -7,7 +7,7 @@ set -e
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Initialize counters
-TOTAL_TESTS=2
+TOTAL_TESTS=4
 PASSED_TESTS=0
 FAILED_TESTS=0
 FAILED_NAMES=()
@@ -31,6 +31,8 @@ function run_test() {
 # Run each test
 run_test "ESM JS Tests" "$SCRIPT_DIR/esm-js/test.sh"
 run_test "Using Recommended Tests" "$SCRIPT_DIR/using-recommended/test.sh"
+run_test "Extends From Tests" "$SCRIPT_DIR/extends-from/test.sh"
+run_test "Circular Reference Tests" "$SCRIPT_DIR/circular-reference/test.sh"
 
 # Print summary report
 echo -e "\n📊 Test Summary Report"
