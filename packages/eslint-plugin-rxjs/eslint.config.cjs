@@ -45,6 +45,7 @@ module.exports = [
             '@eslint/eslintrc',
             '@eslint/js',
             'jsonc-eslint-parser',
+            '@typescript-eslint/rule-tester',
           ],
           checkMissingDependencies: true,
           checkObsoleteDependencies: true,
