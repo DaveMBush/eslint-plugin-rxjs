@@ -21,7 +21,7 @@
         ],
         "dts": true,
         "bundle": true,
-        "thirdParty": true
+        "thirdParty": false
       }
     },
     "build": {
