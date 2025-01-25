@@ -5,8 +5,8 @@ import {
   isMemberExpression,
 } from '../eslint-etc';
 
-import * as tsutils from 'tsutils';
-import { couldBeType, isReferenceType, isUnionType } from 'tsutils-etc';
+import * as tsutils from 'ts-api-utils';
+import { couldBeType, isReferenceType, isUnionType } from '../tsutils-etc';
 import * as ts from 'typescript';
 import { ESLintUtils } from '@typescript-eslint/utils';
 

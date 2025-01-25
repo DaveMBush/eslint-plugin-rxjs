@@ -1,5 +1,4 @@
 import { TSESTree as es } from '@typescript-eslint/utils';
-import { stripIndent } from 'common-tags';
 import {
   getTypeServices,
   isArrowFunctionExpression,
@@ -32,9 +31,7 @@ export default ESLintUtils.RuleCreator(() => __filename)({
           observable: { type: 'string' },
         },
         type: 'object',
-        description: stripIndent`
-          An optional object with an optional \`observable\` property.
-          The property can be specified as a regular expression string and is used to identify the action observables from which effects and epics are composed.`,
+        description: `An optional object with an optional \`observable\` property. The property can be specified as a regular expression string and is used to identify the action observables from which effects and epics are composed.`,
       },
     ],
     type: 'problem',

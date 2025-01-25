@@ -1,5 +1,4 @@
 import { AST_NODE_TYPES, TSESTree as es } from '@typescript-eslint/utils';
-import { stripIndent } from 'common-tags';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 const defaultOptions: readonly Record<string, boolean | string>[] = [];
@@ -19,9 +18,7 @@ export default ESLintUtils.RuleCreator(() => __filename)({
     schema: [
       {
         type: 'object',
-        description: stripIndent`
-          An object containing keys that are names of observable factory functions
-          and values that are either booleans or strings containing the explanation for the ban.`,
+        description: `An object containing keys that are names of observable factory functions and values that are either booleans or strings containing the explanation for the ban.`,
       },
     ],
     type: 'problem',
