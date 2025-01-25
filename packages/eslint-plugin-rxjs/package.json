@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "dependencies": {
     "@typescript-eslint/utils": "^8.19.0",
-    "common-tags": "^1.8.2",
     "tsutils": "^3.21.0",
     "tsutils-etc": "^1.4.2"
   },
