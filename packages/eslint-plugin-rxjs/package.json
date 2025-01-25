@@ -2,9 +2,8 @@
   "name": "@smarttools/eslint-plugin-rxjs",
   "version": "1.0.0",
   "dependencies": {
-    "@typescript-eslint/utils": "^8.19.0",
-    "tsutils": "^3.21.0",
-    "tsutils-etc": "^1.4.2"
+    "@typescript-eslint/utils": "^8.21.0",
+    "tsutils": "^3.21.0"
   },
   "repository": {
     "type": "git",

@@ -3,14 +3,42 @@ import {
   TSESLint,
   TSESTree as es,
 } from '@typescript-eslint/utils';
-import * as tsutils from 'tsutils-etc';
+import * as tsutilsEtc from '../tsutils-etc';
 import ts from 'typescript';
 import { isArrowFunctionExpression, isFunctionDeclaration } from './is';
+
+interface TypeServices {
+  couldBeBehaviorSubject: (node: es.Node) => boolean;
+  couldBeError: (node: es.Node) => boolean;
+  couldBeFunction: (node: es.Node) => boolean;
+  couldBeMonoTypeOperatorFunction: (node: es.Node) => boolean;
+  couldBeObservable: (node: es.Node) => boolean;
+  couldBeSubject: (node: es.Node) => boolean;
+  couldBeSubscription: (node: es.Node) => boolean;
+  couldBeType: (
+    node: es.Node,
+    name: string | RegExp,
+    qualified?: { name: RegExp },
+  ) => boolean;
+  couldReturnObservable: (node: es.Node) => boolean;
+  couldReturnType: (
+    node: es.Node,
+    name: string | RegExp,
+    qualified?: { name: RegExp },
+  ) => boolean;
+  getType: (node: es.Node) => ts.Type | undefined;
+  isAny: (node: es.Node) => boolean;
+  isReferenceType: (node: es.Node) => boolean;
+  isUnknown: (node: es.Node) => boolean;
+  typeChecker: ts.TypeChecker;
+}
 
 export function getTypeServices<
   TMessageIds extends string,
   TOptions extends unknown[],
->(context: TSESLint.RuleContext<TMessageIds, Readonly<TOptions>>) {
+>(
+  context: TSESLint.RuleContext<TMessageIds, Readonly<TOptions>>,
+): TypeServices {
   const services = ESLintUtils.getParserServices(context);
   const { esTreeNodeToTSNodeMap, program } = services;
   const typeChecker = program.getTypeChecker();
@@ -38,7 +66,7 @@ export function getTypeServices<
       return false;
     }
 
-    const result = tsutils.couldBeType(
+    const result = tsutilsEtc.couldBeType(
       type,
       name,
       qualified ? { ...qualified, typeChecker } : undefined,
@@ -68,7 +96,7 @@ export function getTypeServices<
     }
     const result = Boolean(
       tsTypeNode &&
-        tsutils.couldBeType(
+        tsutilsEtc.couldBeType(
           typeChecker.getTypeAtLocation(tsTypeNode),
           name,
           qualified ? { ...qualified, typeChecker } : undefined,
@@ -89,7 +117,7 @@ export function getTypeServices<
       if (!type) {
         return false;
       }
-      return tsutils.couldBeFunction(type);
+      return tsutilsEtc.couldBeFunction(type);
     },
     couldBeMonoTypeOperatorFunction: (node: es.Node) =>
       couldBeType(node, 'MonoTypeOperatorFunction'),
@@ -106,21 +134,21 @@ export function getTypeServices<
       if (!type) {
         return false;
       }
-      return tsutils.isAny(type);
+      return tsutilsEtc.isAny(type);
     },
     isReferenceType: (node: es.Node) => {
       const type = getType(node);
       if (!type) {
         return false;
       }
-      return tsutils.isReferenceType(type);
+      return tsutilsEtc.isReferenceType(type);
     },
     isUnknown: (node: es.Node) => {
       const type = getType(node);
       if (!type) {
         return false;
       }
-      return tsutils.isUnknown(type);
+      return tsutilsEtc.isUnknown(type);
     },
     typeChecker,
   };
