@@ -1,4 +1,4 @@
-import * as tsutils from 'tsutils';
+import * as tsutils from 'ts-api-utils';
 import * as ts from 'typescript';
 
 export function isAny(type: ts.Type): boolean {
