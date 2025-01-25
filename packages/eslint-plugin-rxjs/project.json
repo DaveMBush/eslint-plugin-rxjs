@@ -67,5 +67,11 @@
         "currentVersionResolver": "git-tag"
       }
     }
+  },
+  "nxDependencyChecks": {
+    "ignoredDependencies": [
+      "typescript",
+      "@angular-eslint/test-utils"
+    ]
   }
 }
