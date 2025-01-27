@@ -24,7 +24,7 @@
     "@nx/eslint-plugin": "20.3.2",
     "@nx/jest": "20.3.2",
     "@nx/js": "20.3.2",
-    "@nx/nest": "20.3.2",
+    "@nx/nest": "20.3.3",
     "@nx/node": "20.3.2",
     "@nx/web": "20.3.2",
     "@nx/webpack": "20.3.2",
