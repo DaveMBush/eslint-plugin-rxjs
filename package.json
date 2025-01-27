@@ -28,7 +28,7 @@
     "@nx/node": "20.3.2",
     "@nx/web": "20.3.2",
     "@nx/webpack": "20.3.2",
-    "@nx/workspace": "20.3.2",
+    "@nx/workspace": "20.3.3",
     "@swc-node/register": "~1.10.9",
     "@swc/core": "~1.10.7",
     "@swc/helpers": "~0.5.15",
