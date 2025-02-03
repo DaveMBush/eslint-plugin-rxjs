@@ -34,7 +34,7 @@
     "@swc/helpers": "~0.5.15",
     "@types/jest": "^29.4.0",
     "@types/node": "22.10.5",
-    "@typescript-eslint/rule-tester": "^8.20.0",
+    "@typescript-eslint/rule-tester": "^8.22.0",
     "esbuild": "^0.24.2",
     "eslint": "~9.18.0",
     "eslint-config-prettier": "^10.0.1",
