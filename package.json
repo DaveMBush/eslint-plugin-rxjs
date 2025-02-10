@@ -19,7 +19,7 @@
     "@eslint/eslintrc": "^3.2.0",
     "@nx/angular": "20.4.0",
     "@nx/cypress": "20.4.0",
-    "@nx/esbuild": "20.4.0",
+    "@nx/esbuild": "20.4.2",
     "@nx/eslint": "20.4.0",
     "@nx/eslint-plugin": "20.4.0",
     "@nx/jest": "20.4.0",
