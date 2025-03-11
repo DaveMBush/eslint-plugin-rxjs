@@ -20,7 +20,7 @@
     "@nx/angular": "20.4.6",
     "@nx/cypress": "20.4.6",
     "@nx/esbuild": "20.4.6",
-    "@nx/eslint": "20.4.6",
+    "@nx/eslint": "20.5.0",
     "@nx/eslint-plugin": "20.4.6",
     "@nx/jest": "20.4.6",
     "@nx/js": "20.4.6",
