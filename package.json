@@ -18,7 +18,7 @@
     "@angular-eslint/test-utils": "19.2.0",
     "@eslint/eslintrc": "^3.3.0",
     "@nx/angular": "20.5.0",
-    "@nx/cypress": "20.5.0",
+    "@nx/cypress": "20.6.1",
     "@nx/esbuild": "20.5.0",
     "@nx/eslint": "20.6.1",
     "@nx/eslint-plugin": "20.5.0",
