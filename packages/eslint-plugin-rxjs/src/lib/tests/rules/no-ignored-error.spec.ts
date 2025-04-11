@@ -107,5 +107,20 @@ ruleTester.run('no-ignored-error', rule, {
         }
       `,
     }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'https://github.com/DaveMBush/eslint-plugin-rxjs/issues/131',
+      messageId,
+      annotatedSource: `
+        // https://github.com/DaveMBush/eslint-plugin-rxjs/issues/131
+        import { of } from "rxjs";
+        const observable = of([1, 2]);
+        observable.subscribe({
+                   ~~~~~~~~~
+          next: (v) => {
+            console.log(v);
+          },
+        });
+      `,
+    }),
   ],
 });

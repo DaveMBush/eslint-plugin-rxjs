@@ -23,6 +23,18 @@ export default ESLintUtils.RuleCreator(() => __filename)({
   create: (context) => {
     const { couldBeObservable, couldBeFunction } = getTypeServices(context);
 
+    function hasErrorHandler(arg: es.Node): boolean {
+      if (arg.type === 'ObjectExpression') {
+        return arg.properties.some(
+          (prop) =>
+            prop.type === 'Property' &&
+            'name' in prop.key &&
+            prop.key.name === 'error',
+        );
+      }
+      return false;
+    }
+
     return {
       "CallExpression[arguments.length > 0] > MemberExpression > Identifier[name='subscribe']":
         (node: es.Identifier) => {
@@ -31,10 +43,14 @@ export default ESLintUtils.RuleCreator(() => __filename)({
             memberExpression,
           ) as es.CallExpression;
 
+          const [firstArg] = callExpression.arguments;
+
           if (
-            callExpression.arguments.length < 2 &&
             couldBeObservable(memberExpression.object) &&
-            couldBeFunction(callExpression.arguments[0])
+            ((callExpression.arguments.length < 2 &&
+              couldBeFunction(firstArg)) ||
+              (firstArg.type === 'ObjectExpression' &&
+                !hasErrorHandler(firstArg)))
           ) {
             context.report({
               messageId,
