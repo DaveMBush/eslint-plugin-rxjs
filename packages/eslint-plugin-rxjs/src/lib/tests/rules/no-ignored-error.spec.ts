@@ -29,6 +29,19 @@ ruleTester.run('no-ignored-error', rule, {
       };
       whatever.subscribe();
     `,
+    `
+      // working https://github.com/DaveMBush/eslint-plugin-rxjs/issues/131
+      import { of } from "rxjs";
+      const observable = of([1, 2]);
+      observable.subscribe({
+        next: (v) => {
+          console.log(v);
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+    `,
   ],
   invalid: [
     convertAnnotatedSourceToFailureCase({
