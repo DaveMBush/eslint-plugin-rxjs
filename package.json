@@ -27,7 +27,7 @@
     "@nx/nest": "20.7.2",
     "@nx/node": "20.7.2",
     "@nx/web": "20.7.2",
-    "@nx/webpack": "20.7.2",
+    "@nx/webpack": "20.8.0",
     "@nx/workspace": "20.7.2",
     "@swc-node/register": "~1.10.10",
     "@swc/core": "~1.11.13",
