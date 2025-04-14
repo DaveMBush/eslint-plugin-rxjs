@@ -21,7 +21,7 @@
     "@nx/cypress": "20.7.2",
     "@nx/esbuild": "20.7.2",
     "@nx/eslint": "20.7.2",
-    "@nx/eslint-plugin": "20.7.2",
+    "@nx/eslint-plugin": "20.8.0",
     "@nx/jest": "20.7.2",
     "@nx/js": "20.7.2",
     "@nx/nest": "20.7.2",
