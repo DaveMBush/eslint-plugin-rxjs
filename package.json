@@ -33,7 +33,7 @@
     "@swc/core": "~1.11.18",
     "@swc/helpers": "~0.5.15",
     "@types/jest": "^29.5.14",
-    "@types/node": "22.14.0",
+    "@types/node": "22.15.3",
     "@typescript-eslint/rule-tester": "^8.31.1",
     "esbuild": "^0.25.3",
     "eslint": "~9.26.0",
