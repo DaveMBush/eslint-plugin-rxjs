@@ -31,7 +31,7 @@
     "@nx/workspace": "20.8.1",
     "@swc-node/register": "~1.10.10",
     "@swc/core": "~1.11.18",
-    "@swc/helpers": "~0.5.15",
+    "@swc/helpers": "~0.5.17",
     "@types/jest": "^29.5.14",
     "@types/node": "22.15.3",
     "@typescript-eslint/rule-tester": "^8.31.1",
