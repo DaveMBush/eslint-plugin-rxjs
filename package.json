@@ -30,7 +30,7 @@
     "@nx/webpack": "20.8.1",
     "@nx/workspace": "20.8.1",
     "@swc-node/register": "~1.10.10",
-    "@swc/core": "~1.11.18",
+    "@swc/core": "~1.11.24",
     "@swc/helpers": "~0.5.17",
     "@types/jest": "^29.5.14",
     "@types/node": "22.15.3",
