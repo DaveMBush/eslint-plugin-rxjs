@@ -15,7 +15,7 @@
     "tslib": "^2.8.1"
   },
   "devDependencies": {
-    "@angular-eslint/test-utils": "19.4.0",
+    "@angular-eslint/test-utils": "19.5.0",
     "@eslint/eslintrc": "^3.3.1",
     "@nx/angular": "21.0.3",
     "@nx/cypress": "21.0.3",
