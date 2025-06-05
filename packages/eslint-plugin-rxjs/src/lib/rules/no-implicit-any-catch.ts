@@ -81,7 +81,7 @@ export default ESLintUtils.RuleCreator(() => __filename)({
         isArrowFunctionExpression(callback) ||
         isFunctionExpression(callback)
       ) {
-        const [param] = callback.params;
+        const [param, secondParam] = callback.params;
         if (!param) {
           return;
         }
@@ -125,24 +125,54 @@ export default ESLintUtils.RuleCreator(() => __filename)({
           }
         } else {
           function fix(fixer: eslint.RuleFixer) {
-            if (isParenthesised(sourceCode, param)) {
-              return fixer.insertTextAfter(param, ': unknown');
+            if (secondParam) {
+              if (isParenthesised(sourceCode, param)) {
+                return fixer.insertTextAfter(param, ': unknown');
+              }
+              const tokenBefore = sourceCode.getTokenBefore(param);
+              const tokenAfter = sourceCode.getTokenAfter(secondParam);
+              if (
+                tokenBefore &&
+                tokenBefore.value === '(' &&
+                tokenAfter &&
+                tokenAfter.value === ')'
+              ) {
+                const paramsText = `${sourceCode.getText(param)}: unknown, ${sourceCode.getText(secondParam)}`;
+                return fixer.replaceTextRange(
+                  [tokenBefore.range[0], tokenAfter.range[1]],
+                  `(${paramsText})`,
+                );
+              } else {
+                const paramsText = `${sourceCode.getText(param)}: unknown, ${sourceCode.getText(secondParam)}`;
+                return fixer.replaceTextRange(
+                  [param.range[0], secondParam.range[1]],
+                  `(${paramsText})`,
+                );
+              }
+            } else {
+              if (isParenthesised(sourceCode, param)) {
+                return fixer.insertTextAfter(param, ': unknown');
+              }
+              return [
+                fixer.insertTextBefore(param, '('),
+                fixer.insertTextAfter(param, ': unknown)'),
+              ];
             }
-            return [
-              fixer.insertTextBefore(param, '('),
-              fixer.insertTextAfter(param, ': unknown)'),
-            ];
           }
           context.report({
             fix,
             messageId: implicitAnyId,
             node: param,
-            suggest: [
-              {
-                messageId: suggestExplicitUnknownId,
-                fix,
-              },
-            ],
+            ...(secondParam && callback.params.length === 2
+              ? {} // No suggestions for two-parameter case (arrow or function)
+              : {
+                  suggest: [
+                    {
+                      messageId: suggestExplicitUnknownId,
+                      fix,
+                    },
+                  ],
+                }),
           });
         }
       }

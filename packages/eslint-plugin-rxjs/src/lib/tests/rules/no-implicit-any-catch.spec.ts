@@ -57,6 +57,17 @@ ruleTester.run('no-implicit-any-catch', rule, {
     },
     {
       code: `
+        // non-arrow; explicit unknown; default option
+        import { throwError } from "rxjs";
+        import { catchError } from "rxjs/operators";
+
+        throwError("Kaboom!").pipe(
+          catchError(function (error: unknown, caught: Observable<unknown>) { console.error(error); })
+        );
+      `,
+    },
+    {
+      code: `
         // arrow; explicit unknown; explicit option
         import { throwError } from "rxjs";
         import { catchError } from "rxjs/operators";
@@ -210,6 +221,30 @@ ruleTester.run('no-implicit-any-catch', rule, {
   ],
   invalid: [
     convertAnnotatedSourceToFailureCase({
+      description: 'arrow; implicit any; 2 parameters',
+      messageId: implicitAnyId,
+      annotatedSource: `
+        // arrow; implicit any; 2 parameters
+        import { throwError } from "rxjs";
+        import { catchError } from "rxjs/operators";
+
+        throwError("Kaboom!").pipe(
+          catchError((error, caught) => console.error(error))
+                      ~~~~~//
+        );
+        `,
+      annotatedOutput: `
+        // arrow; implicit any; 2 parameters
+        import { throwError } from "rxjs";
+        import { catchError } from "rxjs/operators";
+
+        throwError("Kaboom!").pipe(
+          catchError((error: unknown, caught) => console.error(error))
+                      //
+        );
+        `,
+    }),
+    convertAnnotatedSourceToFailureCase({
       description: 'arrow; implicit any',
       messageId: implicitAnyId,
       annotatedSource: `
@@ -325,6 +360,30 @@ ruleTester.run('no-implicit-any-catch', rule, {
       `,
         },
       ],
+    }),
+    convertAnnotatedSourceToFailureCase({
+      description: 'non-arrow; implicit any; 2 parameters',
+      messageId: implicitAnyId,
+      annotatedSource: `
+        // non-arrow; implicit any; 2 parameters
+        import { throwError } from "rxjs";
+        import { catchError } from "rxjs/operators";
+
+        throwError("Kaboom!").pipe(
+          catchError(function (error, caught) { console.error(error); })
+                               ~~~~~//
+          );
+      `,
+      annotatedOutput: `
+        // non-arrow; implicit any; 2 parameters
+        import { throwError } from "rxjs";
+        import { catchError } from "rxjs/operators";
+
+        throwError("Kaboom!").pipe(
+          catchError(function (error: unknown, caught) { console.error(error); })
+                               //
+          );
+      `,
     }),
     convertAnnotatedSourceToFailureCase({
       description: 'arrow; explicit any; default option',
