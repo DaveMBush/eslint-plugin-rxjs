@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@typescript-eslint/utils": "^8.32.1",
+    "@typescript-eslint/utils": "^8.33.1",
     "ts-api-utils": "^2.1.0",
     "tslib": "^2.8.1"
   },
