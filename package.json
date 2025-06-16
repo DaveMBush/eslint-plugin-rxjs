@@ -26,7 +26,7 @@
     "@nx/js": "21.1.3",
     "@nx/nest": "21.1.3",
     "@nx/node": "21.1.3",
-    "@nx/web": "21.1.3",
+    "@nx/web": "21.2.0",
     "@nx/webpack": "21.1.3",
     "@nx/workspace": "21.1.3",
     "@swc-node/register": "~1.10.10",
