@@ -17,6 +17,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/prefer-observer.md',
       description:
         'Forbids the passing separate handlers to `subscribe` and `tap`.',
     },

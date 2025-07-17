@@ -7,6 +7,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-subject-value.md',
       description:
         'Forbids accessing the `value` property of a `BehaviorSubject` instance.',
     },

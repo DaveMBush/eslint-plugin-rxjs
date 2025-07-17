@@ -25,6 +25,7 @@ export const shouldNotBeFinnishMessageId = 'shouldNotBeFinnish';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/finnish.md',
       description: 'Enforces the use of Finnish notation.',
     },
     fixable: undefined,

@@ -98,7 +98,10 @@ const rules = {
 type ESLintPlugin = {
   meta: typeof meta;
   rules: typeof rules;
-  configs: Record<string, unknown>;
+  configs: {
+    recommended: typeof recommendedConfig;
+    'recommended-legacy': typeof recommended;
+  };
 };
 
 const basePlugin = {

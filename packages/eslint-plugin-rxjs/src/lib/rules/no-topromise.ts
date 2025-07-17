@@ -7,6 +7,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-topromise.md',
       description: 'Forbids the use of the `toPromise` method.',
     },
     fixable: undefined,

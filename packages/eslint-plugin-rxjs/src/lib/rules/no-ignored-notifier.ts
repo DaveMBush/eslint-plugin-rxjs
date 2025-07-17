@@ -11,6 +11,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-ignored-notifier.md',
       description:
         'Forbids observables not composed from the `repeatWhen` or `retryWhen` notifier.',
     },
