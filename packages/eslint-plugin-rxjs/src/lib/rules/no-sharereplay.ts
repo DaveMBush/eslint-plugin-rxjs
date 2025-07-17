@@ -8,10 +8,11 @@ const defaultOptions: readonly {
 export const forbiddenId = 'forbidden';
 export const forbiddenWithoutConfigId = 'forbiddenWithoutConfig';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-sharereplay.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-sharereplay.md',
       description: 'Forbids using the `shareReplay` operator.',
     },
     fixable: undefined,

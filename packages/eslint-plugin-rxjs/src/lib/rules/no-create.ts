@@ -4,10 +4,11 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 
 export const messageId = 'forbidden';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-create.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-create.md',
       description: 'Forbids the calling of `Observable.create`.',
     },
     fixable: undefined,

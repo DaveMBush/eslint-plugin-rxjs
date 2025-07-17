@@ -14,10 +14,11 @@ const defaultOptions: readonly {
 
 export const messageId = 'forbidden';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/prefer-observer.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/prefer-observer.md',
       description:
         'Forbids the passing separate handlers to `subscribe` and `tap`.',
     },

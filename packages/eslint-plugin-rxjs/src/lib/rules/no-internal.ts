@@ -4,10 +4,11 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 export const forbiddenId = 'forbidden';
 export const suggestId = 'suggest';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-internal.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-internal.md',
       description: 'Forbids the importation of internals.',
     },
     fixable: 'code',

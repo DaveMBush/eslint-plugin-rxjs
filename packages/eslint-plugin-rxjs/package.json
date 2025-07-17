@@ -1,6 +1,6 @@
 {
   "name": "@smarttools/eslint-plugin-rxjs",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "dependencies": {
     "@typescript-eslint/utils": "^8.33.1",
     "ts-api-utils": "^2.1.0"

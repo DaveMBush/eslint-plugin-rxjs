@@ -12,10 +12,11 @@ const defaultOptions: readonly {
 export const forbiddenId = 'forbidden';
 export const forbiddenAllowProtectedId = 'forbiddenAllowProtected';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-exposed-subjects.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-exposed-subjects.md',
       description: 'Forbids exposed (i.e. non-private) subjects.',
     },
     fixable: undefined,

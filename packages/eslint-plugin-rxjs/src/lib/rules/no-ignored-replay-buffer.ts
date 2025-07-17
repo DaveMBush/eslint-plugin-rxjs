@@ -6,10 +6,11 @@ import { ESLintUtils } from '@typescript-eslint/utils';
 // https://github.com/JasonWeinzierl/eslint-plugin-rxjs-x/pull/12/files#diff-8a9cff9aa21d1a4600766e85f1493aa81fa30c4902d6110c21173d00536393ed
 
 export const messageId = 'forbidden';
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-ignored-replay-buffer.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-ignored-replay-buffer.md',
       description:
         'Forbids using `ReplaySubject`, `publishReplay` or `shareReplay` without specifying the buffer size.',
     },
