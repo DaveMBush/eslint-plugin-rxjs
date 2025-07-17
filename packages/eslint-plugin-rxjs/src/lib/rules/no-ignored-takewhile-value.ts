@@ -12,6 +12,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-ignored-takewhile-value.md',
       description: 'Forbids ignoring the value within `takeWhile`.',
     },
     fixable: undefined,

@@ -43,6 +43,7 @@ export const suggestExplicitUnknownId = 'suggestExplicitUnknown';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-implicit-any-catch.md',
       description:
         'Forbids implicit `any` error parameters in `catchError` operators.',
     },

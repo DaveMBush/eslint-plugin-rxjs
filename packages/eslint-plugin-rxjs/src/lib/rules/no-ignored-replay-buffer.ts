@@ -9,6 +9,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-ignored-replay-buffer.md',
       description:
         'Forbids using `ReplaySubject`, `publishReplay` or `shareReplay` without specifying the buffer size.',
     },

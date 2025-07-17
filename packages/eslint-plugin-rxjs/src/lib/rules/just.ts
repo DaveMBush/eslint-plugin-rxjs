@@ -6,6 +6,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/just.md',
       description: 'Enforces the use of a `just` alias for `of`.',
     },
     fixable: 'code',

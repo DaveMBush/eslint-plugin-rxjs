@@ -9,6 +9,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/throw-error.md',
       description:
         'Enforces the passing of `Error` values to error notifications.',
     },

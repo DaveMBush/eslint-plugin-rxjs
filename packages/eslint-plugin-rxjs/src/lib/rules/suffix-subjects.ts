@@ -22,6 +22,7 @@ export const messageId = 'forbidden';
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/suffix-subjects.md',
       description: 'Enforces the use of a suffix in subject identifiers.',
     },
     fixable: undefined,

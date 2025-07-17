@@ -6,6 +6,7 @@ export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     deprecated: true,
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-tap.md',
       description: 'Forbids the use of the `tap` operator.',
     },
     fixable: undefined,

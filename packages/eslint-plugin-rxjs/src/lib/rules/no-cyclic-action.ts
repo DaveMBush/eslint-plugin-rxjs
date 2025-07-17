@@ -18,6 +18,7 @@ const defaultOptions: readonly {
 export default ESLintUtils.RuleCreator(() => __filename)({
   meta: {
     docs: {
+      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-cyclic-action.md',
       description: 'Forbids effects and epics that re-emit filtered actions.',
     },
     fixable: undefined,
