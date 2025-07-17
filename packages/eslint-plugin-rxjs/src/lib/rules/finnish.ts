@@ -22,10 +22,11 @@ const defaultOptions: readonly {
 export const shouldBeFinnishMessageId = 'shouldBeFinnish';
 export const shouldNotBeFinnishMessageId = 'shouldNotBeFinnish';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/finnish.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/finnish.md',
       description: 'Enforces the use of Finnish notation.',
     },
     fixable: undefined,

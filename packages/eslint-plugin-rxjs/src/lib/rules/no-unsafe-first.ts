@@ -9,10 +9,11 @@ const defaultOptions: readonly {
 }[] = [];
 
 export const messageId = 'forbidden';
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-unsafe-first.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-unsafe-first.md',
       description: 'Forbids unsafe `first`/`take` usage in effects and epics.',
     },
     fixable: undefined,

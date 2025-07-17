@@ -20,10 +20,11 @@ const defaultOptions: readonly {
 
 export type RuleOptions = typeof defaultOptions;
 export const messageId = 'forbidden';
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-unsafe-switchmap.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-unsafe-switchmap.md',
       description: 'Forbids unsafe `switchMap` usage in effects and epics.',
     },
     fixable: undefined,

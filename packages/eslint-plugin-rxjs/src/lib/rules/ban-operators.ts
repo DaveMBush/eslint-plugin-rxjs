@@ -5,10 +5,11 @@ const defaultOptions: readonly Record<string, boolean | string>[] = [];
 
 export const messageId = 'forbidden';
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/ban-operators.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/ban-operators.md',
       description: 'Forbids the use of banned operators.',
     },
     fixable: undefined,

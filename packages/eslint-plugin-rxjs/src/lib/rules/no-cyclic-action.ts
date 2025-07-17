@@ -15,10 +15,11 @@ const defaultOptions: readonly {
   observable?: string;
 }[] = [];
 
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-cyclic-action.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-cyclic-action.md',
       description: 'Forbids effects and epics that re-emit filtered actions.',
     },
     fixable: undefined,

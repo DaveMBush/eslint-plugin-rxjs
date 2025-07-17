@@ -2,11 +2,12 @@ import { TSESTree as es } from '@typescript-eslint/utils';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 export const messageId = 'forbidden';
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-tap.md'
+)({
   meta: {
     deprecated: true,
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-tap.md',
       description: 'Forbids the use of the `tap` operator.',
     },
     fixable: undefined,

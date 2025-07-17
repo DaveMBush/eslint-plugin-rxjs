@@ -12,10 +12,11 @@ import {
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 export const messageId = 'forbidden';
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-redundant-notify.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/no-redundant-notify.md',
       description:
         'Forbids redundant notifications from completed or errored observables.',
     },

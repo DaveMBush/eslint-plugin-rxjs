@@ -6,10 +6,11 @@ import * as ts from 'typescript';
 import { ESLintUtils } from '@typescript-eslint/utils';
 
 export const messageId = 'forbidden';
-export default ESLintUtils.RuleCreator(() => __filename)({
+export default ESLintUtils.RuleCreator(
+  () => 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/throw-error.md'
+)({
   meta: {
     docs: {
-      url: 'https://github.com/DaveMBush/eslint-plugin-rxjs/blob/main/packages/eslint-plugin-rxjs/docs/rules/throw-error.md',
       description:
         'Enforces the passing of `Error` values to error notifications.',
     },
