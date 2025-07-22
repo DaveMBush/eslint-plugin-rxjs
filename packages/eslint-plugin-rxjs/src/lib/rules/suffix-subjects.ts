@@ -37,7 +37,12 @@ export default ESLintUtils.RuleCreator(
           parameters: { type: 'boolean' },
           properties: { type: 'boolean' },
           suffix: { type: 'string' },
-          types: { type: 'object' },
+          types: { 
+            type: 'object',
+            additionalProperties: {
+              type: 'boolean',
+            },
+          },
           variables: { type: 'boolean' },
         },
         type: 'object',
