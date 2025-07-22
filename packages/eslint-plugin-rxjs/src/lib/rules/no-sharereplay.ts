@@ -28,6 +28,7 @@ export default ESLintUtils.RuleCreator(
           allowConfig: { type: 'boolean' },
         },
         type: 'object',
+        additionalProperties: false,
       },
     ],
     type: 'problem',

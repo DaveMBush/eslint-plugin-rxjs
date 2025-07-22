@@ -35,6 +35,7 @@ export default ESLintUtils.RuleCreator(
         },
         type: 'object',
         description: `An optional object with an optional \`observable\` property. The property can be specified as a regular expression string and is used to identify the action observables from which effects and epics are composed.`,
+        additionalProperties: false,
       },
     ],
     type: 'problem',

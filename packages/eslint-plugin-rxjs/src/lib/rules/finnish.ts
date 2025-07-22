@@ -49,6 +49,7 @@ export default ESLintUtils.RuleCreator(
           variables: { type: 'boolean' },
         },
         type: 'object',
+        additionalProperties: false,
       },
     ],
     type: 'problem',

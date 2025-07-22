@@ -34,6 +34,7 @@ export default ESLintUtils.RuleCreator(
           allowNext: { type: 'boolean' },
         },
         type: 'object',
+        additionalProperties: false,
       },
     ],
     type: 'problem',

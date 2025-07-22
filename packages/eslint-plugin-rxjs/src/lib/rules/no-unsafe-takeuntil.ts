@@ -37,6 +37,7 @@ export default ESLintUtils.RuleCreator(
         },
         type: 'object',
         description: `An optional object with optional \`alias\` and \`allow\` properties. The \`alias\` property is an array containing the names of operators that aliases for \`takeUntil\`. The \`allow\` property is an array containing the names of the operators that are allowed to follow \`takeUntil\`.`,
+        additionalProperties: false,
       },
     ],
     type: 'problem',
