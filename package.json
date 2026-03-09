@@ -32,7 +32,7 @@
     "@nx/workspace": "21.2.4",
     "@swc-node/register": "~1.10.10",
     "@swc/core": "~1.15.18",
-    "@swc/helpers": "~0.5.17",
+    "@swc/helpers": "~0.5.19",
     "@types/jest": "^30.0.0",
     "@types/node": "24.0.14",
     "@typescript-eslint/rule-tester": "^8.37.0",
