@@ -79,6 +79,33 @@ export function getTypeServices<
     name: string | RegExp,
     qualified?: { name: RegExp },
   ) => {
+    const qualifiedOpts = qualified ? { ...qualified, typeChecker } : undefined;
+
+    // Try ESTree-based approach first using the explicit return type annotation.
+    // This is more reliable than going through esTreeNodeToTSNodeMap.get(functionNode)
+    // because projectService.allowDefaultProject can return stale TypeScript nodes
+    // for function/method wrapper nodes when virtual file content changes between tests.
+    const esNode = node as any;
+    const esReturnTypeAnnotation =
+      esNode.returnType?.typeAnnotation ||
+      esNode.value?.returnType?.typeAnnotation;
+    if (esReturnTypeAnnotation) {
+      const tsReturnNode = esTreeNodeToTSNodeMap.get(
+        esReturnTypeAnnotation as es.Node,
+      );
+      if (tsReturnNode) {
+        const type = typeChecker.getTypeAtLocation(tsReturnNode);
+        if (
+          type &&
+          tsutilsEtc.couldBeType(type, name, qualifiedOpts)
+        ) {
+          return true;
+        }
+      }
+    }
+
+    // Fall back to original TypeScript-node-based approach for cases without
+    // explicit return type annotations, or for interface method signatures.
     let tsTypeNode: ts.Node | undefined;
     const tsNode = esTreeNodeToTSNodeMap.get(node);
     if (
@@ -94,15 +121,14 @@ export function getTypeServices<
     ) {
       tsTypeNode = tsNode.type;
     }
-    const result = Boolean(
+    return Boolean(
       tsTypeNode &&
         tsutilsEtc.couldBeType(
           typeChecker.getTypeAtLocation(tsTypeNode),
           name,
-          qualified ? { ...qualified, typeChecker } : undefined,
+          qualifiedOpts,
         ),
     );
-    return result;
   };
 
   return {

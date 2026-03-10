@@ -10,7 +10,6 @@ export const testCheckConfig = {
           '*.ts','*.tsx'
         ],
       },
-      project: path.join(__dirname, '../../../../tsconfig.lib.json'),
       tsconfigRootDir: path.join(__dirname, '../../../../'),
     },
   },
