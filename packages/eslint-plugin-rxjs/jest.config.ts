@@ -1,5 +1,5 @@
 /* eslint-disable */
-export default {
+module.exports = {
   displayName: 'eslint-plugin-rxjs',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',

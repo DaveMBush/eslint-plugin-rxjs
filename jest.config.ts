@@ -1,5 +1,3 @@
-import { getJestProjects } from '@nx/jest';
-
-export default {
-  projects: getJestProjects(),
+module.exports = {
+  projects: ['<rootDir>/packages/*/jest.config.ts'],
 };
