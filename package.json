@@ -49,7 +49,7 @@
     "typescript": "5.9.3",
     "typescript-eslint": "8.57.0",
     "verdaccio": "6.3.2",
-    "jest-util": "30.0.5"
+    "jest-util": "30.3.0"
   },
   "engines": {
     "node": ">=22.0.0",
