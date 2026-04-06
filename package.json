@@ -29,7 +29,7 @@
     "@nx/node": "22.5.4",
     "@nx/web": "22.5.4",
     "@nx/webpack": "22.5.4",
-    "@nx/workspace": "22.5.4",
+    "@nx/workspace": "22.6.4",
     "@swc-node/register": "1.11.1",
     "@swc/core": "1.15.21",
     "@swc/helpers": "0.5.19",
