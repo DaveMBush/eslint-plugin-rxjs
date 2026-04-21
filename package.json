@@ -37,7 +37,7 @@
     "@types/node": "25.6.0",
     "@typescript-eslint/rule-tester": "8.57.0",
     "esbuild": "^0.25.6",
-    "eslint": "~9.31.0",
+    "eslint": "~10.2.1",
     "eslint-config-prettier": "10.1.8",
     "jest": "^30.3.0",
     "jest-environment-node": "^30.3.0",
