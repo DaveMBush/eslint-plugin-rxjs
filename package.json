@@ -17,7 +17,7 @@
   "devDependencies": {
     "@angular-eslint/test-utils": "21.3.1",
     "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^9.31.0",
+    "@eslint/js": "^10.0.1",
     "@nx/angular": "22.6.5",
     "@nx/cypress": "22.6.5",
     "@nx/esbuild": "22.6.5",
