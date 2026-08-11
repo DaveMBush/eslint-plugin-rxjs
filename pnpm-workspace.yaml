@@ -1,6 +1,13 @@
 packages:
   - packages/*
 
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  esbuild: true
+  nx: true
+  unrs-resolver: true
+
 onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
