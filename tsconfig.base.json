@@ -22,7 +22,10 @@
       "@smarttools/eslint-plugin-rxjs": [
         "packages/eslint-plugin-rxjs/src/index.ts"
       ]
-    }
+    },
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "ignoreDeprecations": "6.0"
   },
   "exclude": ["node_modules", "tmp"]
 }

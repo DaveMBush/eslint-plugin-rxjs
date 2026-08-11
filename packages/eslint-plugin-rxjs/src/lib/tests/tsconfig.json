@@ -4,7 +4,12 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "skipLibCheck": true,
-    "target": "esnext"
+    "target": "esnext",
+    "strict": false,
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "esModuleInterop": false,
+    "ignoreDeprecations": "6.0"
   },
   "files": ["file.tsx"]
 }
