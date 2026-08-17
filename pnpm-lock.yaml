@@ -19,8 +19,8 @@ importers:
         version: 2.8.1
     devDependencies:
       '@angular-eslint/test-utils':
-        specifier: 22.0.0
-        version: 22.0.0(@typescript-eslint/parser@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/rule-tester@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(typescript@6.0.3)
+        specifier: 22.1.0
+        version: 22.1.0(@typescript-eslint/parser@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/rule-tester@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(typescript@6.0.3)
       '@eslint/eslintrc':
         specifier: ^3.3.5
         version: 3.3.5(supports-color@7.2.0)
@@ -174,10 +174,10 @@ packages:
     resolution: {integrity: sha512-XH0BtcqSwHlyLRzvbZccSEe5Hcl7Yex8fXfj3gMVBB5g+KBUm2OGtGN3lDOl5BtrwrZBVnNNXkg0ehNrWzxVgw==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
 
-  '@angular-eslint/test-utils@22.0.0':
-    resolution: {integrity: sha512-QJ8pzsJIbGlssI24Wmn10HCWEwHP6O/QdwGFaPHXue8ID4WD7JPK7BrG7Ox5aILlUrlq0gn2Qk6NFSrw7LWAgA==}
+  '@angular-eslint/test-utils@22.1.0':
+    resolution: {integrity: sha512-BBpxOIF3c5LEHwq1veMc0o3VUH++ll1h2EDAL2CVaFBHEQH50HEKh7PDY5Pesx5hdVExFEs466X9iriBbndD0A==}
     peerDependencies:
-      '@angular-eslint/template-parser': 22.0.0
+      '@angular-eslint/template-parser': 22.1.0
       '@typescript-eslint/parser': ^8.0.0
       '@typescript-eslint/rule-tester': ^8.0.0
       '@typescript-eslint/utils': ^8.0.0
@@ -7227,7 +7227,7 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-eslint/test-utils@22.0.0(@typescript-eslint/parser@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/rule-tester@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(typescript@6.0.3)':
+  '@angular-eslint/test-utils@22.1.0(@typescript-eslint/parser@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/rule-tester@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(@typescript-eslint/utils@8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3))(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(typescript@6.0.3)':
     dependencies:
       '@typescript-eslint/rule-tester': 8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
       '@typescript-eslint/utils': 8.67.0(eslint@10.8.1(jiti@2.6.1)(supports-color@7.2.0))(supports-color@7.2.0)(typescript@6.0.3)
