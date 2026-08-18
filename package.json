@@ -31,7 +31,7 @@
     "@nx/webpack": "23.1.1",
     "@nx/workspace": "23.1.1",
     "@swc-node/register": "1.12.1",
-    "@swc/core": "1.15.41",
+    "@swc/core": "1.16.0",
     "@swc/helpers": "0.5.23",
     "@types/jest": "^30.0.0",
     "@types/node": "25.9.3",
