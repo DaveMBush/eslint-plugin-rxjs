@@ -47,7 +47,7 @@
     "ts-jest": "29.4.12",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
-    "typescript-eslint": "8.67.0",
+    "typescript-eslint": "8.68.0",
     "verdaccio": "6.7.2",
     "jest-util": "30.4.1",
     "webpack-cli": "^7.0.0",
