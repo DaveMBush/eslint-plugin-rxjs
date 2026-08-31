@@ -52,7 +52,7 @@
     "jest-util": "30.4.1",
     "webpack-cli": "^7.0.0",
     "webpack-dev-server": "5.2.6",
-    "webpack": "5.109.2"
+    "webpack": "5.110.1"
   },
   "engines": {
     "node": ">=22.0.0",
