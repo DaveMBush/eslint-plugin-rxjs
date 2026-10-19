@@ -29,7 +29,7 @@ importers:
         version: 10.0.1(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))
       '@nx/angular':
         specifier: 23.3.0
-        version: 23.3.0(c6bacbba446efcfef74bcc4772495fe7)
+        version: 23.3.0(f0de27781fb2b5af4c217cd6a9c911e6)
       '@nx/cypress':
         specifier: 23.3.0
         version: 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@nx/jest@23.3.0(823c9829b80637c10f73472fe8b6bb86))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(@zkochan/js-yaml@0.0.7)(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
@@ -56,10 +56,10 @@ importers:
         version: 23.3.0(81df1ccc1835b58bdd8e65f7fb0965ea)
       '@nx/web':
         specifier: 23.3.0
-        version: 23.3.0(0a713e79caa5211f78c9e5a480a64bf9)
+        version: 23.3.0(bce579680a82b03165beb9d3e129107f)
       '@nx/webpack':
         specifier: 23.3.0
-        version: 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
+        version: 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
       '@nx/workspace':
         specifier: 23.3.0
         version: 23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))
@@ -128,10 +128,10 @@ importers:
         version: 5.110.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(postcss@8.5.30)(svgo@4.1.0)(uglify-js@3.19.3)(webpack-cli@7.2.3)
       webpack-cli:
         specifier: ^7.0.0
-        version: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
+        version: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
       webpack-dev-server:
-        specifier: 5.2.6
-        version: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
+        specifier: 5.2.7
+        version: 5.2.7(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   packages/eslint-plugin-rxjs:
     dependencies:
@@ -2705,7 +2705,6 @@ packages:
 
   ansi-html-community@0.0.8:
     resolution: {integrity: sha512-1APHAyr3+PCamwNw3bXCPp4HFLONZt/yIH0sZp0/469KWNTEy+qN5jQ3GVX6DMZ1UXAi34yVwtTeaG/HpBuuzw==}
-    engines: {'0': node >= 0.8.0}
     hasBin: true
 
   ansi-regex@5.0.1:
@@ -6420,8 +6419,8 @@ packages:
       webpack:
         optional: true
 
-  webpack-dev-server@5.2.6:
-    resolution: {integrity: sha512-HNLRmamRvVavZQ+avceZifmv8hmdUjg43t6MI4SqJDwFdW7RPQwH5vzGhDRZSX59SgfbeHhLnq3g+uooWo7pVw==}
+  webpack-dev-server@5.2.7:
+    resolution: {integrity: sha512-ryXhAEoe/BZlvk0iPNHrr9nsGtNBhC7viKO/tFISSpLjleFfSoi58hpOkN18iZRgwht1aMKVIVvrYgjYfYqSiA==}
     engines: {node: '>= 18.12.0'}
     hasBin: true
     peerDependencies:
@@ -8133,14 +8132,14 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.3
 
-  '@nx/angular@23.3.0(c6bacbba446efcfef74bcc4772495fe7)':
+  '@nx/angular@23.3.0(f0de27781fb2b5af4c217cd6a9c911e6)':
     dependencies:
       '@angular-devkit/core': 22.2.2
       '@angular-devkit/schematics': 22.2.2
       '@nx/devkit': 23.3.0(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))
       '@nx/eslint': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@nx/jest@23.3.0(823c9829b80637c10f73472fe8b6bb86))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(@zkochan/js-yaml@0.0.7)(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
       '@nx/js': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
-      '@nx/web': 23.3.0(0a713e79caa5211f78c9e5a480a64bf9)
+      '@nx/web': 23.3.0(bce579680a82b03165beb9d3e129107f)
       '@phenomnomnominal/tsquery': 6.2.0(typescript@6.0.3)
       '@schematics/angular': 22.2.2
       '@typescript-eslint/type-utils': 8.71.2(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)(typescript@6.0.3)
@@ -8153,7 +8152,7 @@ snapshots:
       tslib: 2.8.1
     optionalDependencies:
       '@nx/cypress': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@nx/jest@23.3.0(823c9829b80637c10f73472fe8b6bb86))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(@zkochan/js-yaml@0.0.7)(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
-      '@nx/webpack': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
+      '@nx/webpack': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
     transitivePeerDependencies:
       - '@babel/traverse'
       - '@nx/jest'
@@ -8449,7 +8448,7 @@ snapshots:
   '@nx/nx-win32-x64-msvc@23.3.0':
     optional: true
 
-  '@nx/web@23.3.0(0a713e79caa5211f78c9e5a480a64bf9)':
+  '@nx/web@23.3.0(bce579680a82b03165beb9d3e129107f)':
     dependencies:
       '@nx/devkit': 23.3.0(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))
       '@nx/js': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
@@ -8461,7 +8460,7 @@ snapshots:
       '@nx/cypress': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@nx/jest@23.3.0(823c9829b80637c10f73472fe8b6bb86))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(@zkochan/js-yaml@0.0.7)(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
       '@nx/eslint': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@nx/jest@23.3.0(823c9829b80637c10f73472fe8b6bb86))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(@zkochan/js-yaml@0.0.7)(eslint@10.9.1(jiti@2.7.0)(supports-color@8.1.1))(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))
       '@nx/jest': 23.3.0(823c9829b80637c10f73472fe8b6bb86)
-      '@nx/webpack': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
+      '@nx/webpack': 23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
     transitivePeerDependencies:
       - '@babel/traverse'
       - '@swc-node/register'
@@ -8472,7 +8471,7 @@ snapshots:
       - supports-color
       - verdaccio
 
-  '@nx/webpack@23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)':
+  '@nx/webpack@23.3.0(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))(supports-color@8.1.1)(typescript@6.0.3)(uglify-js@3.19.3)(verdaccio@6.10.5(supports-color@8.1.1)(typanion@3.14.0))(webpack-cli@7.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)':
     dependencies:
       '@babel/core': 7.29.7(supports-color@8.1.1)
       '@nx/devkit': 23.3.0(nx@23.3.0(@swc-node/register@1.12.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.1(@swc/helpers@0.5.23)))
@@ -8510,8 +8509,8 @@ snapshots:
       webpack-subresource-integrity: 5.1.0(webpack@5.110.1)
     optionalDependencies:
       webpack: 5.110.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(postcss@8.5.30)(svgo@4.1.0)(uglify-js@3.19.3)(webpack-cli@7.2.3)
-      webpack-cli: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
-      webpack-dev-server: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
+      webpack-cli: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
+      webpack-dev-server: 5.2.7(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
     transitivePeerDependencies:
       - '@babel/traverse'
       - '@minify-html/node'
@@ -13616,7 +13615,7 @@ snapshots:
 
   webidl-conversions@3.0.1: {}
 
-  webpack-cli@7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1):
+  webpack-cli@7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1):
     dependencies:
       '@discoveryjs/json-ext': 1.1.0
       commander: 14.0.3
@@ -13630,7 +13629,7 @@ snapshots:
     optionalDependencies:
       js-yaml: 5.4.1
       json5: 2.2.3
-      webpack-dev-server: 5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
+      webpack-dev-server: 5.2.7(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1)
 
   webpack-dev-middleware@7.4.6(webpack@5.110.1):
     dependencies:
@@ -13643,7 +13642,7 @@ snapshots:
     optionalDependencies:
       webpack: 5.110.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(postcss@8.5.30)(svgo@4.1.0)(uglify-js@3.19.3)(webpack-cli@7.2.3)
 
-  webpack-dev-server@5.2.6(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1):
+  webpack-dev-server@5.2.7(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)(webpack-cli@7.2.3)(webpack@5.110.1):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -13675,7 +13674,7 @@ snapshots:
       ws: 8.22.0
     optionalDependencies:
       webpack: 5.110.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(cssnano@7.1.9(postcss@8.5.30))(csso@5.0.5)(esbuild@0.28.2)(postcss@8.5.30)(svgo@4.1.0)(uglify-js@3.19.3)(webpack-cli@7.2.3)
-      webpack-cli: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
+      webpack-cli: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -13719,7 +13718,7 @@ snapshots:
       watchpack: 2.6.1
       webpack-sources: 3.6.0
     optionalDependencies:
-      webpack-cli: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.6)(webpack@5.110.1)
+      webpack-cli: 7.2.3(js-yaml@5.4.1)(json5@2.2.3)(webpack-dev-server@5.2.7)(webpack@5.110.1)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@napi-rs/image'
