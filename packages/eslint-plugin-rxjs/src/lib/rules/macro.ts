@@ -26,8 +26,9 @@ export default ESLintUtils.RuleCreator(
 
     function fix(fixer: eslint.RuleFixer) {
       return fixer.insertTextBefore(
+        // Program's range now includes leading comments, so target the first statement
         /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
-        program!,
+        program!.body[0] ?? program!,
         `import "babel-plugin-rxjs-tools/macro";\n`,
       );
     }
