@@ -50,7 +50,7 @@ importers:
         version: 24.0.5(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.22(@swc/helpers@0.5.23))(nx@24.0.5(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.22(@swc/helpers@0.5.23)))(supports-color@8.1.1)(verdaccio@6.11.1(supports-color@8.1.1)(typanion@3.14.0))
       '@nx/nest':
         specifier: 24.0.5
-        version: 24.0.5(6ea74adf6c1a94352551d58505dbfd9c)
+        version: 24.0.5(c2ef95ce7251149f7c08e763270a22da)
       '@nx/node':
         specifier: 24.0.5
         version: 24.0.5(3e4c06cfaf72dbb5e8960ca4c07569e6)
@@ -103,8 +103,8 @@ importers:
         specifier: 24.0.5
         version: 24.0.5(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.22(@swc/helpers@0.5.23))
       prettier:
-        specifier: ^3.9.10
-        version: 3.9.10
+        specifier: ^3.10.1
+        version: 3.10.1
       rxjs:
         specifier: ^7.8.2
         version: 7.8.2
@@ -5369,8 +5369,8 @@ packages:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
 
-  prettier@3.9.10:
-    resolution: {integrity: sha512-skGHTH1Yb9QvaTC4hWnRTzEYtCpApF0UMBPz+t/0ZPzP8ihefo/btKd+QA7pUE0fEwA1SbS/NmhyEcstdXOIdA==}
+  prettier@3.10.1:
+    resolution: {integrity: sha512-70vp3ZUYoPlFbF9uiTdXHUUCGEIp7d4+6p+8DYbkm2jP7x/3i/paXVF6dopSI3zd/CEitrZN1rc4i85xWmmXlg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -8072,7 +8072,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.4
     optional: true
 
-  '@nestjs/schematics@11.1.0(prettier@3.9.10)(typescript@6.0.3)':
+  '@nestjs/schematics@11.1.0(prettier@3.10.1)(typescript@6.0.3)':
     dependencies:
       '@angular-devkit/core': 19.2.24
       '@angular-devkit/schematics': 19.2.24
@@ -8081,7 +8081,7 @@ snapshots:
       pluralize: 8.0.0
       typescript: 6.0.3
     optionalDependencies:
-      prettier: 3.9.10
+      prettier: 3.10.1
     transitivePeerDependencies:
       - chokidar
 
@@ -8363,9 +8363,9 @@ snapshots:
       - nx
       - supports-color
 
-  '@nx/nest@24.0.5(6ea74adf6c1a94352551d58505dbfd9c)':
+  '@nx/nest@24.0.5(c2ef95ce7251149f7c08e763270a22da)':
     dependencies:
-      '@nestjs/schematics': 11.1.0(prettier@3.9.10)(typescript@6.0.3)
+      '@nestjs/schematics': 11.1.0(prettier@3.10.1)(typescript@6.0.3)
       '@nx/devkit': 24.0.5(nx@24.0.5(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.22(@swc/helpers@0.5.23)))
       '@nx/js': 24.0.5(@babel/traverse@7.29.10(supports-color@8.1.1))(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.22(@swc/helpers@0.5.23))(nx@24.0.5(@swc-node/register@1.12.1(@swc/core@1.16.22(@swc/helpers@0.5.23))(@swc/types@0.1.28)(supports-color@8.1.1)(typescript@6.0.3))(@swc/core@1.16.22(@swc/helpers@0.5.23)))(supports-color@8.1.1)(verdaccio@6.11.1(supports-color@8.1.1)(typanion@3.14.0))
       '@nx/node': 24.0.5(3e4c06cfaf72dbb5e8960ca4c07569e6)
@@ -12586,7 +12586,7 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier@3.9.10: {}
+  prettier@3.10.1: {}
 
   pretty-format@30.5.1:
     dependencies:
