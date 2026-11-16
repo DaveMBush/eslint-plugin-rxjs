@@ -22,7 +22,7 @@
     "@nx/cypress": "24.0.5",
     "@nx/esbuild": "24.0.5",
     "@nx/eslint": "24.0.5",
-    "@nx/eslint-plugin": "24.0.5",
+    "@nx/eslint-plugin": "24.0.6",
     "@nx/jest": "24.0.5",
     "@nx/js": "24.0.5",
     "@nx/nest": "24.0.5",
