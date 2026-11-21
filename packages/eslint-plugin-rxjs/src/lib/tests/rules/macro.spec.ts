@@ -1,7 +1,7 @@
 import { RuleTester } from '@typescript-eslint/rule-tester';
 import { convertAnnotatedSourceToFailureCase } from '@angular-eslint/test-utils';
 import rule, { messageId } from '../../rules/macro';
-import { testCheckConfig } from './type-check';
+
 const ruleTester = new RuleTester();
 
 ruleTester.run('macro', rule, {

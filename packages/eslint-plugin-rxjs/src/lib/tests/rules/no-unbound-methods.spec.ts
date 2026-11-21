@@ -9,7 +9,9 @@ import {
 const ruleTester = new RuleTester(testCheckConfig);
 
 interface Tests {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
   valid: (ValidTestCase<any> | string)[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
   invalid: InvalidTestCase<any, any>[];
 }
 

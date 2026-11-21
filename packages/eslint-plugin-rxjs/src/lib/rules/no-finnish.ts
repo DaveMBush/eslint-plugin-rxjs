@@ -97,6 +97,7 @@ export default ESLintUtils.RuleCreator(
       'TSPropertySignature > Identifier[name=/[$]+$/]': (node: es.Identifier) =>
         checkNode(node, getParent(node)),
       'TSMethodSignature > Identifier[name=/[$]+$/]': (node: es.Identifier) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
         const parent = getParent(node) as any;
         if (node === parent.key) {
           checkNode(node, parent);

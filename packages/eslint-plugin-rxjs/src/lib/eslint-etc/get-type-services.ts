@@ -85,6 +85,7 @@ export function getTypeServices<
     // This is more reliable than going through esTreeNodeToTSNodeMap.get(functionNode)
     // because projectService.allowDefaultProject can return stale TypeScript nodes
     // for function/method wrapper nodes when virtual file content changes between tests.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
     const esNode = node as any;
     const esReturnTypeAnnotation =
       esNode.returnType?.typeAnnotation ||
