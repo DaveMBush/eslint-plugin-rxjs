@@ -218,6 +218,7 @@ export default ESLintUtils.RuleCreator(
         }
       },
       'TSPropertySignature[computed=false]': (node: es.Node) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- legacy code
         const anyNode = node as any;
         if (validate.properties) {
           checkNode(anyNode.key);

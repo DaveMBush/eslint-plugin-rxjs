@@ -47,9 +47,7 @@ export default ESLintUtils.RuleCreator(
           node: node.callee,
         });
       },
-      "ImportDeclaration[source.value='babel-plugin-rxjs-tools/macro']": (
-        node: es.ImportDeclaration,
-      ) => {
+      "ImportDeclaration[source.value='babel-plugin-rxjs-tools/macro']": () => {
         hasMacroImport = true;
       },
       [String.raw`ImportDeclaration[source.value=/^rxjs(\u002f|$)/]`]: (
