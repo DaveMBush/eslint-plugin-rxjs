@@ -3,7 +3,8 @@ const nxEslintPlugin = require('@nx/eslint-plugin');
 
 module.exports = [
   {
-    ignores: ['**/dist'],
+    // .nx = Nx Cloud cache artifacts; tests/** = self-contained fixtures linted by their own per-dir configs; coverage = test output.
+    ignores: ['**/dist', '**/.nx/**', 'tests/**', 'coverage/**'],
   },
   { plugins: { '@nx': nxEslintPlugin } },
   {

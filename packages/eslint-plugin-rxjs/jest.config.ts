@@ -1,4 +1,3 @@
-/* eslint-disable */
 module.exports = {
   displayName: 'eslint-plugin-rxjs',
   preset: '../../jest.preset.js',
